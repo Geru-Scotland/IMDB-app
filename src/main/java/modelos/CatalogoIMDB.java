@@ -1,6 +1,16 @@
 package modelos;
 
 public class CatalogoIMDB {
+    private static CatalogoIMDB instance;
+
+    private CatalogoIMDB(){ }
+
+    public static CatalogoIMDB getInstance() {
+        if(instance == null)
+            instance = new CatalogoIMDB();
+        return instance;
+    }
+
     /**
      * Carga las películas del catálogo desde el fichero indicado
      * @param nomF Nombre del fichero que contiene las películas
