@@ -1,8 +1,10 @@
 package templates;
 
+import modelos.Model;
+
 import java.util.ArrayList;
 
-public class Data<T extends Comparable<T>> {
+public class Data<T extends Comparable<T> & Model> {
     private ArrayList<T> listaGenerica;
 
     public Data(){
@@ -19,13 +21,13 @@ public class Data<T extends Comparable<T>> {
 
     /**
      * Búsqueda dicotómica
-     * @param o
+     * @param str
      * @return
      */
-    public T buscar(T o) {
+    public T buscar(String str) {
         //Temporal, para hacer unas pruebas.
         for(T item : listaGenerica){
-            if(item.compareTo(o) == 0)
+            if(item.getIdentifier().equals(str))
                 return item;
         }
         return null;

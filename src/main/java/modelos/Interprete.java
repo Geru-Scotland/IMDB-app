@@ -16,6 +16,7 @@ public class Interprete extends Entity implements Comparable<Interprete>, Model 
         name = info;
     }
 
+
     public void setRating(double rat){
         this.rating = rat;
     }
@@ -54,5 +55,10 @@ public class Interprete extends Entity implements Comparable<Interprete>, Model 
     @Override
     public int compareTo(Interprete o) {
         return 0;
+    }
+
+    @Override
+    public String getIdentifier() {
+        return name;
     }
 }

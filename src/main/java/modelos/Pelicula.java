@@ -86,4 +86,10 @@ public class Pelicula extends Entity implements Comparable<Pelicula>, Model {
             return 1;
         return 0;
     }
+
+    @Override
+    public String getIdentifier() {
+        return title;
+    }
 }
+

@@ -61,23 +61,23 @@ public class LoadMgr extends CatalogoIMDB {
         while (sc.hasNextLine()) {
             line = sc.nextLine();
             try{
-                Interprete actor = new Interprete();
+                Interprete casting = new Interprete();
                 String[] info = line.split("->");
-                actor.populateInfo(info[0]);
+                casting.populateInfo(info[0]);
 
-                String[] films = new String[0];
+                String[] films = null;
 
                 if(info[1].contains("||")){
                     films = info[1].split("\\|");
                     for (String film : films)
                         if(film.length() > 0)
-                            actor.agregarPelicula(peliculas.buscar(new Pelicula(film)));
+                            casting.agregarPelicula(peliculas.buscar(film));
 
                 } else
-                    actor.agregarPelicula(peliculas.buscar(new Pelicula(info[1])));
+                    casting.agregarPelicula(peliculas.buscar(info[1]));
 
                 try{
-                    interpretes.add(actor);
+                    interpretes.add(casting);
                 } catch (IndexOutOfBoundsException e){
                     System.out.println(e.getMessage());
                 }
