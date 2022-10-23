@@ -63,6 +63,7 @@ dkms.conf
 .DS_Store
 .idea
 .vscode
+*.iml
 
 #Build folder
 /build/
