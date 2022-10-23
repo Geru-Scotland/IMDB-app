@@ -15,10 +15,12 @@ public class Data<T extends Comparable<T>> {
 
     public int getSize(){ return listaGenerica.size(); }
 
+    public T get(int pos) { return listaGenerica.get(pos); }
+
     /**
      * Búsqueda dicotómica
      * @param elemento
      * @return
      */
-    public T buscar(T elemento){ return null; }
+    public T buscar(String elemento){ return null; }
 }

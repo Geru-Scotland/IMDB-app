@@ -1,7 +1,7 @@
 package modelos;
 import java.util.ArrayList;
 
-public class Pelicula implements Comparable<Pelicula> {
+public class Pelicula extends Entity implements Comparable<Pelicula>, Model {
 
     private String title;
     private int year;
@@ -14,11 +14,18 @@ public class Pelicula implements Comparable<Pelicula> {
         interpreteParticip = new ArrayList<Interprete>(); 
     }
 
-    public void populateInfo(String[] info){
-        title = info[0];
-        year = Integer.parseInt(info[1]);
-        rating = Double.parseDouble(info[2]);
-        votes = Integer.parseInt(info[3]);
+    public Pelicula(String title){
+        this.title = title;
+    }
+
+    @Override
+    public void populateInfo(String info){
+        String[] elem = info.split("\\t");
+        title = elem[0];
+        year = Integer.parseInt(elem[1]);
+        rating = Double.parseDouble(elem[2]);
+        votes = Integer.parseInt(elem[3]);
+        System.out.println("Title: " + title);
     }
 
     public String getTitle(){ return title; }

@@ -1,14 +1,23 @@
 package modelos;
 import java.util.ArrayList;
 
-public class Interprete implements Comparable<Interprete> {
+public class Interprete extends Entity implements Comparable<Interprete>, Model {
 
     private ArrayList<Pelicula> peliculasParticip;
     private double rating;
+    private String name;
+
+    public Interprete(){}
+
+    @Override
+    public void populateInfo(String info){
+        name = info;
+    }
 
     public void setRating(double rat){
         this.rating = rat;
     }
+
     /**
      * Calcula y asigna el rating del intérprete en base al rating de sus películas
      */

@@ -23,6 +23,9 @@ public class CatalogoIMDB {
         return instance;
     }
 
+    protected void addToCatalog(String[] info, int type){
+
+    }
 
     /**
      * Imprime por pantalla el no de intérpretes de una película y sus nombres
