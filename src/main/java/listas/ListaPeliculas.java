@@ -1,6 +1,9 @@
 package listas;
 import modelos.*;
 
+import java.util.ArrayList;
+import java.util.ArrayList.*;
+
 public class ListaPeliculas {
 
     private ArrayList<Pelicula> listaPeliculas;
@@ -43,5 +46,5 @@ public class ListaPeliculas {
 		}
         return null;
     }
-    }
 }
+
