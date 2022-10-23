@@ -1,6 +1,7 @@
 package modelos;
 import java.util.ArrayList;
-public class Interprete {
+
+public class Interprete implements Comparable<Interprete> {
 
     private ArrayList<Pelicula> peliculasParticip;
     private double rating;
@@ -44,5 +45,14 @@ public class Interprete {
         }
         if (existe = false) peliculasParticip.add(pel);
         else System.out.println("La película ya forma parte de la lista");
+    }
+
+    public String getNombre() {
+        return null;
+    }
+
+    @Override
+    public int compareTo(Interprete o) {
+        return 0;
     }
 }

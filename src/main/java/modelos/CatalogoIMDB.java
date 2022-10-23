@@ -1,9 +1,19 @@
 package modelos;
 
+import managers.*;
+import templates.Data;
+
 public class CatalogoIMDB {
     private static CatalogoIMDB instance;
 
-    private CatalogoIMDB(){ }
+    protected Data<Pelicula> peliculas;
+    protected Data<Interprete> interpretes;
+
+    private SearchEngine se;
+
+    protected CatalogoIMDB(){
+        se = new SearchEngine();
+    }
 
     public static CatalogoIMDB getInstance() {
         if(instance == null)
@@ -11,16 +21,7 @@ public class CatalogoIMDB {
         return instance;
     }
 
-    /**
-     * Carga las películas del catálogo desde el fichero indicado
-     * @param nomF Nombre del fichero que contiene las películas
-     */
-    public void cargarPeliculas(String nomF) {}
-    /**
-     * Carga los intérpretes del catálogo desde el fichero indicado
-     * POST: se han cargado los intérpretes y se han calculado sus ratings * @param nomF Nombre del fichero que contiene los intérpretes
-     */
-    public void cargarInterpretes(String nomF) {}
+
     /**
      * Imprime por pantalla el no de intérpretes de una película y sus nombres
      * @param titulo Título de la película

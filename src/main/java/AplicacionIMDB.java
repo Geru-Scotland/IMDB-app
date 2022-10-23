@@ -1,17 +1,17 @@
 import java.util.Scanner;
+
+import managers.LoadMgr;
 import modelos.CatalogoIMDB;
 
 public class AplicacionIMDB {
 
+
     public static void main(String[] args){
 
-        //TO DO: ...
         CatalogoIMDB  cat = CatalogoIMDB.getInstance();
 
-        //TO DO: Cargar peliculas
-
-        //TO DO Cargar intirpretes
-
+        LoadMgr loadMgr = new LoadMgr();
+        loadMgr.loadData();
 
         //Menu
         Scanner sc = new Scanner(System.in);

@@ -1,7 +1,7 @@
 package modelos;
 import java.util.ArrayList;
 
-public class Pelicula {
+public class Pelicula implements Comparable<Pelicula> {
     
     private double rating;
     private int numVotos;
@@ -68,5 +68,10 @@ public class Pelicula {
         for(int i = 0; i<interpreteParticip.size(); i++){
             interpreteParticip.get(i).calcularRating();
         }
+    }
+
+    @Override
+    public int compareTo(Pelicula o) {
+        return 0;
     }
 }
