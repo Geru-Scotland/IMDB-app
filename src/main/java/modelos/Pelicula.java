@@ -1,9 +1,12 @@
 package modelos;
+import java.util.ArrayList;
 
 public class Pelicula {
     
     private double rating;
     private int numVotos;
+    private String titulo;
+
     private ArrayList <Interprete> interpreteParticip;
 
     public double getRating(){
@@ -11,7 +14,7 @@ public class Pelicula {
     }
 
     public void setRating(double rat){
-        this.rat = rat;
+        this.rating = rat;
     }
 
     public int getNumVotos(){
@@ -20,6 +23,10 @@ public class Pelicula {
 
     public void setNumVotos(int vot){
         this.numVotos = vot;
+    }
+
+    public String getTitulo(){
+        return titulo;
     }
 
     public Pelicula(){
@@ -52,14 +59,14 @@ public class Pelicula {
      */
     public void anadirVoto(float voto) {
         if (this.getRating()!=-1){
-            this.setRating(this.getRating()*this.getNumVotos() + voto)/(this.getNumVotos() + 1));
+            this.setRating((this.getRating()*this.getNumVotos() + voto)/(this.getNumVotos() + 1));
         } else {
             this.setNumVotos(1);
             this.setRating(voto);
         }
         
         for(int i = 0; i<interpreteParticip.size(); i++){
-            interpreteParticip(i).setRating();
+            interpreteParticip.get(i).calcularRating();
         }
     }
 }

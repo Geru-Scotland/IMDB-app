@@ -1,12 +1,12 @@
 package modelos;
-
+import java.util.ArrayList;
 public class Interprete {
 
     private ArrayList<Pelicula> peliculasParticip;
-    private int rating;
+    private double rating;
 
     public void setRating(double rat){
-        this.rat = rat;
+        this.rating = rat;
     }
     /**
      * Calcula y asigna el rating del intérprete en base al rating de sus películas
@@ -17,9 +17,9 @@ public class Interprete {
         int totalVotos = 0;
         double total = 0.0;
         for (int i = 0; i < peliculasParticip.size(); i++){
-            if (peliculasParticip(i).getRating() != -1){
-                totalRating += peliculasParticip(i).getRating();
-                totalVotos += peliculasParticip(i).getNumVotos();
+            if (peliculasParticip.get(i).getRating() != -1){
+                totalRating += peliculasParticip.get(i).getRating();
+                totalVotos += peliculasParticip.get(i).getNumVotos();
             }
         }
 

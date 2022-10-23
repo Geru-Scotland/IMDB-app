@@ -1,8 +1,6 @@
 package listas;
 import modelos.*;
-
 import java.util.ArrayList;
-import java.util.ArrayList.*;
 
 public class ListaPeliculas {
 
@@ -37,7 +35,7 @@ public class ListaPeliculas {
     public Pelicula buscarPelicula(String titulo){
         int i = 0;
 		while(i<listaPeliculas.size()) {
-			if (!listaPeliculas.get(i).getNombre().equals(titulo)) {
+			if (!listaPeliculas.get(i).getTitulo().equals(titulo)) {
 				i++;
 			}
 			else {
