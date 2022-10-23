@@ -1,7 +1,7 @@
 package modelos;
 import java.util.ArrayList;
 
-public class Pelicula extends Entity implements Comparable<Pelicula>, Model {
+public class Pelicula implements Comparable<Pelicula>, Model {
 
     private String title;
     private int year;

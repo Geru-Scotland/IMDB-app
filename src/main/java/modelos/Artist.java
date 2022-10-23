@@ -1,7 +1,7 @@
 package modelos;
 import java.util.ArrayList;
 
-public class Interprete extends Entity implements Comparable<Interprete>, Model {
+public class Interprete implements Comparable<Interprete>, Model {
 
     private ArrayList<Pelicula> listaPeliculas;
     private double rating;

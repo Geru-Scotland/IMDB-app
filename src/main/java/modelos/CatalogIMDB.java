@@ -6,15 +6,15 @@ import templates.Data;
 public class CatalogoIMDB {
     private static CatalogoIMDB instance;
 
-    protected Data<Pelicula> peliculas;
-    protected Data<Interprete> interpretes;
+    protected Data<Film> films;
+    protected Data<Artist> casting;
 
     private SearchEngine se;
 
     protected CatalogoIMDB(){
         se = new SearchEngine();
-        peliculas = new Data<>();
-        interpretes = new Data<>();
+        films = new Data<>();
+        casting = new Data<>();
     }
 
     public static CatalogoIMDB getInstance() {
