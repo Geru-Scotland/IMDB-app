@@ -25,7 +25,6 @@ public class Pelicula extends Entity implements Comparable<Pelicula>, Model {
         year = Integer.parseInt(elem[1]);
         rating = Double.parseDouble(elem[2]);
         votes = Integer.parseInt(elem[3]);
-        System.out.println("Title: " + title);
     }
 
     public String getTitle(){ return title; }
@@ -83,6 +82,8 @@ public class Pelicula extends Entity implements Comparable<Pelicula>, Model {
 
     @Override
     public int compareTo(Pelicula o) {
+        if(o.getTitle().compareTo(getTitle()) > 0)
+            return 1;
         return 0;
     }
 }

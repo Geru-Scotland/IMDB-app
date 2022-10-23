@@ -19,8 +19,15 @@ public class Data<T extends Comparable<T>> {
 
     /**
      * Búsqueda dicotómica
-     * @param elemento
+     * @param o
      * @return
      */
-    public T buscar(String elemento){ return null; }
+    public T buscar(T o) {
+        //Temporal, para hacer unas pruebas.
+        for(T item : listaGenerica){
+            if(item.compareTo(o) == 0)
+                return item;
+        }
+        return null;
+    }
 }

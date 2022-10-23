@@ -11,8 +11,8 @@ import modelos.*;
 
 public class LoadMgr extends CatalogoIMDB {
 
-    final String filmFile = "/smallerfiles/films_small";
-    final String castFile = "";
+    final String filmFile = "/files/films";
+    final String castFile = "smallerfiles/cast_tiny";
 
     public LoadMgr(){
 
@@ -20,8 +20,12 @@ public class LoadMgr extends CatalogoIMDB {
 
     public void loadData(){
         try{
+            System.out.println("Loading Films database...");
             loadFilms();
+            System.out.println("Films database fully loaded.");
+            System.out.println("Loading Casting database...");
             loadCast();
+            System.out.println("Casting database fully loaded.");
         } catch(IOException e){
             System.out.println(e.getMessage());
         }
@@ -44,6 +48,7 @@ public class LoadMgr extends CatalogoIMDB {
                 System.out.println(e.getMessage());
             }
         }
+
     }
 
     private void loadCast() throws IOException {
@@ -59,22 +64,28 @@ public class LoadMgr extends CatalogoIMDB {
                 Interprete actor = new Interprete();
                 String[] info = line.split("->");
                 actor.populateInfo(info[0]);
-                String[] films = info[0].split("\\||");
-                try{
-                    int i = 0;
-                    while(films[i] != null){
 
-                        peliculas.buscar(films[i]);
-                        i++;
-                    }
+                String[] films = new String[0];
+
+                if(info[1].contains("||")){
+                    films = info[1].split("\\|");
+                    for (String film : films)
+                        if(film.length() > 0)
+                            actor.agregarPelicula(peliculas.buscar(new Pelicula(film)));
+
+                } else
+                    actor.agregarPelicula(peliculas.buscar(new Pelicula(info[1])));
+
+                try{
+                    interpretes.add(actor);
                 } catch (IndexOutOfBoundsException e){
                     System.out.println(e.getMessage());
                 }
-                interpretes.add(actor);
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 System.out.println(e.getMessage());
             }
         }
+        System.out.println("Actor SIZE: " + interpretes.getSize());
     }
 
     private Scanner openFile(String file){

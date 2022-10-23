@@ -3,11 +3,13 @@ import java.util.ArrayList;
 
 public class Interprete extends Entity implements Comparable<Interprete>, Model {
 
-    private ArrayList<Pelicula> peliculasParticip;
+    private ArrayList<Pelicula> listaPeliculas;
     private double rating;
     private String name;
 
-    public Interprete(){}
+    public Interprete(){
+        listaPeliculas = new ArrayList<>();
+    }
 
     @Override
     public void populateInfo(String info){
@@ -26,10 +28,10 @@ public class Interprete extends Entity implements Comparable<Interprete>, Model 
         double totalRating = 0.0;
         int totalVotos = 0;
         double total = 0.0;
-        for (int i = 0; i < peliculasParticip.size(); i++){
-            if (peliculasParticip.get(i).getRating() != -1){
-                totalRating += peliculasParticip.get(i).getRating();
-                totalVotos += peliculasParticip.get(i).getVotes();
+        for (int i = 0; i < listaPeliculas.size(); i++){
+            if (listaPeliculas.get(i).getRating() != -1){
+                totalRating += listaPeliculas.get(i).getRating();
+                totalVotos += listaPeliculas.get(i).getVotes();
             }
         }
 
@@ -41,19 +43,8 @@ public class Interprete extends Entity implements Comparable<Interprete>, Model 
      * Añade una película al intérprete
      * @param pel Película a añadir
      * POST: El rating del intérprete NO se modifica en este momento */
-    public void anadirPelicula(Pelicula pel){
-        int i = 0;
-        boolean existe = false;
-        while(i<peliculasParticip.size() && !existe) {
-            if (!peliculasParticip.get(i).equals(pel)) {
-                i++;
-            }
-            else {
-                existe = true;
-            }
-        }
-        if (existe = false) peliculasParticip.add(pel);
-        else System.out.println("La película ya forma parte de la lista");
+    public void agregarPelicula(Pelicula pel){
+        listaPeliculas.add(pel);
     }
 
     public String getNombre() {
