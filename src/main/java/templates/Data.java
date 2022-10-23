@@ -13,6 +13,8 @@ public class Data<T extends Comparable<T>> {
         listaGenerica.add(elemento);
     }
 
+    public int getSize(){ return listaGenerica.size(); }
+
     /**
      * Búsqueda dicotómica
      * @param elemento
