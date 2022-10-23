@@ -13,6 +13,8 @@ public class CatalogoIMDB {
 
     protected CatalogoIMDB(){
         se = new SearchEngine();
+        peliculas = new Data<>();
+        interpretes = new Data<>();
     }
 
     public static CatalogoIMDB getInstance() {

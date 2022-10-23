@@ -2,35 +2,39 @@ package modelos;
 import java.util.ArrayList;
 
 public class Pelicula implements Comparable<Pelicula> {
-    
+
+    private String title;
+    private int year;
     private double rating;
-    private int numVotos;
-    private String titulo;
+    private int votes;
 
     private ArrayList <Interprete> interpreteParticip;
 
-    public double getRating(){
-        return rating;
+    public Pelicula(){
+        interpreteParticip = new ArrayList<Interprete>(); 
     }
+
+    public void populateInfo(String[] info){
+        title = info[0];
+        year = Integer.parseInt(info[1]);
+        rating = Double.parseDouble(info[2]);
+        votes = Integer.parseInt(info[3]);
+    }
+
+    public String getTitle(){ return title; }
+
+    public int getYear(){ return year; }
+
+    public double getRating(){ return rating; }
+
+    public int getVotes(){ return votes; }
 
     public void setRating(double rat){
         this.rating = rat;
     }
 
-    public int getNumVotos(){
-        return numVotos;
-    }
-
-    public void setNumVotos(int vot){
-        this.numVotos = vot;
-    }
-
-    public String getTitulo(){
-        return titulo;
-    }
-
-    public Pelicula(){
-        interpreteParticip = new ArrayList<Interprete>(); 
+    public void setVotes(int vot){
+        this.votes = vot;
     }
 
     /**
@@ -59,9 +63,9 @@ public class Pelicula implements Comparable<Pelicula> {
      */
     public void anadirVoto(float voto) {
         if (this.getRating()!=-1){
-            this.setRating((this.getRating()*this.getNumVotos() + voto)/(this.getNumVotos() + 1));
+            this.setRating((this.getRating()*this.getVotes() + voto)/(this.getVotes() + 1));
         } else {
-            this.setNumVotos(1);
+            this.setVotes(1);
             this.setRating(voto);
         }
         

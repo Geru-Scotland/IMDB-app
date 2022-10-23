@@ -20,7 +20,7 @@ public class Interprete implements Comparable<Interprete> {
         for (int i = 0; i < peliculasParticip.size(); i++){
             if (peliculasParticip.get(i).getRating() != -1){
                 totalRating += peliculasParticip.get(i).getRating();
-                totalVotos += peliculasParticip.get(i).getNumVotos();
+                totalVotos += peliculasParticip.get(i).getVotes();
             }
         }
 

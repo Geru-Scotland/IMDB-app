@@ -35,7 +35,7 @@ public class ListaPeliculas {
     public Pelicula buscarPelicula(String titulo){
         int i = 0;
 		while(i<listaPeliculas.size()) {
-			if (!listaPeliculas.get(i).getTitulo().equals(titulo)) {
+			if (!listaPeliculas.get(i).getTitle().equals(titulo)) {
 				i++;
 			}
 			else {
