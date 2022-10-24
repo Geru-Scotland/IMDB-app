@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Scanner;
 
-import models.CatalogIMDB;
+import libs.Stopwatch;
 import models.*;
 
 
@@ -22,10 +22,11 @@ public class LoadMgr extends CatalogIMDB {
 
     public void loadData(){
         try{
+            Stopwatch sw = new Stopwatch();
             System.out.println(" ");
             System.out.println("Loading Films database...");
             loadFilms();
-            System.out.println("Successfully loaded " + films.getSize() + " films.");
+            System.out.println("Successfully loaded " + films.getSize() + " films in " + sw.elapsedTime() + " seconds");
             System.out.println("Loading Casting database...");
             loadCast();
             System.out.println("Successfully loaded " + casting.getSize() + " artists.");
