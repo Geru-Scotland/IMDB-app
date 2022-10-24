@@ -5,6 +5,9 @@ import models.Artist;
 import models.Film;
 import templates.Data;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class CatalogIMDB {
     private static CatalogIMDB instance;
 
@@ -38,7 +41,7 @@ public class CatalogIMDB {
             return;
         System.out.println("Busqueda finalizada en " + sw.elapsedTime() + " segundos.");
         System.out.println("Nombre: "+ nombre);
-        System.out.println("Rating: " + artist.getRating());
+        System.out.println("Rating: " + BigDecimal.valueOf(artist.getRating()).setScale(2, RoundingMode.FLOOR));
         System.out.println("Peliculas ("+ artist.getFilmsNum()+") ");
         for(Film film : artist.getFilms())
             System.out.println(film.getIdentifier());
