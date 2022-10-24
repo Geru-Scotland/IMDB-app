@@ -3,7 +3,6 @@ package managers;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -13,13 +12,24 @@ import models.*;
 
 public class LoadMgr extends CatalogIMDB {
 
-    final String filmFile = "smallerfiles/films_medium";
-    final String castFile = "smallerfiles/cast_medium";
+    final String filmFile = "files/films";
+    final String castFile = "files/cast";
 
     public LoadMgr(){
 
     }
 
+    /**
+     * Opción 1: Ordenar el arraylist de casting para poder hacer búsquedas binarias
+     * posteriormente. De ésta manera agregamos ~3.5s extra en la carga inicial (ficheros grandes)
+     * pero reducimos drásticamente el tiempo de búsqueda en cada una de las mismas.
+     *
+     * Opción 2: NO ordenar el arraylist de casting y en la búsqueda utilizar el método "search"
+     * del SearchEngine. Eliminamos el tiempo extra de carga que necesita el ordenado, pero se incrementa
+     * el tiempo por cada búsqueda.
+     *
+     * Ambas son válidas y funcionales.
+     */
     public void loadData(){
         try{
             Stopwatch sw = new Stopwatch();
