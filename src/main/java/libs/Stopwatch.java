@@ -12,7 +12,7 @@ package libs;
 
 public class Stopwatch {
 
-    private final long start;
+    private long start;
 
     /** Create a stopwatch object. */
     public Stopwatch() {
@@ -25,5 +25,12 @@ public class Stopwatch {
     public double elapsedTime() {
         long now = System.currentTimeMillis();
         return (now - start) / 1000.0;
+    }
+
+    /**
+     * Reset feature
+     */
+    public void reset(){
+        start = System.currentTimeMillis();
     }
 }

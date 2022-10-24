@@ -13,8 +13,8 @@ import models.*;
 
 public class LoadMgr extends CatalogIMDB {
 
-    final String filmFile = "files/films";
-    final String castFile = "files/cast";
+    final String filmFile = "smallerfiles/films_medium";
+    final String castFile = "smallerfiles/cast_medium";
 
     public LoadMgr(){
 
@@ -26,13 +26,15 @@ public class LoadMgr extends CatalogIMDB {
             System.out.println(" ");
             System.out.println("Loading Films database...");
             loadFilms();
-            System.out.println("Successfully loaded " + films.getSize() + " films in " + sw.elapsedTime() + " seconds");
+            System.out.println("Successfully loaded " + films.getSize() + " films in " + sw.elapsedTime() + " seconds.");
             System.out.println("Loading Casting database...");
+            sw.reset();
             loadCast();
-            System.out.println("Successfully loaded " + casting.getSize() + " artists.");
+            System.out.println("Successfully loaded " + casting.getSize() + " artists in " + sw.elapsedTime() + " seconds.");
             System.out.println("Sorting casting list...");
+            sw.reset();
             Collections.sort(casting.getList());
-            System.out.println("Casting list sorted.");
+            System.out.println("Casting list sorted in " + sw.elapsedTime() + " seconds.");;
             System.out.println(" ");
             System.out.println("");
         } catch(IOException e){

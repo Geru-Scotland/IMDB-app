@@ -1,5 +1,6 @@
 package models;
 
+import libs.Stopwatch;
 import managers.*;
 import templates.Data;
 
@@ -38,9 +39,11 @@ public class CatalogIMDB {
      * @param nombre Nombre del intérprete
      */
     public void imprimirInfoInterprete(String nombre) {
+        Stopwatch sw = new Stopwatch();
         Artist artist = casting.binarySearch(nombre);
         if(artist == null)
             return;
+        System.out.println("Busqueda finalizada en " + sw.elapsedTime() + " segundos.");
         System.out.println("El artista "+ nombre + " ha participado en las siguientes peliculas: ");
         for(Film film : artist.getFilms())
             System.out.println(film.getIdentifier());
