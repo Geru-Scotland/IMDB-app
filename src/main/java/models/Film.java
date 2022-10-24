@@ -1,20 +1,20 @@
 package modelos;
 import java.util.ArrayList;
 
-public class Pelicula implements Comparable<Pelicula>, Model {
+public class Film implements Comparable<Film>, Model {
 
     private String title;
     private int year;
     private double rating;
     private int votes;
 
-    private ArrayList <Interprete> interpreteParticip;
+    private ArrayList <Artist> artistParticip;
 
-    public Pelicula(){
-        interpreteParticip = new ArrayList<Interprete>(); 
+    public Film(){
+        artistParticip = new ArrayList<Artist>();
     }
 
-    public Pelicula(String title){
+    public Film(String title){
         this.title = title;
     }
 
@@ -47,18 +47,18 @@ public class Pelicula implements Comparable<Pelicula>, Model {
      * Añade un intérprete a la película
      * @param inter Intérprete a añadir
      */
-    public void anadirInterprete(Interprete inter){
+    public void anadirInterprete(Artist inter){
         int i = 0;
         boolean existe = false;
-        while(i<interpreteParticip.size() && !existe) {
-            if (!interpreteParticip.get(i).equals(inter)) {
+        while(i< artistParticip.size() && !existe) {
+            if (!artistParticip.get(i).equals(inter)) {
                 i++;
             }
             else {
                 existe = true;
             }
         }
-        if (existe = false) interpreteParticip.add(inter);
+        if (existe = false) artistParticip.add(inter);
         else System.out.println("El interprete ya forma parte de la lista");
     }
 
@@ -75,13 +75,13 @@ public class Pelicula implements Comparable<Pelicula>, Model {
             this.setRating(voto);
         }
         
-        for(int i = 0; i<interpreteParticip.size(); i++){
-            interpreteParticip.get(i).calcularRating();
+        for(int i = 0; i< artistParticip.size(); i++){
+            artistParticip.get(i).calcularRating();
         }
     }
 
     @Override
-    public int compareTo(Pelicula o) {
+    public int compareTo(Film o) {
         if(o.getTitle().compareTo(getTitle()) > 0)
             return 1;
         return 0;

@@ -3,23 +3,23 @@ package modelos;
 import managers.*;
 import templates.Data;
 
-public class CatalogoIMDB {
-    private static CatalogoIMDB instance;
+public class CatalogIMDB {
+    private static CatalogIMDB instance;
 
     protected Data<Film> films;
     protected Data<Artist> casting;
 
     private SearchEngine se;
 
-    protected CatalogoIMDB(){
+    protected CatalogIMDB(){
         se = new SearchEngine();
         films = new Data<>();
         casting = new Data<>();
     }
 
-    public static CatalogoIMDB getInstance() {
+    public static CatalogIMDB getInstance() {
         if(instance == null)
-            instance = new CatalogoIMDB();
+            instance = new CatalogIMDB();
         return instance;
     }
 
