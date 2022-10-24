@@ -90,7 +90,7 @@ public class LoadMgr extends CatalogIMDB {
                 } catch (IndexOutOfBoundsException e){
                     System.out.println(e.getMessage());
                 }
-            } catch (NullPointerException | NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            } catch (NullPointerException | NumberFormatException | ArrayIndexOutOfBoundsException ignored) {
 
             }
         }

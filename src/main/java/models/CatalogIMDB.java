@@ -6,8 +6,8 @@ import templates.Data;
 public class CatalogIMDB {
     private static CatalogIMDB instance;
 
-    protected Data<Film> films;
-    protected Data<Artist> casting;
+    protected static Data<Film> films;
+    protected static Data<Artist> casting;
 
     private SearchEngine se;
 
@@ -37,7 +37,15 @@ public class CatalogIMDB {
      * de sus películas.
      * @param nombre Nombre del intérprete
      */
-    public void imprimirInfoInterprete(String nombre) {}
+    public void imprimirInfoInterprete(String nombre) {
+        Artist artist = casting.normalSearch(nombre);
+        if(artist == null)
+            return;
+        System.out.println("El artista "+ nombre + " ha participado en las siguientes peliculas: ");
+        for(Film film : artist.getFilms())
+            System.out.println(film.getIdentifier());
+
+    }
     /**
      * Añade un nuevo voto a una película
      * PRE: el valor del voto está entre 0.0 y 10.0.

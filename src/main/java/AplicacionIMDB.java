@@ -29,6 +29,17 @@ public class AplicacionIMDB {
                 case 1:
                     //TO DO
                     break;
+                case 2:
+                    /*
+                    Test, mejorar esto y gestionar bien posibles excepciones
+                    Tanto de input, como posibles nullptr en busqueda.
+                    */
+                    System.out.println("Introduce el nombre del artista: ");
+                    String artist = sc.nextLine();
+                    cat.imprimirInfoInterprete(artist);
+                    break;
+                default:
+                    break;
                 // TO DO
             }
         }
