@@ -3,6 +3,8 @@ package managers;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Scanner;
 
 import models.CatalogIMDB;
@@ -27,6 +29,9 @@ public class LoadMgr extends CatalogIMDB {
             System.out.println("Loading Casting database...");
             loadCast();
             System.out.println("Successfully loaded " + casting.getSize() + " artists.");
+            System.out.println("Sorting casting list...");
+            Collections.sort(casting.getList());
+            System.out.println("Casting list sorted.");
             System.out.println(" ");
             System.out.println("");
         } catch(IOException e){

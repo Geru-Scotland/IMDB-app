@@ -38,7 +38,7 @@ public class CatalogIMDB {
      * @param nombre Nombre del intérprete
      */
     public void imprimirInfoInterprete(String nombre) {
-        Artist artist = casting.normalSearch(nombre);
+        Artist artist = casting.binarySearch(nombre);
         if(artist == null)
             return;
         System.out.println("El artista "+ nombre + " ha participado en las siguientes peliculas: ");

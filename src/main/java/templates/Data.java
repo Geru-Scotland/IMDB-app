@@ -23,6 +23,8 @@ public class Data<T extends Comparable<T> & Model> {
 
     public T get(int pos) { return genericList.get(pos); }
 
+    public ArrayList<T> getList() { return genericList; }
+
     /**
      * @param str
      * @return
@@ -47,7 +49,7 @@ public class Data<T extends Comparable<T> & Model> {
         int middle = (first + last)/2;
 
         while( first <= last ){
-
+            //System.out.println("Comparing: " + genericList.get(middle).getIdentifier() + " with: " + key);
             if ( genericList.get(middle).getIdentifier().compareTo(key) < 0 )
                 first = middle + 1;
             else if ( genericList.get(middle).getIdentifier().equals(key))

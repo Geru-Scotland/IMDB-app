@@ -57,7 +57,12 @@ public class Artist implements Comparable<Artist>, Model {
 
     @Override
     public int compareTo(Artist o) {
-        return 0;
+        return getIdentifier().compareTo(o.getIdentifier());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof Artist && ((Artist) o).getIdentifier().equals(getIdentifier());
     }
 
     @Override

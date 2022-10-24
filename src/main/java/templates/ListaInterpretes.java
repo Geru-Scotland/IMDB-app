@@ -16,7 +16,7 @@ public class ListaInterpretes {
      * Añade un intérprete a la lista
      * @param inter Intérprete a añadir
      */
-    public void añadirInterprete(Artist inter){
+    public void anadirInterprete(Artist inter){
             int i = 0;
             boolean existe = false;
             while(i< listaArtists.size() && !existe) {
