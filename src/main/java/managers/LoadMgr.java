@@ -12,8 +12,8 @@ import models.*;
 
 public class LoadMgr extends CatalogIMDB {
 
-    final String filmFile = "files/films";
-    final String castFile = "files/cast";
+    final String filmFile = "smallerfiles/films_medium";
+    final String castFile = "smallerfiles/cast_medium";
 
     public LoadMgr(){
 
@@ -89,10 +89,9 @@ public class LoadMgr extends CatalogIMDB {
                 String[] filmList = null;
 
                 if(info[1].contains("||")){
-                    filmList = info[1].split("\\|");
+                    filmList = info[1].split("\\|\\|");
                     for (String film : filmList)
-                        if(film.length() > 0)
-                            linkData(film, artist);
+                        linkData(film, artist);
 
                 } else{
                     linkData(info[1], artist);

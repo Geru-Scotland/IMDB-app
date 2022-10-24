@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Artist implements Comparable<Artist>, Entity {
 
     private ArrayList<Film> films;
+    private int filmsNum;
     private double rating;
     private String name;
 
@@ -11,27 +12,25 @@ public class Artist implements Comparable<Artist>, Entity {
         films = new ArrayList<>();
     }
 
-    public void setRating(double rat){
-        this.rating = rat;
+    public double getRating() {
+        computeRating();
+        return rating;
     }
-
     /**
      * Calcula y asigna el rating del intérprete en base al rating de sus películas
      */
-    public void calcularRating(){
+    public void computeRating(){
 
-        double totalRating = 0.0;
-        int totalVotos = 0;
-        double total = 0.0;
-        for (int i = 0; i < films.size(); i++){
-            if (films.get(i).getRating() != -1){
-                totalRating += films.get(i).getRating();
-                totalVotos += films.get(i).getVotes();
+        double filmsRating = 0.0;
+        int votes = 0;
+        for(Film film : films){
+            if(film.getRating() != -1){
+                filmsRating += film.getTotalRating();
+                votes += film.getVotes();
             }
         }
 
-        total = totalRating / totalVotos;
-        this.setRating(total);
+        rating = filmsRating / votes;
     }
 
     /**
@@ -40,7 +39,10 @@ public class Artist implements Comparable<Artist>, Entity {
      * POST: El rating del intérprete NO se modifica en este momento */
     public void addFilm(Film pel){
         films.add(pel);
+        filmsNum++;
     }
+
+    public int getFilmsNum(){ return filmsNum; }
 
     public ArrayList<Film> getFilms(){
         return films;

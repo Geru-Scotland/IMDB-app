@@ -14,9 +14,9 @@ public class AplicacionIMDB {
 
         //Menu
         Scanner sc = new Scanner(System.in);
-        int opcion=-1;
+        int opcion =- 1;
 
-        while(opcion!=0) {
+        while(opcion != 0) {
             System.out.println("Escoja una opcion:");
             System.out.println("1. Mostrar informacion de pelicula");
             System.out.println("2. Mostrar informacion de interprete");
@@ -35,7 +35,18 @@ public class AplicacionIMDB {
                     */
                     System.out.println("Introduce el nombre del artista: ");
                     String artist = sc.nextLine();
-                    cat.imprimirInfoInterprete(artist);
+                    cat.displayArtist(artist);
+                    break;
+                case 3:
+                    /*
+                    Test, mejorar esto y gestionar bien posibles excepciones
+                    Tanto de input, como posibles nullptr en busqueda.
+                    */
+                    System.out.println("Introduce el nombre de la pelicula: ");
+                    String film = sc.nextLine();
+                    System.out.println("Introduce tu voto: ");
+                    int vote = Integer.parseInt(sc.nextLine());
+                    cat.addVotetoFilm(film, vote);
                     break;
                 default:
                     break;

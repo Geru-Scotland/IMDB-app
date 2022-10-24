@@ -22,36 +22,26 @@ public class CatalogIMDB {
         return instance;
     }
 
-    protected void addVotetoFilm(Film film, float vote){
-
+    public void addVotetoFilm(String filmName, float vote){
+        Film film = films.binarySearch(filmName);
+        if(film == null)
+            return;
+        film.addVote(vote);
     }
 
-    /**
-     * Imprime por pantalla el no de intérpretes de una película y sus nombres
-     * @param titulo Título de la película
-     */
-    public void imprimirInfoPelicula(String titulo) {}
-    /**
-     * Imprime por pantalla el nombre del intérprete, su rating y los títulos
-     * de sus películas.
-     * @param nombre Nombre del intérprete
-     */
-    public void imprimirInfoInterprete(String nombre) {
+    public void displayFilm(String titulo) {}
+
+    public void displayArtist(String nombre) {
         Stopwatch sw = new Stopwatch();
         Artist artist = casting.binarySearch(nombre);
         if(artist == null)
             return;
         System.out.println("Busqueda finalizada en " + sw.elapsedTime() + " segundos.");
-        System.out.println("El artista "+ nombre + " ha participado en las siguientes peliculas: ");
+        System.out.println("Nombre: "+ nombre);
+        System.out.println("Rating: " + artist.getRating());
+        System.out.println("Peliculas ("+ artist.getFilmsNum()+") ");
         for(Film film : artist.getFilms())
             System.out.println(film.getIdentifier());
 
     }
-    /**
-     * Añade un nuevo voto a una película
-     * PRE: el valor del voto está entre 0.0 y 10.0.
-     * @param titulo Título de la película
-     * @param voto Valor del voto
-     */
-    public void anadirVoto(String titulo, float voto) {}
 }

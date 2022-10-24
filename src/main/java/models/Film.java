@@ -28,19 +28,15 @@ public class Film implements Comparable<Film>, Entity {
     }
 
     public String getTitle(){ return title; }
-
     public int getYear(){ return year; }
-
     public double getRating(){ return rating; }
-
+    public double getTotalRating(){ return rating * votes; }
     public int getVotes(){ return votes; }
-
     public void setRating(double rat){
-        this.rating = rat;
+        rating = rat;
     }
-
     public void setVotes(int vot){
-        this.votes = vot;
+        votes = vot;
     }
 
     /**
@@ -48,17 +44,16 @@ public class Film implements Comparable<Film>, Entity {
      * POST: se han recalculado los ratings de sus intérpretes
      * @param voto
      */
-    public void anadirVoto(float voto) {
+    public void addVote(float voto) {
         if (this.getRating()!=-1){
             this.setRating((this.getRating()*this.getVotes() + voto)/(this.getVotes() + 1));
         } else {
             this.setVotes(1);
             this.setRating(voto);
         }
-        
-        for(int i = 0; i< casting.size(); i++){
-            casting.get(i).calcularRating();
-        }
+
+        for(Artist artist : casting)
+            artist.computeRating();
     }
 
     public void addArtist(Artist art){
