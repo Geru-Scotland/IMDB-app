@@ -32,9 +32,9 @@ public class CatalogIMDB {
         film.addVote(vote);
     }
 
-    public void displayFilm(String titulo) {}
+    public void displayFilmInfo(String titulo) {}
 
-    public void displayArtist(String nombre) {
+    public void displayArtistInfo(String nombre) {
         Stopwatch sw = new Stopwatch();
         Artist artist = casting.binarySearch(nombre);
         if(artist == null)
@@ -44,7 +44,7 @@ public class CatalogIMDB {
         System.out.println("Rating: " + BigDecimal.valueOf(artist.getRating()).setScale(2, RoundingMode.FLOOR));
         System.out.println("Peliculas ("+ artist.getFilmsNum()+") ");
         for(Film film : artist.getFilms())
-            System.out.println(film.getIdentifier());
+            System.out.println(film.getIdentifier() + " [r=" + film.getRating()+ ", v="+ film.getVotes()+"]");
 
     }
 }

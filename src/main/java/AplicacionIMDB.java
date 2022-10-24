@@ -35,7 +35,7 @@ public class AplicacionIMDB {
                     */
                     System.out.println("Introduce el nombre del artista: ");
                     String artist = sc.nextLine();
-                    cat.displayArtist(artist);
+                    cat.displayArtistInfo(artist);
                     break;
                 case 3:
                     /*

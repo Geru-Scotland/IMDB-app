@@ -18,15 +18,6 @@ public class Film implements Comparable<Film>, Entity {
         this.title = title;
     }
 
-    @Override
-    public void populateInfo(String info){
-        String[] elem = info.split("\\t");
-        title = elem[0];
-        year = Integer.parseInt(elem[1]);
-        rating = Double.parseDouble(elem[2]);
-        votes = Integer.parseInt(elem[3]);
-    }
-
     public String getTitle(){ return title; }
     public int getYear(){ return year; }
     public double getRating(){ return rating; }
@@ -39,11 +30,6 @@ public class Film implements Comparable<Film>, Entity {
         votes = vot;
     }
 
-    /**
-     * Añade un nuevo voto a la película.
-     * POST: se han recalculado los ratings de sus intérpretes
-     * @param voto
-     */
     public void addVote(float voto) {
         if (this.getRating()!=-1){
             this.setRating((this.getRating()*this.getVotes() + voto)/(this.getVotes() + 1));
@@ -62,6 +48,15 @@ public class Film implements Comparable<Film>, Entity {
 
     public ArrayList<Artist> getCasting(){
         return casting;
+    }
+
+    @Override
+    public void populateInfo(String info){
+        String[] elem = info.split("\\t");
+        title = elem[0];
+        year = Integer.parseInt(elem[1]);
+        rating = Double.parseDouble(elem[2]);
+        votes = Integer.parseInt(elem[3]);
     }
 
     @Override
