@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 import managers.LoadMgr;
-import models.CatalogIMDB;
+import managers.CatalogIMDB;
 
 public class AplicacionIMDB {
 

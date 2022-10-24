@@ -1,6 +1,6 @@
 package models;
 
-public interface Model {
+public interface Entity {
     void populateInfo(String info);
     String getIdentifier();
 }

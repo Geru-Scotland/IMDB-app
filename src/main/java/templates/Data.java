@@ -1,10 +1,10 @@
 package templates;
 
-import models.Model;
+import models.Entity;
 
 import java.util.ArrayList;
 
-public class Data<T extends Comparable<T> & Model> extends SearchEngine<T> {
+public class Data<T extends Comparable<T> & Entity> extends SearchEngine<T> {
     private ArrayList<T> genericList;
     private int amount;
 

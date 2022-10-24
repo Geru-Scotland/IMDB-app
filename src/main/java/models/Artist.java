@@ -1,7 +1,7 @@
 package models;
 import java.util.ArrayList;
 
-public class Artist implements Comparable<Artist>, Model {
+public class Artist implements Comparable<Artist>, Entity {
 
     private ArrayList<Film> films;
     private double rating;

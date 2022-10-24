@@ -1,7 +1,7 @@
 package models;
 import java.util.ArrayList;
 
-public class Film implements Comparable<Film>, Model {
+public class Film implements Comparable<Film>, Entity {
 
     private String title;
     private int year;
@@ -41,25 +41,6 @@ public class Film implements Comparable<Film>, Model {
 
     public void setVotes(int vot){
         this.votes = vot;
-    }
-
-    /**
-     * Añade un intérprete a la película
-     * @param inter Intérprete a añadir
-     */
-    public void anadirInterprete(Artist inter){
-        int i = 0;
-        boolean existe = false;
-        while(i< casting.size() && !existe) {
-            if (!casting.get(i).equals(inter)) {
-                i++;
-            }
-            else {
-                existe = true;
-            }
-        }
-        if (existe = false) casting.add(inter);
-        else System.out.println("El interprete ya forma parte de la lista");
     }
 
     /**

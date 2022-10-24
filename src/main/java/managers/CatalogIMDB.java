@@ -1,16 +1,15 @@
-package models;
+package managers;
 
 import libs.Stopwatch;
+import models.Artist;
+import models.Film;
 import templates.Data;
-import templates.SearchEngine;
 
 public class CatalogIMDB {
     private static CatalogIMDB instance;
 
     protected static Data<Film> films;
     protected static Data<Artist> casting;
-
-    private SearchEngine se;
 
     protected CatalogIMDB(){
         films = new Data<>();
@@ -23,7 +22,7 @@ public class CatalogIMDB {
         return instance;
     }
 
-    protected void addToCatalog(String[] info, int type){
+    protected void addVotetoFilm(Film film, float vote){
 
     }
 
