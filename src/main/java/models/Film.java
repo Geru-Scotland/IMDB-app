@@ -1,4 +1,4 @@
-package modelos;
+package models;
 import java.util.ArrayList;
 
 public class Film implements Comparable<Film>, Model {
@@ -8,10 +8,10 @@ public class Film implements Comparable<Film>, Model {
     private double rating;
     private int votes;
 
-    private ArrayList <Artist> artistParticip;
+    private ArrayList<Artist> casting;
 
     public Film(){
-        artistParticip = new ArrayList<Artist>();
+        casting = new ArrayList<Artist>();
     }
 
     public Film(String title){
@@ -50,15 +50,15 @@ public class Film implements Comparable<Film>, Model {
     public void anadirInterprete(Artist inter){
         int i = 0;
         boolean existe = false;
-        while(i< artistParticip.size() && !existe) {
-            if (!artistParticip.get(i).equals(inter)) {
+        while(i< casting.size() && !existe) {
+            if (!casting.get(i).equals(inter)) {
                 i++;
             }
             else {
                 existe = true;
             }
         }
-        if (existe = false) artistParticip.add(inter);
+        if (existe = false) casting.add(inter);
         else System.out.println("El interprete ya forma parte de la lista");
     }
 
@@ -75,9 +75,17 @@ public class Film implements Comparable<Film>, Model {
             this.setRating(voto);
         }
         
-        for(int i = 0; i< artistParticip.size(); i++){
-            artistParticip.get(i).calcularRating();
+        for(int i = 0; i< casting.size(); i++){
+            casting.get(i).calcularRating();
         }
+    }
+
+    public void addArtist(Artist art){
+        casting.add(art);
+    }
+
+    public ArrayList<Artist> getCasting(){
+        return casting;
     }
 
     @Override

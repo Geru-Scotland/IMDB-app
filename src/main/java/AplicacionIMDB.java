@@ -1,14 +1,14 @@
 import java.util.Scanner;
 
 import managers.LoadMgr;
-import modelos.CatalogoIMDB;
+import models.CatalogIMDB;
 
 public class AplicacionIMDB {
 
 
     public static void main(String[] args){
 
-        CatalogoIMDB  cat = CatalogoIMDB.getInstance();
+        CatalogIMDB cat = CatalogIMDB.getInstance();
 
         LoadMgr loadMgr = new LoadMgr();
         loadMgr.loadData();

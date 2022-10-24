@@ -1,21 +1,15 @@
-package modelos;
+package models;
 import java.util.ArrayList;
 
 public class Artist implements Comparable<Artist>, Model {
 
-    private ArrayList<Film> listaFilms;
+    private ArrayList<Film> films;
     private double rating;
     private String name;
 
     public Artist(){
-        listaFilms = new ArrayList<>();
+        films = new ArrayList<>();
     }
-
-    @Override
-    public void populateInfo(String info){
-        name = info;
-    }
-
 
     public void setRating(double rat){
         this.rating = rat;
@@ -29,10 +23,10 @@ public class Artist implements Comparable<Artist>, Model {
         double totalRating = 0.0;
         int totalVotos = 0;
         double total = 0.0;
-        for (int i = 0; i < listaFilms.size(); i++){
-            if (listaFilms.get(i).getRating() != -1){
-                totalRating += listaFilms.get(i).getRating();
-                totalVotos += listaFilms.get(i).getVotes();
+        for (int i = 0; i < films.size(); i++){
+            if (films.get(i).getRating() != -1){
+                totalRating += films.get(i).getRating();
+                totalVotos += films.get(i).getVotes();
             }
         }
 
@@ -44,12 +38,21 @@ public class Artist implements Comparable<Artist>, Model {
      * Añade una película al intérprete
      * @param pel Película a añadir
      * POST: El rating del intérprete NO se modifica en este momento */
-    public void agregarPelicula(Film pel){
-        listaFilms.add(pel);
+    public void addFilm(Film pel){
+        films.add(pel);
     }
 
-    public String getNombre() {
-        return null;
+    public ArrayList<Film> getFilms(){
+        return films;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void populateInfo(String info){
+        name = info;
     }
 
     @Override
