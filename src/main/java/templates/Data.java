@@ -3,6 +3,7 @@ package templates;
 import models.Model;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Data<T extends Comparable<T> & Model> {
     private ArrayList<T> genericList;
@@ -28,7 +29,7 @@ public class Data<T extends Comparable<T> & Model> {
      */
     public T normalSearch(String str) {
         for(T item : genericList){
-            if(item.getIdentifier().equals(str))
+            if(item.getIdentifier().equalsIgnoreCase(str))
                 return item;
         }
         return null;
