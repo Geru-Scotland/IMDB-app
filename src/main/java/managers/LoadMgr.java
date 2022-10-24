@@ -7,13 +7,15 @@ import java.util.Collections;
 import java.util.Scanner;
 
 import libs.Stopwatch;
-import models.*;
+import entities.models.DataModel;
+import entities.Artist;
+import entities.Film;
 
 
-public class LoadMgr extends CatalogIMDB {
+public class LoadMgr extends DataModel {
 
-    final String filmFile = "smallerfiles/films_medium";
-    final String castFile = "smallerfiles/cast_medium";
+    final String filmFile = "files/films";
+    final String castFile = "files/cast";
 
     public LoadMgr(){
 
@@ -119,7 +121,7 @@ public class LoadMgr extends CatalogIMDB {
 
     private void linkData(String filmName, Artist artist){
         Film currFilm = films.binarySearch(filmName);
-        artist.addFilm(currFilm);
-        currFilm.addArtist(artist);
+        artist.addData(currFilm);
+        currFilm.addData(artist);
     }
 }

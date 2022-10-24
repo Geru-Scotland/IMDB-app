@@ -1,14 +1,14 @@
 package templates;
 
-import models.Entity;
+import entities.models.Entity;
 
 import java.util.ArrayList;
 
-public class Data<T extends Comparable<T> & Entity> extends SearchEngine<T> {
+public class DataWrapper<T extends Comparable<T> & Entity> extends SearchEngine<T> {
     private ArrayList<T> genericList;
     private int amount;
 
-    public Data(){
+    public DataWrapper(){
         genericList = new ArrayList<>();
         amount = 0;
     }
@@ -19,9 +19,7 @@ public class Data<T extends Comparable<T> & Entity> extends SearchEngine<T> {
     }
 
     public int getSize(){ return genericList.size(); }
-
     public T get(int pos) { return genericList.get(pos); }
-
     public ArrayList<T> getList() { return genericList; }
 
     /**
@@ -48,7 +46,7 @@ public class Data<T extends Comparable<T> & Entity> extends SearchEngine<T> {
         int middle = (first + last)/2;
 
         while( first <= last ){
-            //System.out.println("Comparing: " + genericList.get(middle).getIdentifier() + " with: " + key);
+
             if ( genericList.get(middle).getIdentifier().compareTo(key) < 0 )
                 first = middle + 1;
             else if ( genericList.get(middle).getIdentifier().equals(key))

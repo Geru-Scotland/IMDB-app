@@ -1,4 +1,6 @@
-package models;
+package entities;
+import entities.models.Entity;
+
 import java.util.ArrayList;
 
 public class Artist implements Comparable<Artist>, Entity {
@@ -12,20 +14,13 @@ public class Artist implements Comparable<Artist>, Entity {
         films = new ArrayList<>();
     }
 
-    public double getRating() {
-        computeRating();
-        return rating;
-    }
-    /**
-     * Calcula y asigna el rating del intérprete en base al rating de sus películas
-     */
     public void computeRating(){
 
         double filmsRating = 0.0;
         int votes = 0;
         for(Film film : films){
-            if(film.getRating() != -1){
-                filmsRating += film.getTotalRating();
+            if(film.getRating(false) != -1){
+                filmsRating += film.getRating(true);
                 votes += film.getVotes();
             }
         }
@@ -33,23 +28,23 @@ public class Artist implements Comparable<Artist>, Entity {
         rating = filmsRating / votes;
     }
 
-    /**
-     * Añade una película al intérprete
-     * @param pel Película a añadir
-     * POST: El rating del intérprete NO se modifica en este momento */
-    public void addFilm(Film pel){
-        films.add(pel);
+    public void addData(Object obj){
+        if(!(obj instanceof Film))
+            return;
+        films.add((Film)obj);
         filmsNum++;
     }
 
     public int getFilmsNum(){ return filmsNum; }
-
     public ArrayList<Film> getFilms(){
         return films;
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public double getRating(boolean opt) {
+        if(opt)
+            computeRating();
+        return rating;
     }
 
     @Override

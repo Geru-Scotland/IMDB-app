@@ -46,7 +46,7 @@ public class AplicacionIMDB {
                     String film = sc.nextLine();
                     System.out.println("Introduce tu voto: ");
                     int vote = Integer.parseInt(sc.nextLine());
-                    cat.addVotetoFilm(film, vote);
+                    cat.addVoteToFilm(film, vote);
                     break;
                 default:
                     break;

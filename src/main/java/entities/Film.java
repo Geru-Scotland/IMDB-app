@@ -1,4 +1,6 @@
-package models;
+package entities;
+import entities.models.Entity;
+
 import java.util.ArrayList;
 
 public class Film implements Comparable<Film>, Entity {
@@ -7,48 +9,41 @@ public class Film implements Comparable<Film>, Entity {
     private int year;
     private double rating;
     private int votes;
+    private int artistNum;
 
     private ArrayList<Artist> casting;
 
-    public Film(){
-        casting = new ArrayList<Artist>();
-    }
+    public Film(){ casting = new ArrayList<Artist>(); }
 
-    public Film(String title){
-        this.title = title;
-    }
-
-    public String getTitle(){ return title; }
     public int getYear(){ return year; }
-    public double getRating(){ return rating; }
-    public double getTotalRating(){ return rating * votes; }
-    public int getVotes(){ return votes; }
-    public void setRating(double rat){
-        rating = rat;
-    }
-    public void setVotes(int vot){
-        votes = vot;
-    }
+    public int getVotes() {return votes; }
 
-    public void addVote(float voto) {
-        if (this.getRating()!=-1){
-            this.setRating((this.getRating()*this.getVotes() + voto)/(this.getVotes() + 1));
+    public void addVote(float newVote) {
+        if (rating!=-1){
+            rating = (rating*votes + newVote)/(votes + 1);
         } else {
-            this.setVotes(1);
-            this.setRating(voto);
+            votes = 1;
+            rating = newVote;
         }
 
         for(Artist artist : casting)
             artist.computeRating();
     }
 
-    public void addArtist(Artist art){
-        casting.add(art);
+    @Override
+    public void addData(Object obj){
+        if(!(obj instanceof Artist))
+            return;
+        casting.add((Artist)obj);
+        artistNum++;
     }
 
     public ArrayList<Artist> getCasting(){
         return casting;
     }
+
+    @Override
+    public double getRating(boolean weighted) { return weighted ? rating * votes : rating; }
 
     @Override
     public void populateInfo(String info){
@@ -61,7 +56,7 @@ public class Film implements Comparable<Film>, Entity {
 
     @Override
     public int compareTo(Film o) {
-        if(o.getTitle().compareTo(getTitle()) > 0)
+        if(o.getIdentifier().compareTo(title) > 0)
             return 1;
         return 0;
     }
