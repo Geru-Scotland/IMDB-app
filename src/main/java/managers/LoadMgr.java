@@ -91,16 +91,11 @@ public class LoadMgr extends CatalogIMDB {
                 if(info[1].contains("||")){
                     filmList = info[1].split("\\|");
                     for (String film : filmList)
-                        if(film.length() > 0){
-                            Film currFilm = films.binarySearch(film);
-                            artist.addFilm(currFilm);
-                            currFilm.addArtist(artist);
-                        }
+                        if(film.length() > 0)
+                            linkData(film, artist);
 
                 } else{
-                    Film currFilm = films.binarySearch(info[1]);
-                    artist.addFilm(currFilm);
-                    currFilm.addArtist(artist);
+                    linkData(info[1], artist);
                 }
 
                 try{
@@ -121,5 +116,11 @@ public class LoadMgr extends CatalogIMDB {
             System.out.println("No existe ningún fichero llamado " + file);
         }
         return null;
+    }
+
+    private void linkData(String filmName, Artist artist){
+        Film currFilm = films.binarySearch(filmName);
+        artist.addFilm(currFilm);
+        currFilm.addArtist(artist);
     }
 }
