@@ -5,14 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
 
-import modelos.CatalogoIMDB;
-import modelos.*;
+import models.CatalogIMDB;
+import models.*;
 
 
-public class LoadMgr extends CatalogoIMDB {
+public class LoadMgr extends CatalogIMDB {
 
-    final String filmFile = "/files/films";
-    final String castFile = "smallerfiles/cast_tiny";
+    final String filmFile = "files/films";
+    final String castFile = "files/cast";
 
     public LoadMgr(){
 
@@ -20,12 +20,15 @@ public class LoadMgr extends CatalogoIMDB {
 
     public void loadData(){
         try{
+            System.out.println(" ");
             System.out.println("Loading Films database...");
             loadFilms();
-            System.out.println("Films database fully loaded.");
+            System.out.println("Successfully loaded " + films.getSize() + " films.");
             System.out.println("Loading Casting database...");
             loadCast();
-            System.out.println("Casting database fully loaded.");
+            System.out.println("Successfully loaded " + casting.getSize() + " artists.");
+            System.out.println(" ");
+            System.out.println("");
         } catch(IOException e){
             System.out.println(e.getMessage());
         }
@@ -41,9 +44,9 @@ public class LoadMgr extends CatalogoIMDB {
         while (sc.hasNextLine()) {
             line = sc.nextLine();
             try{
-                Pelicula film = new Pelicula();
+                Film film = new Film();
                 film.populateInfo(line);
-                peliculas.add(film);
+                films.add(film);
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 System.out.println(e.getMessage());
             }
@@ -61,31 +64,36 @@ public class LoadMgr extends CatalogoIMDB {
         while (sc.hasNextLine()) {
             line = sc.nextLine();
             try{
-                Interprete casting = new Interprete();
+                Artist artist = new Artist();
                 String[] info = line.split("->");
-                casting.populateInfo(info[0]);
+                artist.populateInfo(info[0]);
 
-                String[] films = null;
+                String[] filmList = null;
 
                 if(info[1].contains("||")){
-                    films = info[1].split("\\|");
-                    for (String film : films)
-                        if(film.length() > 0)
-                            casting.agregarPelicula(peliculas.buscar(film));
+                    filmList = info[1].split("\\|");
+                    for (String film : filmList)
+                        if(film.length() > 0){
+                            Film currFilm = films.binarySearch(film);
+                            artist.addFilm(currFilm);
+                            currFilm.addArtist(artist);
+                        }
 
-                } else
-                    casting.agregarPelicula(peliculas.buscar(info[1]));
+                } else{
+                    Film currFilm = films.binarySearch(info[1]);
+                    artist.addFilm(currFilm);
+                    currFilm.addArtist(artist);
+                }
 
                 try{
-                    interpretes.add(casting);
+                    casting.add(artist);
                 } catch (IndexOutOfBoundsException e){
                     System.out.println(e.getMessage());
                 }
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                System.out.println(e.getMessage());
+            } catch (NullPointerException | NumberFormatException | ArrayIndexOutOfBoundsException e) {
+
             }
         }
-        System.out.println("Actor SIZE: " + interpretes.getSize());
     }
 
     private Scanner openFile(String file){
