@@ -1,8 +1,8 @@
 package models;
 
 import libs.Stopwatch;
-import managers.*;
 import templates.Data;
+import templates.SearchEngine;
 
 public class CatalogIMDB {
     private static CatalogIMDB instance;
@@ -13,7 +13,6 @@ public class CatalogIMDB {
     private SearchEngine se;
 
     protected CatalogIMDB(){
-        se = new SearchEngine();
         films = new Data<>();
         casting = new Data<>();
     }

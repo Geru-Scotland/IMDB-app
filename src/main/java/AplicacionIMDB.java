@@ -5,7 +5,6 @@ import models.CatalogIMDB;
 
 public class AplicacionIMDB {
 
-
     public static void main(String[] args){
 
         CatalogIMDB cat = CatalogIMDB.getInstance();

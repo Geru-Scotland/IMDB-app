@@ -3,9 +3,8 @@ package templates;
 import models.Model;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
-public class Data<T extends Comparable<T> & Model> {
+public class Data<T extends Comparable<T> & Model> extends SearchEngine<T> {
     private ArrayList<T> genericList;
     private int amount;
 
@@ -29,7 +28,7 @@ public class Data<T extends Comparable<T> & Model> {
      * @param str
      * @return
      */
-    public T normalSearch(String str) {
+    public T search(String str) {
         for(T item : genericList){
             if(item.getIdentifier().equalsIgnoreCase(str))
                 return item;
