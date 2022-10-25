@@ -1,7 +1,6 @@
 package templates;
 
 import entities.models.Entity;
-
 import java.util.ArrayList;
 
 public class DataWrapper<T extends Comparable<T> & Entity> extends SearchEngine<T> {
@@ -27,10 +26,9 @@ public class DataWrapper<T extends Comparable<T> & Entity> extends SearchEngine<
      * @return
      */
     public T search(String str) {
-        for(T item : genericList){
+        for(T item : genericList)
             if(item.getIdentifier().equalsIgnoreCase(str))
                 return item;
-        }
         return null;
     }
 

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Artist implements Comparable<Artist>, Entity {
 
-    private ArrayList<Film> films;
+    private final ArrayList<Film> films;
     private int filmsNum;
     private double rating;
     private String name;
@@ -39,6 +39,11 @@ public class Artist implements Comparable<Artist>, Entity {
     public ArrayList<Film> getFilms(){
         return films;
     }
+
+
+    /**
+     * Overrides
+     */
 
     @Override
     public double getRating(boolean opt) {

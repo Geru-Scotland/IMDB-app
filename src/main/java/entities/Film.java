@@ -11,24 +11,36 @@ public class Film implements Comparable<Film>, Entity {
     private int votes;
     private int artistNum;
 
-    private ArrayList<Artist> casting;
+    private final ArrayList<Artist> casting;
 
     public Film(){ casting = new ArrayList<Artist>(); }
 
     public int getYear(){ return year; }
     public int getVotes() {return votes; }
 
-    public void addVote(float newVote) {
+    public void addVote(float score) {
         if (rating!=-1){
-            rating = (rating*votes + newVote)/(votes + 1);
+            rating = (rating*votes + score)/(votes + 1);
         } else {
             votes = 1;
-            rating = newVote;
+            rating = score;
         }
 
+        /**
+         * Actualizar el rating para todos los artistas.
+         */
         for(Artist artist : casting)
             artist.computeRating();
     }
+
+
+    public ArrayList<Artist> getCasting(){
+        return casting;
+    }
+
+    /**
+     * Overrides
+     */
 
     @Override
     public void addData(Object obj){
@@ -36,10 +48,6 @@ public class Film implements Comparable<Film>, Entity {
             return;
         casting.add((Artist)obj);
         artistNum++;
-    }
-
-    public ArrayList<Artist> getCasting(){
-        return casting;
     }
 
     @Override

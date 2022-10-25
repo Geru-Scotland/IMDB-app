@@ -14,12 +14,13 @@ import entities.Film;
 
 public class LoadMgr extends DataModel {
 
+    /**
+     * TODO: Path/File selector.
+     */
     final String filmFile = "files/films";
     final String castFile = "files/cast";
 
-    public LoadMgr(){
-
-    }
+    public LoadMgr(){ }
 
     /**
      * Opción 1: Ordenar el arraylist de casting para poder hacer búsquedas binarias
