@@ -1,11 +1,12 @@
 package entities;
 import entities.models.Entity;
+import exceptions.EmptyDataException;
 
 import java.util.ArrayList;
 
-public class Artist implements Comparable<Artist>, Entity {
+public class Artist<T> implements Comparable<Artist<T>>, Entity<T> {
 
-    private final ArrayList<Film> films;
+    private final ArrayList<T> films;
     private int filmsNum;
     private double rating;
     private String name;
@@ -18,26 +19,22 @@ public class Artist implements Comparable<Artist>, Entity {
 
         double filmsRating = 0.0;
         int votes = 0;
-        for(Film film : films){
-            if(film.getRating(false) != -1){
-                filmsRating += film.getRating(true);
-                votes += film.getVotes();
+
+        for(Object film : films){
+            if(((Film)film).getRating(false) != -1){
+                filmsRating += ((Film)film).getRating(true);
+                votes += ((Film)film).getVotes();
             }
         }
 
         rating = filmsRating / votes;
     }
 
-    public void addData(Object obj){
+    public void addData(T obj){
         if(!(obj instanceof Film))
             return;
-        films.add((Film)obj);
+        films.add(obj);
         filmsNum++;
-    }
-
-    public int getFilmsNum(){ return filmsNum; }
-    public ArrayList<Film> getFilms(){
-        return films;
     }
 
     /**
@@ -45,11 +42,21 @@ public class Artist implements Comparable<Artist>, Entity {
      */
 
     @Override
+    public ArrayList<T> getDataList() throws EmptyDataException {
+        if(filmsNum == 0)
+            throw new EmptyDataException("Este artista no pertenece a ninguna pelicula.");
+        return films;
+    }
+
+    @Override
     public double getRating(boolean opt) {
         if(opt)
             computeRating();
         return rating;
     }
+
+    @Override
+    public int getDataNum(){ return filmsNum; }
 
     @Override
     public void populateInfo(String info){

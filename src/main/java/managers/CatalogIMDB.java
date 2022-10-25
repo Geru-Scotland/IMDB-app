@@ -1,5 +1,6 @@
 package managers;
 
+import exceptions.EmptyDataException;
 import exceptions.NonValidInputValue;
 import libs.Stopwatch;
 import entities.Artist;
@@ -9,6 +10,7 @@ import templates.DataWrapper;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 
 import exceptions.EntityNotFoundException;
 
@@ -37,51 +39,79 @@ public class CatalogIMDB extends DataModel {
         }
     }
 
-    public void displayFilmInfo(String titulo) throws EntityNotFoundException {
+    public void displayFilmInfo(String title) throws EntityNotFoundException {
         try{
-            Stopwatch sw = new Stopwatch();
-            Film film = films.binarySearch(titulo);
-
-            System.out.println("Busqueda finalizada en " + sw.elapsedTime() + " segundos.");
-            System.out.println("Titulo: "+ titulo);
-            try{
-                System.out.println("Rating: " + BigDecimal.valueOf(film.getRating(false)).setScale(2, RoundingMode.FLOOR));
-            } catch(NumberFormatException e){
-                System.out.println("Rating: -");
-            }
-            System.out.println("Actores ("+ film.getArtistNum() +") ");
-            for(Artist artist : film.getCasting()){
-                try{
-                    System.out.println(artist.getIdentifier() + " [r=" + BigDecimal.valueOf(film.getRating(false)).setScale(2, RoundingMode.FLOOR)+ ", v="+ film.getVotes()+"]");
-                } catch(NumberFormatException e){
-                    System.out.println("Rating: -");
-                }
-            }
+            displayData(films, title);
         } catch(EntityNotFoundException e){
             System.out.println(e.getMessage());
         }
     }
 
-    public void displayArtistInfo(String nombre) throws EntityNotFoundException {
+    public void displayArtistInfo(String name){
         try{
-            Stopwatch sw = new Stopwatch();
-            Artist artist = casting.binarySearch(nombre);
+            displayData(casting, name);
+        } catch(EntityNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+    }
 
+    public void displayData(DataWrapper collection, String identifier) throws EntityNotFoundException {
+
+        Stopwatch sw = new Stopwatch();
+        try{
+            Object entity = collection.binarySearch(identifier);
             System.out.println("Busqueda finalizada en " + sw.elapsedTime() + " segundos.");
-            System.out.println("Nombre: "+ nombre);
+            System.out.println("Nombre: "+ identifier);
+
             try{
-                System.out.println("Rating: " + BigDecimal.valueOf(artist.getRating(true)).setScale(2, RoundingMode.FLOOR));
+                double rating = 0.0;
+                String dataText = "";
+                String dataText2 = "";
+                int dataNum = 0;
+                ArrayList entityList = null;
+
+                if(entity instanceof Artist){
+                    rating = ((Artist)entity).getRating(true);
+                    dataText = "Peliculas (";
+                    dataNum = ((Artist)entity).getDataNum();
+                    try{
+                        entityList = ((Artist)entity).getDataList();
+                    } catch(EmptyDataException e){
+                        System.out.println(e.getMessage());
+                    }
+                }else if(entity instanceof Film){
+                    rating = ((Film)entity).getRating(false);
+                    dataText = "Actores (";
+                    dataNum = ((Film)entity).getDataNum();
+                    dataText2 = " | votos: " + ((Film)entity).getVotes();
+                    try{
+                        entityList = ((Film)entity).getDataList();
+                    } catch(EmptyDataException e){
+                        System.out.println(e.getMessage());
+                    }
+                }
+                System.out.println(dataText + dataNum+") ");
+                System.out.println("Rating: " + BigDecimal.valueOf(rating).setScale(2, RoundingMode.FLOOR) + dataText2);
+                System.out.println("_____________");
+                System.out.println("_____________");
+                assert entityList != null;
+                for(Object subEntity : entityList){
+                    try{
+                        if(subEntity instanceof Artist)
+                            System.out.println(((Artist)subEntity).getIdentifier() + " [r=" + BigDecimal.valueOf(((Artist)subEntity).getRating(true)).setScale(2, RoundingMode.FLOOR)+ "]");
+                        else if(subEntity instanceof Film)
+                            System.out.println(((Film)subEntity).getIdentifier() + " [r=" + BigDecimal.valueOf(((Film)subEntity).getRating(false)).setScale(2, RoundingMode.FLOOR)+ ", v="+ ((Film)subEntity).getVotes()+"]");
+                    } catch(NumberFormatException e){
+                        System.out.println("Rating: -");
+                    }
+                }
+                System.out.println("_____________");
+                System.out.println("_____________");
+
             } catch(NumberFormatException e){
                 System.out.println("Rating: -");
             }
-            System.out.println("Peliculas ("+ artist.getFilmsNum()+") ");
-            for(Film film : artist.getFilms()){
-                try{
-                    System.out.println(film.getIdentifier() + " [r=" + BigDecimal.valueOf(film.getRating(false)).setScale(2, RoundingMode.FLOOR)+ ", v="+ film.getVotes()+"]");
-                } catch(NumberFormatException e){
-                    System.out.println("Rating: -");
-                }
-            }
+
         } catch(EntityNotFoundException e){
             System.out.println(e.getMessage());
         }

@@ -1,8 +1,14 @@
 package entities.models;
 
-public interface Entity {
+import exceptions.EmptyDataException;
+
+import java.util.ArrayList;
+
+public interface Entity<T> {
     void populateInfo(String info);
     String getIdentifier();
     double getRating(boolean opt);
-    void addData(Object o);
+    int getDataNum();
+    ArrayList<T> getDataList() throws EmptyDataException;
+    void addData(T o);
 }

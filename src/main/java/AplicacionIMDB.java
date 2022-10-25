@@ -60,11 +60,7 @@ public class AplicacionIMDB {
                             System.out.print(">> ");
                             String artist = sc.nextLine();
                             clearConsole();
-                            try{
-                                cat.displayArtistInfo(artist);
-                            } catch(EntityNotFoundException e){
-                                System.out.println(e.getMessage());
-                            }
+                            cat.displayArtistInfo(artist);
                         } catch(NoSuchElementException | IllegalStateException ignore){}
                         break;
                     case 3:

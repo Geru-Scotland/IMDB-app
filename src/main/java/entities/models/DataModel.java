@@ -6,8 +6,8 @@ import templates.DataWrapper;
 
 public abstract class DataModel {
 
-    protected static DataWrapper<Film> films;
-    protected static DataWrapper<Artist> casting;
+    protected static DataWrapper<Film<Artist>> films;
+    protected static DataWrapper<Artist<Film>>casting;
 
     public DataModel(){}
 }
