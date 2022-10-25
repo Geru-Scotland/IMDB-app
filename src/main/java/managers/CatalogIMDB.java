@@ -1,18 +1,17 @@
 package managers;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.ArrayList;
-
-import exceptions.EmptyDataException;
-import exceptions.NonValidInputValue;
-import exceptions.EntityNotFoundException;
-
-import libs.Stopwatch;
 import entities.Artist;
 import entities.Film;
 import entities.models.DataModel;
+import exceptions.EmptyDataException;
+import exceptions.EntityNotFoundException;
+import exceptions.NonValidInputValue;
+import libs.Stopwatch;
 import templates.DataWrapper;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
 
 /**
  * Clase catálogo, cuyo objetivo es el de hacer de interfaz para el usuario, entre

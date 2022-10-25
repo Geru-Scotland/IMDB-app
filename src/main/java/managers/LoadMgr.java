@@ -1,18 +1,17 @@
 package managers;
 
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.Collections;
-import java.util.Scanner;
-
-import exceptions.EntityNotFoundException;
-import exceptions.LoadMgrException;
-
-import libs.Stopwatch;
-import entities.models.DataModel;
 import entities.Artist;
 import entities.Film;
+import entities.models.DataModel;
+import exceptions.EntityNotFoundException;
+import exceptions.LoadMgrException;
+import libs.Stopwatch;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Scanner;
 
 
 public class LoadMgr extends DataModel {

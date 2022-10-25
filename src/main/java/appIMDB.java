@@ -1,11 +1,11 @@
-import java.util.NoSuchElementException;
-import java.util.Scanner;
-
 import exceptions.EntityNotFoundException;
 import exceptions.LoadMgrException;
 import exceptions.NonValidInputValue;
-import managers.LoadMgr;
 import managers.CatalogIMDB;
+import managers.LoadMgr;
+
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class appIMDB {
 
