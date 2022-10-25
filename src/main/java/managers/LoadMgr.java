@@ -26,6 +26,14 @@ public class LoadMgr extends DataModel {
     public LoadMgr(){ }
 
     /**
+     *
+     * Método encargado de cargar toda la información.
+     *
+     * 1) Carga las películas de manera secuencial.
+     * 2) Carga los artistas y relaciona con las peliculas ya cargadas.
+     *
+     * Hemos desarrollado dos opciones, dejando como base la primera:
+     *
      * Opción 1: Ordenar el arraylist de casting para poder hacer búsquedas binarias
      * posteriormente. De ésta manera agregamos ~3.5s extra en la carga inicial (ficheros grandes)
      * pero reducimos drásticamente el tiempo de búsqueda en cada una de las mismas.
@@ -60,6 +68,11 @@ public class LoadMgr extends DataModel {
         }
     }
 
+    /**
+     * Carga las películas de manera secuencial.
+     * @throws IOException Excepción lanzada en caso de existir los problemas típicos.
+     * @throws LoadMgrException Tratamiento para cualquier otro tipo de problema al abrir el fichero.
+     */
     private void loadFilms() throws IOException, LoadMgrException {
         try{
             Scanner sc = openFile(filmFile);
@@ -80,6 +93,11 @@ public class LoadMgr extends DataModel {
         }
     }
 
+    /**
+     * Carga los artistas de manera secuencial y realiza el proceso de link/relación con las películas.
+     * @throws IOException Excepción lanzada en caso de existir los problemas típicos.
+     * @throws LoadMgrException Tratamiento para cualquier otro tipo de problema al abrir el fichero.
+     */
     private void loadCast() throws IOException, LoadMgrException  {
         try{
             Scanner sc = openFile(castFile);
@@ -115,6 +133,12 @@ public class LoadMgr extends DataModel {
         }
     }
 
+    /**
+     * Método encargado de abrir el fichero y lanzar la excepción apropiada en caso de error.
+     * @param file Nombre del fichero a cargar.
+     * @return Referencia al scanner con el fichero abierto.
+     * @throws LoadMgrException Lanza esta excepción ante cualquier problema.
+     */
     private Scanner openFile(String file) throws LoadMgrException {
         try {
             return new Scanner(new FileReader("./data/" + file + ".txt"));
@@ -124,6 +148,13 @@ public class LoadMgr extends DataModel {
         throw new LoadMgrException("[EXCEPTION] [LOADMGR] Ha habido un problem al abrir el fichero.");
     }
 
+    /**
+     * Proceso de relación entre Artista - película (para cada uno de los artistas cargados de manera secuencial)
+     * Para ello, se analiza la lista de películas de cada artista, y todas ellas se buscan mediante el algoritmo de
+     * búsqueda binaria en la estructura de datos del Wrapper.
+     * @param filmName Nombre de la película a buscar.
+     * @param artist Nombre del artista.
+     */
     private void linkData(String filmName, Artist artist){
         try{
             Film currFilm = films.binarySearch(filmName);
