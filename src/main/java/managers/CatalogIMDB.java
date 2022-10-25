@@ -25,10 +25,10 @@ public class CatalogIMDB extends DataModel {
         return instance;
     }
 
-    public void addFilmVote(String filmName, float score){
+    public void addFilmVote(String filmName, float score) throws IllegalArgumentException {
         Film film = films.binarySearch(filmName);
         if(film == null)
-            return;
+            throw new IllegalArgumentException();
         film.addVote(score);
     }
 

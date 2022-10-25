@@ -28,7 +28,7 @@ public class AplicacionIMDB {
             opcion = Integer.parseInt(sc.nextLine());
             switch(opcion) {
                 case 1:
-                    //TO DO
+
                     break;
                 case 2:
                     /*
@@ -55,7 +55,7 @@ public class AplicacionIMDB {
                     System.out.println("Introduce tu voto: ");
                     try{
                         cat.addFilmVote(film, Integer.parseInt(sc.nextLine()));
-                    } catch (NumberFormatException e){
+                    } catch (IllegalArgumentException e){
                         System.out.println("Introduce un número entre 0-10, por favor");
                     }
                     break;
