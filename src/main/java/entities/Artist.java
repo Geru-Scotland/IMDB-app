@@ -40,7 +40,6 @@ public class Artist implements Comparable<Artist>, Entity {
         return films;
     }
 
-
     /**
      * Overrides
      */

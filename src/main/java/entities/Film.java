@@ -13,18 +13,20 @@ public class Film implements Comparable<Film>, Entity {
 
     private final ArrayList<Artist> casting;
 
-    public Film(){ casting = new ArrayList<Artist>(); }
+    public Film(){
+        casting = new ArrayList<Artist>();
+    }
 
     public int getYear(){ return year; }
     public int getVotes() {return votes; }
 
     public void addVote(float score) {
-        if (rating!=-1){
-            rating = (rating*votes + score)/(votes + 1);
-        } else {
-            votes = 1;
+        votes++;
+        if (rating == -1){
+            votes++;
             rating = score;
-        }
+        }else
+            rating = (rating*(votes-1) + score)/votes;
 
         /**
          * Actualizar el rating para todos los artistas.

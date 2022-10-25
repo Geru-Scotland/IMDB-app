@@ -47,8 +47,12 @@ public class CatalogIMDB extends DataModel {
             System.out.println("Rating: -");
         }
         System.out.println("Peliculas ("+ artist.getFilmsNum()+") ");
-        for(Film film : artist.getFilms())
-            System.out.println(film.getIdentifier() + " [r=" + film.getRating(false)+ ", v="+ film.getVotes()+"]");
-
+        for(Film film : artist.getFilms()){
+            try{
+                System.out.println(film.getIdentifier() + " [r=" + BigDecimal.valueOf(film.getRating(false)).setScale(2, RoundingMode.FLOOR)+ ", v="+ film.getVotes()+"]");
+            } catch(NumberFormatException e){
+                System.out.println("Rating: -");
+            }
+        }
     }
 }
