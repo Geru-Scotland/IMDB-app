@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 public interface Entity<T> {
     void populateInfo(String info);
+    void addData(T obj);
     String getIdentifier();
-    double getRating(boolean opt);
     int getDataNum();
+    double getRating(boolean opt);
     ArrayList<T> getDataList() throws EmptyDataException;
-    void addData(T o);
 }

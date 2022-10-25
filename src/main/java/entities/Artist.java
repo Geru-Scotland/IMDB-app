@@ -11,9 +11,7 @@ public class Artist<T> implements Comparable<Artist<T>>, Entity<T> {
     private double rating;
     private String name;
 
-    public Artist(){
-        films = new ArrayList<>();
-    }
+    public Artist(){ films = new ArrayList<>(); }
 
     public void computeRating(){
 
@@ -30,6 +28,14 @@ public class Artist<T> implements Comparable<Artist<T>>, Entity<T> {
         rating = filmsRating / votes;
     }
 
+    /**
+     * Overrides
+     */
+
+    @Override
+    public void populateInfo(String info){ name = info; }
+
+    @Override
     public void addData(T obj){
         if(!(obj instanceof Film))
             return;
@@ -37,16 +43,11 @@ public class Artist<T> implements Comparable<Artist<T>>, Entity<T> {
         filmsNum++;
     }
 
-    /**
-     * Overrides
-     */
+    @Override
+    public String getIdentifier() { return name; }
 
     @Override
-    public ArrayList<T> getDataList() throws EmptyDataException {
-        if(filmsNum == 0)
-            throw new EmptyDataException("Este artista no pertenece a ninguna pelicula.");
-        return films;
-    }
+    public int getDataNum(){ return filmsNum; }
 
     @Override
     public double getRating(boolean opt) {
@@ -56,25 +57,17 @@ public class Artist<T> implements Comparable<Artist<T>>, Entity<T> {
     }
 
     @Override
-    public int getDataNum(){ return filmsNum; }
-
-    @Override
-    public void populateInfo(String info){
-        name = info;
+    public ArrayList<T> getDataList() throws EmptyDataException {
+        if(filmsNum == 0)
+            throw new EmptyDataException("Este artista no pertenece a ninguna pelicula.");
+        return films;
     }
 
     @Override
-    public int compareTo(Artist o) {
-        return getIdentifier().compareTo(o.getIdentifier());
-    }
+    public int compareTo(Artist o) { return getIdentifier().compareTo(o.getIdentifier()); }
 
     @Override
     public boolean equals(Object o) {
-        return o instanceof Artist && ((Artist) o).getIdentifier().equals(getIdentifier());
-    }
-
-    @Override
-    public String getIdentifier() {
-        return name;
+        return o instanceof Artist && ((Artist)o).getIdentifier().equals(getIdentifier());
     }
 }

@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import exceptions.EntityNotFoundException;
 import exceptions.LoadMgrException;
+
 import libs.Stopwatch;
 import entities.models.DataModel;
 import entities.Artist;
@@ -19,8 +20,8 @@ public class LoadMgr extends DataModel {
     /**
      * TODO: Path/File selector.
      */
-    final String filmFile = "smallerfiles/films_medium";
-    final String castFile = "smallerfiles/cast_medium";
+    final String filmFile = "files/films";
+    final String castFile = "files/cast";
 
     public LoadMgr(){ }
 

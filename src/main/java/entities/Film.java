@@ -28,9 +28,6 @@ public class Film<T> implements Comparable<Film<T>>, Entity<T> {
         }else
             rating = (rating*(votes-1) + score)/votes;
 
-        /**
-         * Actualizar el rating para todos los artistas.
-         */
         for(T entity : casting)
             ((Artist)entity).computeRating();
     }
@@ -38,27 +35,6 @@ public class Film<T> implements Comparable<Film<T>>, Entity<T> {
     /**
      * Overrides
      */
-
-    @Override
-    public ArrayList<T> getDataList() throws EmptyDataException{
-        if(artistNum == 0)
-            throw new EmptyDataException("Esta pelicula no contiene ningún artista.");
-        return casting;
-    }
-
-    @Override
-    public int getDataNum() { return artistNum; }
-
-    @Override
-    public void addData(T obj){
-        if(!(obj instanceof Artist))
-            return;
-        casting.add(obj);
-        artistNum++;
-    }
-
-    @Override
-    public double getRating(boolean weighted) { return weighted ? rating * votes : rating; }
 
     @Override
     public void populateInfo(String info){
@@ -70,15 +46,34 @@ public class Film<T> implements Comparable<Film<T>>, Entity<T> {
     }
 
     @Override
+    public void addData(T obj){
+        if(!(obj instanceof Artist))
+            return;
+        casting.add(obj);
+        artistNum++;
+    }
+
+    @Override
+    public String getIdentifier() { return title; }
+
+    @Override
+    public int getDataNum() { return artistNum; }
+
+    @Override
+    public double getRating(boolean weighted) { return weighted ? rating * votes : rating; }
+
+    @Override
+    public ArrayList<T> getDataList() throws EmptyDataException{
+        if(artistNum == 0)
+            throw new EmptyDataException("Esta pelicula no contiene ningún artista.");
+        return casting;
+    }
+
+    @Override
     public int compareTo(Film o) {
         if(o.getIdentifier().compareTo(title) > 0)
             return 1;
         return 0;
-    }
-
-    @Override
-    public String getIdentifier() {
-        return title;
     }
 }
 

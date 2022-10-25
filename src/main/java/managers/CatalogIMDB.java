@@ -1,18 +1,18 @@
 package managers;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+
 import exceptions.EmptyDataException;
 import exceptions.NonValidInputValue;
+import exceptions.EntityNotFoundException;
+
 import libs.Stopwatch;
 import entities.Artist;
 import entities.Film;
 import entities.models.DataModel;
 import templates.DataWrapper;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.ArrayList;
-
-import exceptions.EntityNotFoundException;
 
 public class CatalogIMDB extends DataModel {
     private static CatalogIMDB instance;
@@ -57,8 +57,8 @@ public class CatalogIMDB extends DataModel {
 
     public void displayData(DataWrapper collection, String identifier) throws EntityNotFoundException {
 
-        Stopwatch sw = new Stopwatch();
         try{
+            Stopwatch sw = new Stopwatch();
             Object entity = collection.binarySearch(identifier);
             System.out.println("Busqueda finalizada en " + sw.elapsedTime() + " segundos.");
             System.out.println("Nombre: "+ identifier);
@@ -90,10 +90,12 @@ public class CatalogIMDB extends DataModel {
                         System.out.println(e.getMessage());
                     }
                 }
+
                 System.out.println(dataText + dataNum+") ");
                 System.out.println("Rating: " + BigDecimal.valueOf(rating).setScale(2, RoundingMode.FLOOR) + dataText2);
                 System.out.println("_____________");
                 System.out.println("_____________");
+
                 assert entityList != null;
                 for(Object subEntity : entityList){
                     try{

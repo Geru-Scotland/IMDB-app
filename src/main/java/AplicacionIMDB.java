@@ -17,7 +17,6 @@ public class AplicacionIMDB {
             LoadMgr loadMgr = new LoadMgr();
             loadMgr.loadData();
 
-            //Menu
             Scanner sc = new Scanner(System.in);
             int option =- 1;
 
