@@ -34,7 +34,7 @@ public class CatalogIMDB extends DataModel {
 
     public void displayFilmInfo(String titulo) {}
 
-    public void displayArtistInfo(String nombre) throws EntityNotFoundException{
+    public void displayArtistInfo(String nombre) throws EntityNotFoundException {
         Stopwatch sw = new Stopwatch();
         Artist artist = casting.binarySearch(nombre);
         if(artist == null)

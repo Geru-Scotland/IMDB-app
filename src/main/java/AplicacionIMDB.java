@@ -22,7 +22,7 @@ public class AplicacionIMDB {
             System.out.println("Escoja una opcion:");
             System.out.println("1. Mostrar informacion de pelicula");
             System.out.println("2. Mostrar informacion de interprete");
-            System.out.println("3. Anadir voto a pelicula");
+            System.out.println("3. Anadir voto a pelicula [0-10]");
 
             System.out.println("0. Salir");
             opcion = Integer.parseInt(sc.nextLine());
@@ -56,7 +56,7 @@ public class AplicacionIMDB {
                     try{
                         cat.addFilmVote(film, Integer.parseInt(sc.nextLine()));
                     } catch (NumberFormatException e){
-                        System.out.println("Introduce un número, por favor");
+                        System.out.println("Introduce un número entre 0-10, por favor");
                     }
                     break;
                 default:
