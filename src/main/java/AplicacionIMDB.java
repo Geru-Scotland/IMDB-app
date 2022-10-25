@@ -28,7 +28,15 @@ public class AplicacionIMDB {
             opcion = Integer.parseInt(sc.nextLine());
             switch(opcion) {
                 case 1:
-
+                    try{
+                        System.out.println("Introduce el nombre de la pelicula: ");
+                        String film = sc.nextLine();
+                        try{
+                            cat.displayFilmInfo(film);
+                        } catch(EntityNotFoundException e){
+                            System.out.println(e.getMessage());
+                        }
+                    } catch(NoSuchElementException | IllegalStateException ignore){}
                     break;
                 case 2:
                     /*
@@ -56,7 +64,7 @@ public class AplicacionIMDB {
                     try{
                         cat.addFilmVote(film, Integer.parseInt(sc.nextLine()));
                     } catch (IllegalArgumentException e){
-                        System.out.println("Introduce un número entre 0-10, por favor");
+                        System.out.println("Introduce un nï¿½mero entre 0-10, por favor");
                     }
                     break;
                 default:
