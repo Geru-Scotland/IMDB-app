@@ -4,6 +4,11 @@ import exceptions.EmptyDataException;
 
 import java.util.ArrayList;
 
+/**
+ * Características conceptuales y metodos que toda entidad que vaya a ser wrapeada con la clase
+ * DataWrapper debe de tener.
+ * @param <T> Objeto de tipo T, que pertenecerá a una colección de la entidad en cuestión.
+ */
 public interface Entity<T> {
     /**
      * Método engargado de poblar la información relevante a la entidad.

@@ -14,6 +14,10 @@ import entities.Film;
 import entities.models.DataModel;
 import templates.DataWrapper;
 
+/**
+ * Clase catálogo, cuyo objetivo es el de hacer de interfaz para el usuario, entre
+ * los datos y sus estructuras.
+ */
 public class CatalogIMDB extends DataModel {
     private static CatalogIMDB instance;
 
@@ -28,17 +32,29 @@ public class CatalogIMDB extends DataModel {
         return instance;
     }
 
-    public void addFilmVote(String filmName, float score) throws IllegalArgumentException, NonValidInputValue {
+    /**
+     * Método para agregar un voto a una película
+     * @param filmName Nombre de la pelicula.
+     * @param score Puntuación del voto.
+     * @throws IllegalArgumentException
+     * @throws NonValidInputValue Excepción que será lanzada en caso de introducir un valor válido como voto.
+     */
+    public void addFilmVote(String filmName, float score) throws NonValidInputValue {
         try{
             if(score < 0 || score > 10)
                 throw new NonValidInputValue();
-            Film film = films.binarySearch(filmName);
+            Film<?> film = films.binarySearch(filmName);
             film.addVote(score);
         } catch(EntityNotFoundException e){
             System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * Vuelca información de la película.
+     * @param title Título de la pelicula
+     * @throws EntityNotFoundException Se lanzará en el caso de no encontrarse en base de datos.
+     */
     public void displayFilmInfo(String title) throws EntityNotFoundException {
         try{
             displayData(films, title);
@@ -47,6 +63,10 @@ public class CatalogIMDB extends DataModel {
         }
     }
 
+    /**
+     * Vuelca información del artista.
+     * @param name Nombre del artista.
+     */
     public void displayArtistInfo(String name){
         try{
             displayData(casting, name);
@@ -55,7 +75,14 @@ public class CatalogIMDB extends DataModel {
         }
     }
 
-    public void displayData(DataWrapper collection, String identifier) throws EntityNotFoundException {
+    /**
+     * Método encargado de mostrar la información relacionada al elemento encontrado en la colleción con elementos de tipo T
+     * que le pasemos.
+     * @param collection Colección de datos donde realizar la búsqueda.
+     * @param identifier Identificador de la entidad.
+     * @throws EntityNotFoundException Excepción que será lanzada en caso de no encontrar la entidad en cuestión.
+     */
+    public void displayData(DataWrapper<?> collection, String identifier) throws EntityNotFoundException {
 
         try{
             Stopwatch sw = new Stopwatch();
@@ -68,24 +95,24 @@ public class CatalogIMDB extends DataModel {
                 String dataText = "";
                 String dataText2 = "";
                 int dataNum = 0;
-                ArrayList entityList = null;
+                ArrayList<?> entityList = null;
 
                 if(entity instanceof Artist){
-                    rating = ((Artist)entity).getRating(true);
+                    rating = ((Artist<?>)entity).getRating(true);
                     dataText = "Peliculas (";
-                    dataNum = ((Artist)entity).getDataNum();
+                    dataNum = ((Artist<?>)entity).getDataNum();
                     try{
-                        entityList = ((Artist)entity).getDataList();
+                        entityList = ((Artist<?>)entity).getDataList();
                     } catch(EmptyDataException e){
                         System.out.println(e.getMessage());
                     }
                 }else if(entity instanceof Film){
-                    rating = ((Film)entity).getRating(false);
+                    rating = ((Film<?>)entity).getRating(false);
                     dataText = "Actores (";
-                    dataNum = ((Film)entity).getDataNum();
-                    dataText2 = " | votos: " + ((Film)entity).getVotes();
+                    dataNum = ((Film<?>)entity).getDataNum();
+                    dataText2 = " | votos: " + ((Film<?>)entity).getVotes();
                     try{
-                        entityList = ((Film)entity).getDataList();
+                        entityList = ((Film<?>)entity).getDataList();
                     } catch(EmptyDataException e){
                         System.out.println(e.getMessage());
                     }
@@ -100,9 +127,9 @@ public class CatalogIMDB extends DataModel {
                 for(Object subEntity : entityList){
                     try{
                         if(subEntity instanceof Artist)
-                            System.out.println(((Artist)subEntity).getIdentifier() + " [r=" + BigDecimal.valueOf(((Artist)subEntity).getRating(true)).setScale(2, RoundingMode.FLOOR)+ "]");
+                            System.out.println(((Artist<?>)subEntity).getIdentifier() + " [r=" + BigDecimal.valueOf(((Artist<?>)subEntity).getRating(true)).setScale(2, RoundingMode.FLOOR)+ "]");
                         else if(subEntity instanceof Film)
-                            System.out.println(((Film)subEntity).getIdentifier() + " [r=" + BigDecimal.valueOf(((Film)subEntity).getRating(false)).setScale(2, RoundingMode.FLOOR)+ ", v="+ ((Film)subEntity).getVotes()+"]");
+                            System.out.println(((Film<?>)subEntity).getIdentifier() + " [r=" + BigDecimal.valueOf(((Film<?>)subEntity).getRating(false)).setScale(2, RoundingMode.FLOOR)+ ", v="+ ((Film<?>)subEntity).getVotes()+"]");
                     } catch(NumberFormatException e){
                         System.out.println("Rating: -");
                     }
