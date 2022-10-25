@@ -32,7 +32,28 @@ public class CatalogIMDB extends DataModel {
         film.addVote(score);
     }
 
-    public void displayFilmInfo(String titulo) {}
+    public void displayFilmInfo(String titulo) throws EntityNotFoundException {
+        Stopwatch sw = new Stopwatch();
+        Film film = films.binarySearch(titulo);
+        if (film == null){
+            throw new EntityNotFoundException("La pelicula introducida no existe, por favor introduce en formato 'Titulo'");}
+        System.out.println("Busqueda finalizada en " + sw.elapsedTime() + " segundos.");
+        System.out.println("Titulo: "+ titulo);   
+        try{
+            System.out.println("Rating: " + BigDecimal.valueOf(film.getRating(true)).setScale(2, RoundingMode.FLOOR));
+        } catch(NumberFormatException e){
+            System.out.println("Rating: -");
+        }
+        System.out.println("Actores ("+ film.getCasting()+") ");
+        for(Artist artist : film.getCasting()){
+            try{
+                System.out.println(artist.getIdentifier() + " [r=" + BigDecimal.valueOf(film.getRating(false)).setScale(2, RoundingMode.FLOOR)+ ", v="+ film.getVotes()+"]");
+            } catch(NumberFormatException e){
+                System.out.println("Rating: -");
+            }
+        } 
+        
+    }
 
     public void displayArtistInfo(String nombre) throws EntityNotFoundException {
         Stopwatch sw = new Stopwatch();
