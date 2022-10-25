@@ -1,6 +1,8 @@
 package templates;
 
 import entities.models.Entity;
+import exceptions.EntityNotFoundException;
+
 import java.util.ArrayList;
 
 public class DataWrapper<T extends Comparable<T> & Entity> extends SearchEngine<T> {
@@ -22,14 +24,14 @@ public class DataWrapper<T extends Comparable<T> & Entity> extends SearchEngine<
     public ArrayList<T> getList() { return genericList; }
 
     /**
-     * @param str
+     * @param key
      * @return
      */
-    public T search(String str) {
+    public T search(String key) throws EntityNotFoundException {
         for(T item : genericList)
-            if(item.getIdentifier().equalsIgnoreCase(str))
+            if(item.getIdentifier().equalsIgnoreCase(key))
                 return item;
-        return null;
+        throw new EntityNotFoundException("[EXCEPTION] [SEARCH ENGINE] Entity not found: " + key);
     }
 
     /**
@@ -37,7 +39,7 @@ public class DataWrapper<T extends Comparable<T> & Entity> extends SearchEngine<
      * @param key
      * @return
      */
-    public T binarySearch(String key){
+    public T binarySearch(String key) throws EntityNotFoundException {
 
         int first = 0;
         int last = amount-1;
@@ -54,7 +56,6 @@ public class DataWrapper<T extends Comparable<T> & Entity> extends SearchEngine<
 
             middle = (first + last)/2;
         }
-
-        return null;
+        throw new EntityNotFoundException("[EXCEPTION] [SEARCH ENGINE] Entity not found: " + key);
     }
 }

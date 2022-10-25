@@ -35,10 +35,10 @@ public class Film implements Comparable<Film>, Entity {
             artist.computeRating();
     }
 
-
     public ArrayList<Artist> getCasting(){
         return casting;
     }
+    public int getArtistNum(){ return artistNum; }
 
     /**
      * Overrides
