@@ -4,6 +4,13 @@ import exceptions.EmptyDataException;
 
 import java.util.ArrayList;
 
+/**
+ * Clase que gestiona lo relacionado a los artistas. Implementa Comparable para
+ * poder comparar sus elementos e implementa a la interfaz Entity. La cual define
+ * conceptos genéricos que las entidades que estamos tratando deben de adoptar.
+ * @param <T> Tipo de los elementos correspondientes a la lista que
+ *           nuestra clase Artist almacenará (Films, pero podrían ser otros)
+ */
 public class Artist<T> implements Comparable<Artist<T>>, Entity<T> {
 
     private final ArrayList<T> films;

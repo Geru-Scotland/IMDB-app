@@ -5,10 +5,45 @@ import exceptions.EmptyDataException;
 import java.util.ArrayList;
 
 public interface Entity<T> {
+    /**
+     * Método engargado de poblar la información relevante a la entidad.
+     * @param info String que contendrá información intrínseca a la clase. Habrá que splitear en el caso de que la entidad
+     *             sea Films, para acceder a todos sus parámetros.
+     */
     void populateInfo(String info);
+
+    /**
+     * Método encargado de agregar un elemento del tipo T a la colección de datos
+     * que tendrá la entidad.
+     * @param obj Objeto de tipo T que será agregado a una colección de tipo ArrayList.
+     */
     void addData(T obj);
+
+    /**
+     * Método "getter" encargado de obtener el parámetro que actúe como identificador para cada
+     * entidad.
+     * @return String que actúa como identificador de la identidad en cuestión.
+     */
     String getIdentifier();
+
+    /**
+     * Método "getter" que nos devolverá el número de posiciones ocupadas de la colección
+     * que disponga la Entidad.
+     * @return integer con el valor de elementos reales dentro del ArrayList.
+     */
     int getDataNum();
-    double getRating(boolean opt);
+
+    /**
+     * Método "getter" que nos devolverá el rating correspondiente a la entidad.
+     * @param weighted variable que indicará si se ha de aplicar algún tipo de peso al rating promedio.
+     * @return variable de tipo double con el rating correspondiente.
+     */
+    double getRating(boolean weighted);
+
+    /**
+     * Método "getter" que nos devolverá
+     * @return Referencia a la colección del tipo ArrayList<T> que posea la entidad en cuestión.
+     * @throws EmptyDataException Excepción que será lanzada en caso de no existir ningún dato.
+     */
     ArrayList<T> getDataList() throws EmptyDataException;
 }

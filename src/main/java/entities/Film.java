@@ -4,6 +4,13 @@ import exceptions.EmptyDataException;
 
 import java.util.ArrayList;
 
+/**
+ * Clase que gestiona lo relacionado a las peliculas. Implementa Comparable para
+ * poder comparar sus elementos e implementa a la interfaz Entity. La cual define
+ * conceptos genéricos que las entidades que estamos tratando deben de adoptar.
+ * @param <T> Tipo de los elementos correspondientes a la lista que
+ *           nuestra clase Film almacenará (Artistas, pero podrían ser otros)
+ */
 public class Film<T> implements Comparable<Film<T>>, Entity<T> {
 
     private final ArrayList<T> casting;
@@ -13,13 +20,18 @@ public class Film<T> implements Comparable<Film<T>>, Entity<T> {
     private int votes;
     private int artistNum;
 
-    public Film(){
-        casting = new ArrayList<>();
-    }
+    public Film(){ casting = new ArrayList<>(); }
 
     public int getYear(){ return year; }
     public int getVotes() {return votes; }
 
+    /**
+     * Método para agregar un nuevo voto a una determinada pelicula y actualizar
+     * su rating.
+     * De manera adicional recalculará los ratings de aquellos artistas que
+     * actúen en la misma.
+     * @param score voto/puntuación.
+     */
     public void addVote(float score) {
         votes++;
         if (rating == -1){
