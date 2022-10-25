@@ -39,17 +39,17 @@ public class LoadMgr extends DataModel {
         try{
             Stopwatch sw = new Stopwatch();
             System.out.println(" ");
-            System.out.println("Loading Films database...");
+            System.out.println("Loading Films database...[O(n)]");
             loadFilms();
             System.out.println("Successfully loaded " + films.getSize() + " films in " + sw.elapsedTime() + " seconds.");
-            System.out.println("Loading Casting database...");
+            System.out.println("Loading Casting database...[Algorithm: Binary Search | O(nlogn)]");
             sw.reset();
             loadCast();
             System.out.println("Successfully loaded " + casting.getSize() + " artists in " + sw.elapsedTime() + " seconds.");
             System.out.println("Sorting casting list...");
             sw.reset();
             Collections.sort(casting.getList());
-            System.out.println("Casting list sorted in " + sw.elapsedTime() + " seconds.");;
+            System.out.println("Casting list sorted in " + sw.elapsedTime() + " seconds [Algorithm: It. Mergesort (Collections.sort) | O(nlogn)]");;
             System.out.println(" ");
             System.out.println("");
         } catch(IOException e){
