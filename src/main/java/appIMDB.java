@@ -7,7 +7,7 @@ import exceptions.NonValidInputValue;
 import managers.LoadMgr;
 import managers.CatalogIMDB;
 
-public class AplicacionIMDB {
+public class appIMDB {
 
     public static void main(String[] args){
 
@@ -87,6 +87,14 @@ public class AplicacionIMDB {
         }
     }
 
+    /**
+     * Método encargado de "limpiar" la consola cuando corresponda.
+     * Depende del sistema operativo en el que sea ejecutado, se llamará
+     * a un comando u otro.
+     *
+     * Sin embargo, en las consolas integradas de los IDEs, estos comandos
+     * no son reconocidos. Así que fuerzo un limpiado de 20 líneas.
+     */
     public static void clearConsole()
     {
         try
@@ -98,7 +106,6 @@ public class AplicacionIMDB {
             else if(os.contains("Linux") || os.contains("Mac"))
                 Runtime.getRuntime().exec("clear");
 
-            //Por si acaso, ya que si estamos en la consola del IDE no funciona.
             for(int i=0; i <= 20; i++)
                 System.out.println(" ");
         }
