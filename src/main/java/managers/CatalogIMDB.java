@@ -9,6 +9,8 @@ import templates.DataWrapper;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import exceptions.EntityNotFoundException;
+
 public class CatalogIMDB extends DataModel {
     private static CatalogIMDB instance;
 
@@ -23,20 +25,20 @@ public class CatalogIMDB extends DataModel {
         return instance;
     }
 
-    public void addVoteToFilm(String filmName, float vote){
+    public void addFilmVote(String filmName, float score){
         Film film = films.binarySearch(filmName);
         if(film == null)
             return;
-        film.addVote(vote);
+        film.addVote(score);
     }
 
     public void displayFilmInfo(String titulo) {}
 
-    public void displayArtistInfo(String nombre) {
+    public void displayArtistInfo(String nombre) throws EntityNotFoundException{
         Stopwatch sw = new Stopwatch();
         Artist artist = casting.binarySearch(nombre);
         if(artist == null)
-            return;
+            throw new EntityNotFoundException("El artista introducido no existe, por favor introduce en formato 'Apellido, Nombre' (case sensitive)");
         System.out.println("Busqueda finalizada en " + sw.elapsedTime() + " segundos.");
         System.out.println("Nombre: "+ nombre);
         try{

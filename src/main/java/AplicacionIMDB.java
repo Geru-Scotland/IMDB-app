@@ -1,5 +1,7 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import exceptions.EntityNotFoundException;
 import managers.LoadMgr;
 import managers.CatalogIMDB;
 
@@ -33,9 +35,15 @@ public class AplicacionIMDB {
                     Test, mejorar esto y gestionar bien posibles excepciones
                     Tanto de input, como posibles nullptr en busqueda.
                     */
-                    System.out.println("Introduce el nombre del artista: ");
-                    String artist = sc.nextLine();
-                    cat.displayArtistInfo(artist);
+                    try{
+                        System.out.println("Introduce el nombre del artista: ");
+                        String artist = sc.nextLine();
+                        try{
+                            cat.displayArtistInfo(artist);
+                        } catch(EntityNotFoundException e){
+                            System.out.println(e.getMessage());
+                        }
+                    } catch(NoSuchElementException | IllegalStateException ignore){}
                     break;
                 case 3:
                     /*
@@ -45,8 +53,11 @@ public class AplicacionIMDB {
                     System.out.println("Introduce el nombre de la pelicula: ");
                     String film = sc.nextLine();
                     System.out.println("Introduce tu voto: ");
-                    int vote = Integer.parseInt(sc.nextLine());
-                    cat.addVoteToFilm(film, vote);
+                    try{
+                        cat.addFilmVote(film, Integer.parseInt(sc.nextLine()));
+                    } catch (NumberFormatException e){
+                        System.out.println("Introduce un número, por favor");
+                    }
                     break;
                 default:
                     break;
