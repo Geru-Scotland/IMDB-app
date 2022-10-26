@@ -50,7 +50,7 @@ public class LoadMgr extends DataModel {
             System.out.println("Loading Films database...[O(n)]");
             loadFilms();
             System.out.println("Successfully loaded " + films.getSize() + " films in " + sw.elapsedTime() + " seconds.");
-            System.out.println("Loading Casting database and linking data...[Algorithm: Binary Search | O(n(mlogn))]");
+            System.out.println("Loading Casting database and linking data...[Algorithm: Binary Search | O(n(mlogp))]");
             sw.reset();
             loadCast();
             System.out.println("Successfully loaded " + casting.getSize() + " artists in " + sw.elapsedTime() + " seconds.");
