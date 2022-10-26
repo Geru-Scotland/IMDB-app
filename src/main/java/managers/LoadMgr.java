@@ -50,7 +50,7 @@ public class LoadMgr extends DataModel {
             System.out.println("Loading Films database...[O(n)]");
             loadFilms();
             System.out.println("Successfully loaded " + films.getSize() + " films in " + sw.elapsedTime() + " seconds.");
-            System.out.println("Loading Casting database...[Algorithm: Binary Search | O(nlogn)]");
+            System.out.println("Loading Casting database and linking data...[Algorithm: Binary Search | O(n(mlogn))]");
             sw.reset();
             loadCast();
             System.out.println("Successfully loaded " + casting.getSize() + " artists in " + sw.elapsedTime() + " seconds.");
@@ -116,9 +116,8 @@ public class LoadMgr extends DataModel {
                         for (String film : filmList)
                             linkData(film, artist);
 
-                    } else{
+                    } else
                         linkData(info[1], artist);
-                    }
 
                     try{
                         casting.add(artist);

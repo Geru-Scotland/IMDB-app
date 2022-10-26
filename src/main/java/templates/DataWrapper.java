@@ -43,7 +43,7 @@ public class DataWrapper<T extends Comparable<T> & Entity<?>> extends SearchEngi
     }
 
     /**
-     * Búsqueda binaria o dicotómica sobre la lista generíca.
+     * Búsqueda binaria o dicotómica sobre la lista genérica.
      * @param key Elemento a buscar.
      * @return Elemento encontrado.
      * @throws EntityNotFoundException lanzamos excepción en caso de no haber encontrado el elemento.
@@ -54,10 +54,10 @@ public class DataWrapper<T extends Comparable<T> & Entity<?>> extends SearchEngi
         int last = amount-1;
         int middle = (first + last)/2;
 
-        while( first <= last ){
-            if ( genericList.get(middle).getIdentifier().compareTo(key) < 0 )
+        while(first <= last){
+            if (genericList.get(middle).getIdentifier().compareTo(key) < 0)
                 first = middle + 1;
-            else if ( genericList.get(middle).getIdentifier().equals(key))
+            else if (genericList.get(middle).getIdentifier().equals(key))
                 return genericList.get(middle);
             else
                 last = middle - 1;
