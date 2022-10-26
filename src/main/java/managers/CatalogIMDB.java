@@ -32,6 +32,28 @@ public class CatalogIMDB extends DataModel {
     }
 
     /**
+     * Metodo para analizar los datos de los ficheros. Nos interesa saber de manera previa si,
+     * en el fichero de artistas, existe algún artista que posea una película y ésta NO esté
+     * en el fichero de peliculas ya cargado.
+     *
+     * Resultado: 2 Películas que están en el fichero de artistas NO están en en el
+     * de películas:
+     * -"You Are Here"
+     * -"Palác Akropolis"
+     */
+    public void checkNonExistantFilmsFromArtists(){
+        for(Artist artist : casting.getList()){
+            try{
+                ArrayList<Film> filmList = artist.getDataList();
+                for(Film film : filmList)
+                    films.binarySearch(film.getIdentifier());
+            } catch(EmptyDataException | EntityNotFoundException e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    /**
      * Método para agregar un voto a una película
      * @param filmName Nombre de la pelicula.
      * @param score Puntuación del voto.
@@ -93,13 +115,11 @@ public class CatalogIMDB extends DataModel {
                 double rating = 0.0;
                 String dataText = "";
                 String dataText2 = "";
-                int dataNum = 0;
                 ArrayList<?> entityList = null;
 
                 if(entity instanceof Artist){
                     rating = ((Artist<?>)entity).getRating(true);
-                    dataText = "Peliculas (";
-                    dataNum = ((Artist<?>)entity).getDataNum();
+                    dataText = "Peliculas (" + ((Artist<?>)entity).getDataNum();
                     try{
                         entityList = ((Artist<?>)entity).getDataList();
                     } catch(EmptyDataException e){
@@ -107,8 +127,7 @@ public class CatalogIMDB extends DataModel {
                     }
                 }else if(entity instanceof Film){
                     rating = ((Film<?>)entity).getRating(false);
-                    dataText = "Actores (";
-                    dataNum = ((Film<?>)entity).getDataNum();
+                    dataText = "Actores (" + ((Film<?>)entity).getDataNum();
                     dataText2 = " | votos: " + ((Film<?>)entity).getVotes();
                     try{
                         entityList = ((Film<?>)entity).getDataList();
@@ -117,7 +136,7 @@ public class CatalogIMDB extends DataModel {
                     }
                 }
 
-                System.out.println(dataText + dataNum+") ");
+                System.out.println(dataText + ") ");
                 System.out.println("Rating: " + BigDecimal.valueOf(rating).setScale(2, RoundingMode.FLOOR) + dataText2);
                 System.out.println("_____________");
                 System.out.println("_____________");
@@ -133,6 +152,7 @@ public class CatalogIMDB extends DataModel {
                         System.out.println("Rating: -");
                     }
                 }
+
                 System.out.println("_____________");
                 System.out.println("_____________");
 
