@@ -87,6 +87,7 @@ public class LoadMgr extends DataModel {
                     System.out.println(e.getMessage());
                 }
             }
+            sc.close();
         } catch(LoadMgrException e){
             throw new LoadMgrException(e.getMessage());
         }
@@ -126,6 +127,7 @@ public class LoadMgr extends DataModel {
                     }
                 } catch (NullPointerException | NumberFormatException | ArrayIndexOutOfBoundsException ignored) {}
             }
+            sc.close();
         } catch(LoadMgrException e){
             throw new LoadMgrException(e.getMessage());
         }
