@@ -6,13 +6,13 @@ import templates.DataWrapper;
 import java.util.ArrayList;
 
 /**
- * Características conceptuales y metodos que toda entidad que vaya a ser wrapeada con la clase
+ * Características conceptuales y métodos que toda entidad que vaya a ser wrapeada con la clase
  * DataWrapper debe de tener.
  * @param <T> Objeto de tipo T, que pertenecerá a una colección de la entidad en cuestión.
  */
 public abstract class Entity<T extends Comparable<T>> {
     /**
-     * Variables miembro
+     * Variables miembros
      */
     protected DataWrapper<Entity<T>> dataWrapper;
     protected String identifier;
@@ -21,7 +21,7 @@ public abstract class Entity<T extends Comparable<T>> {
     protected  Entity() { dataWrapper = new DataWrapper<>(); }
 
     /**
-     * Método engargado de poblar la información relevante a la entidad.
+     * Método encargado de poblar la información relevante a la entidad.
      * @param info String que contendrá información intrínseca a la clase. Habrá que splitear en el caso de que la entidad
      *             sea Films, para acceder a todos sus parámetros.
      */

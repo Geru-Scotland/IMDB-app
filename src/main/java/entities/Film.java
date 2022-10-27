@@ -17,7 +17,7 @@ public class Film<T extends Comparable<T>> extends Entity<T> implements Comparab
     private double rating;
     private int votes;
 
-    public Film(){ }
+    public Film(){}
 
     public int getYear(){ return year; }
     public int getVotes() {return votes; }

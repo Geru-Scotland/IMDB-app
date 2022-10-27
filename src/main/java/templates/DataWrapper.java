@@ -13,16 +13,13 @@ import java.util.ArrayList;
  */
 public class DataWrapper<T extends Entity<?>> extends SearchEngine<T> {
     private final ArrayList<T> genericList;
-    private int amount;
 
     public DataWrapper(){
         genericList = new ArrayList<>();
-        amount = 0;
     }
 
     public void add(T elemento){
         genericList.add(elemento);
-        amount++;
     }
 
     public int getSize(){ return genericList.size(); }
@@ -51,7 +48,7 @@ public class DataWrapper<T extends Entity<?>> extends SearchEngine<T> {
     public T binarySearch(String key) throws EntityNotFoundException {
 
         int first = 0;
-        int last = amount-1;
+        int last = genericList.size() - 1;
         int middle = (first + last)/2;
 
         while(first <= last){
