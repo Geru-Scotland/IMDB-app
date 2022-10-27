@@ -155,9 +155,9 @@ public class LoadMgr extends DataModel {
      * @param filmName Nombre de la película a buscar.
      * @param artist Nombre del artista.
      */
-    private void linkData(String filmName, Artist artist){
+    private void linkData(String filmName, Artist<Film<?>> artist){
         try{
-            Film currFilm = films.binarySearch(filmName);
+            Film<Artist<?>> currFilm = films.binarySearch(filmName);
             artist.addData(currFilm);
             currFilm.addData(artist);
         } catch (EntityNotFoundException ignore){}

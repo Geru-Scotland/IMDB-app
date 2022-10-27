@@ -21,9 +21,9 @@ public class Artist<T extends Comparable<T>> extends Entity<T> implements Compar
         int votes = 0;
 
         for(Object film : dataWrapper.getList()){
-            if(((Film)film).getRating(false) != -1){
-                filmsRating += ((Film)film).getRating(true);
-                votes += ((Film)film).getVotes();
+            if(((Film<?>)film).getRating(false) != -1){
+                filmsRating += ((Film<?>)film).getRating(true);
+                votes += ((Film<?>)film).getVotes();
             }
         }
 
@@ -69,6 +69,6 @@ public class Artist<T extends Comparable<T>> extends Entity<T> implements Compar
 
     @Override
     public boolean equals(Object o) {
-        return o instanceof Artist && ((Artist)o).getIdentifier().equals(getIdentifier());
+        return o instanceof Artist && ((Artist<?>)o).getIdentifier().equals(getIdentifier());
     }
 }

@@ -39,7 +39,7 @@ public class Film<T extends Comparable<T>> extends Entity<T> implements Comparab
 
         ArrayList<Entity<T>> dataList = dataWrapper.getList();
         for(Entity<T> item: dataList)
-            ((Artist)item).computeRating();
+            ((Artist<?>)item).computeRating();
     }
 
     /**
