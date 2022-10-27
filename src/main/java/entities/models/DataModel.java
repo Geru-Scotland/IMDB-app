@@ -11,7 +11,7 @@ import templates.DataWrapper;
 public abstract class DataModel {
 
     protected static DataWrapper<Film<Artist<?>>> films;
-    protected static DataWrapper<Artist<Film<?>>>casting;
+    protected static DataWrapper<Artist<Film<?>>> casting;
 
     public DataModel(){}
 }

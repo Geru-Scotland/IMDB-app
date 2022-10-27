@@ -20,7 +20,7 @@ public class Artist<T extends Comparable<T>> extends Entity<T> implements Compar
         double filmsRating = 0.0;
         int votes = 0;
 
-        for(Object film : dataList){
+        for(Object film : dataWrapper.getList()){
             if(((Film)film).getRating(false) != -1){
                 filmsRating += ((Film)film).getRating(true);
                 votes += ((Film)film).getVotes();
@@ -41,14 +41,14 @@ public class Artist<T extends Comparable<T>> extends Entity<T> implements Compar
     public void addData(T obj){
         if(!(obj instanceof Film))
             return;
-        dataList.add(obj);
+        dataWrapper.add((Film)obj);
     }
 
     @Override
     public String getIdentifier() { return identifier; }
 
     @Override
-    public int getDataNum(){ return dataList.size(); }
+    public int getDataNum(){ return dataWrapper.getList().size(); }
 
     @Override
     public double getRating(boolean opt) {
@@ -58,10 +58,10 @@ public class Artist<T extends Comparable<T>> extends Entity<T> implements Compar
     }
 
     @Override
-    public ArrayList<T> getDataList() throws EmptyDataException {
-        if(dataList.size() == 0)
+    public ArrayList<Entity<T>> getDataList() throws EmptyDataException {
+        if(dataWrapper.getSize() == 0)
             throw new EmptyDataException("Este artista no pertenece a ninguna pelicula.");
-        return dataList;
+        return dataWrapper.getList();
     }
 
     @Override

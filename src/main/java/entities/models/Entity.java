@@ -1,6 +1,7 @@
 package entities.models;
 
 import exceptions.EmptyDataException;
+import templates.DataWrapper;
 
 import java.util.ArrayList;
 
@@ -13,11 +14,11 @@ public abstract class Entity<T extends Comparable<T>> {
     /**
      * Variables miembro
      */
-    protected ArrayList<T> dataList;
+    protected DataWrapper<Entity<T>> dataWrapper;
     protected String identifier;
     protected double rating;
 
-    protected  Entity() { dataList = new ArrayList<>();  }
+    protected  Entity() { dataWrapper = new DataWrapper<>(); }
 
     /**
      * Método engargado de poblar la información relevante a la entidad.
@@ -59,5 +60,5 @@ public abstract class Entity<T extends Comparable<T>> {
      * @return Referencia a la colección del tipo ArrayList<T> que posea la entidad en cuestión.
      * @throws EmptyDataException Excepción que será lanzada en caso de no existir ningún dato.
      */
-    public abstract ArrayList<T> getDataList() throws EmptyDataException;
+    public abstract ArrayList<Entity<T>> getDataList() throws EmptyDataException;
 }
