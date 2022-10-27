@@ -1,6 +1,7 @@
 package entities;
 import entities.models.Entity;
 import exceptions.EmptyDataException;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -11,21 +12,16 @@ import java.util.ArrayList;
  * @param <T> Tipo de los elementos correspondientes a la lista que
  *           nuestra clase Artist almacenará (Films, pero podrían ser otros)
  */
-public class Artist<T> implements Comparable<Artist<T>>, Entity<T> {
+public class Artist<T extends Comparable<T>> extends Entity<T> implements Comparable<Artist<?>>{
 
-    private final ArrayList<T> films;
-    private int filmsNum;
-    private double rating;
-    private String name;
-
-    public Artist(){ films = new ArrayList<>(); }
+    public Artist(){ dataList = new ArrayList<>(); }
 
     public void computeRating(){
 
         double filmsRating = 0.0;
         int votes = 0;
 
-        for(Object film : films){
+        for(Object film : dataList){
             if(((Film)film).getRating(false) != -1){
                 filmsRating += ((Film)film).getRating(true);
                 votes += ((Film)film).getVotes();
@@ -40,21 +36,20 @@ public class Artist<T> implements Comparable<Artist<T>>, Entity<T> {
      */
 
     @Override
-    public void populateInfo(String info){ name = info; }
+    public void populateInfo(String info){ identifier = info; }
 
     @Override
     public void addData(T obj){
         if(!(obj instanceof Film))
             return;
-        films.add(obj);
-        filmsNum++;
+        dataList.add(obj);
     }
 
     @Override
-    public String getIdentifier() { return name; }
+    public String getIdentifier() { return identifier; }
 
     @Override
-    public int getDataNum(){ return filmsNum; }
+    public int getDataNum(){ return dataList.size(); }
 
     @Override
     public double getRating(boolean opt) {
@@ -65,9 +60,9 @@ public class Artist<T> implements Comparable<Artist<T>>, Entity<T> {
 
     @Override
     public ArrayList<T> getDataList() throws EmptyDataException {
-        if(filmsNum == 0)
+        if(dataList.size() == 0)
             throw new EmptyDataException("Este artista no pertenece a ninguna pelicula.");
-        return films;
+        return dataList;
     }
 
     @Override

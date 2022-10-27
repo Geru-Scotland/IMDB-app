@@ -11,16 +11,14 @@ import java.util.ArrayList;
  * @param <T> Tipo de los elementos correspondientes a la lista que
  *           nuestra clase Film almacenará (Artistas, pero podrían ser otros)
  */
-public class Film<T> implements Comparable<Film<T>>, Entity<T> {
+public class Film<T extends Comparable<T>> extends Entity<T> implements Comparable<Film<?>> {
 
-    private final ArrayList<T> casting;
-    private String title;
     private int year;
     private double rating;
     private int votes;
-    private int artistNum;
 
-    public Film(){ casting = new ArrayList<>(); }
+    public Film(){
+        dataList = (ArrayList<T>) new ArrayList<Film<T>>(); }
 
     public int getYear(){ return year; }
     public int getVotes() {return votes; }
@@ -40,7 +38,7 @@ public class Film<T> implements Comparable<Film<T>>, Entity<T> {
         }else
             rating = (rating*(votes-1) + score)/votes;
 
-        for(T entity : casting)
+        for(T entity : dataList)
             ((Artist)entity).computeRating();
     }
 
@@ -51,7 +49,7 @@ public class Film<T> implements Comparable<Film<T>>, Entity<T> {
     @Override
     public void populateInfo(String info){
         String[] elem = info.split("\\t");
-        title = elem[0];
+        identifier = elem[0];
         year = Integer.parseInt(elem[1]);
         rating = Double.parseDouble(elem[2]);
         votes = Integer.parseInt(elem[3]);
@@ -61,29 +59,28 @@ public class Film<T> implements Comparable<Film<T>>, Entity<T> {
     public void addData(T obj){
         if(!(obj instanceof Artist))
             return;
-        casting.add(obj);
-        artistNum++;
+        dataList.add(obj);
     }
 
     @Override
-    public String getIdentifier() { return title; }
+    public String getIdentifier() { return identifier; }
 
     @Override
-    public int getDataNum() { return artistNum; }
+    public int getDataNum() { return dataList.size(); }
 
     @Override
     public double getRating(boolean weighted) { return weighted ? rating * votes : rating; }
 
     @Override
     public ArrayList<T> getDataList() throws EmptyDataException{
-        if(artistNum == 0)
+        if(dataList.size() == 0)
             throw new EmptyDataException("Esta pelicula no contiene ningún artista.");
-        return casting;
+        return dataList;
     }
 
     @Override
     public int compareTo(Film o) {
-        if(o.getIdentifier().compareTo(title) > 0)
+        if(o.getIdentifier().compareTo(identifier) > 0)
             return 1;
         return 0;
     }
