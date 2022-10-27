@@ -17,7 +17,7 @@ public abstract class Entity<T extends Comparable<T>> {
     protected String identifier;
     protected double rating;
 
-    protected  Entity() {}
+    protected  Entity() { dataList = new ArrayList<>();  }
 
     /**
      * Método engargado de poblar la información relevante a la entidad.

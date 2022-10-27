@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Artist<T extends Comparable<T>> extends Entity<T> implements Comparable<Artist<?>>{
 
-    public Artist(){ dataList = new ArrayList<>(); }
+    public Artist(){ }
 
     public void computeRating(){
 
