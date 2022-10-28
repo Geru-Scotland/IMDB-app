@@ -1,16 +1,19 @@
 package managers;
 
+import exceptions.EntityNotFoundException;
 import exceptions.LoadMgrException;
-import org.junit.jupiter.api.BeforeEach;
+import exceptions.NonValidInputValue;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 
 class CatalogIMDBTest {
 
-    CatalogIMDB cat;
+    static CatalogIMDB cat;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         cat = CatalogIMDB.getInstance();
         try{
             LoadMgr loadMgr = new LoadMgr();
@@ -46,11 +49,10 @@ class CatalogIMDBTest {
 
     @Test
     public void addFilmVoteTest(){
+        Assertions.assertThrows(EntityNotFoundException.class, () -> cat.addFilmVote("Non existent film", 8));
+        Assertions.assertThrows(NonValidInputValue.class, () -> cat.addFilmVote("Fight Club", 12));
 
-    }
-
-    @Test
-    public void newTest(){
-
+        Assertions.assertDoesNotThrow(()-> cat.addFilmVote("Fight Club", 9));
+        Assertions.assertDoesNotThrow(()-> cat.addFilmVote("I Love Sydney", 4));
     }
 }
