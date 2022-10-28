@@ -60,15 +60,12 @@ public class CatalogIMDB extends DataModel {
      * @throws IllegalArgumentException
      * @throws NonValidInputValue Excepción que será lanzada en caso de introducir un valor válido como voto.
      */
-    public void addFilmVote(String filmName, float score) throws NonValidInputValue {
-        try{
-            if(score < 0 || score > 10)
-                throw new NonValidInputValue();
-            Film<?> film = films.binarySearch(filmName);
-            film.addVote(score);
-        } catch(EntityNotFoundException e){
-            System.out.println(e.getMessage());
-        }
+    public void addFilmVote(String filmName, float score) throws NonValidInputValue, EntityNotFoundException {
+        if(score < 0 || score > 10)
+            throw new NonValidInputValue();
+
+        Film<?> film = films.binarySearch(filmName);
+        film.addVote(score);
     }
 
     /**

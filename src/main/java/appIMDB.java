@@ -70,7 +70,11 @@ public class appIMDB {
                             String film = sc.nextLine();
                             System.out.println("[3] Introduce tu voto: ");
                             System.out.print(">> ");
-                            cat.addFilmVote(film, Integer.parseInt(sc.nextLine()));
+                            try{
+                                cat.addFilmVote(film, Integer.parseInt(sc.nextLine()));
+                            } catch(EntityNotFoundException e) {
+                                System.out.println(e.getMessage());
+                            }
                             clearConsole();
                         } catch (NonValidInputValue | IllegalArgumentException | NoSuchElementException e){
                             clearConsole();
