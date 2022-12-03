@@ -154,6 +154,8 @@ public class LoadMgr extends DataModel {
      * búsqueda binaria en la estructura de datos del Wrapper.
      * @param filmName Nombre de la película a buscar.
      * @param artist Nombre del artista.
+     *
+     * TODO: Trasladar esto a DataWrapper.
      */
     private void linkData(String filmName, Artist<Film<?>> artist){
         try{

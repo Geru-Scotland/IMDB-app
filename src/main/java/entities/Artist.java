@@ -1,6 +1,7 @@
 package entities;
 import entities.models.Entity;
 import exceptions.EmptyDataException;
+import templates.DataWrapper;
 
 import java.util.ArrayList;
 
@@ -28,6 +29,10 @@ public class Artist<T extends Comparable<T>> extends Entity<T> implements Compar
         }
 
         rating = filmsRating / votes;
+    }
+
+    public DataWrapper<?> getWrapper(){
+        return dataWrapper;
     }
 
     /**
