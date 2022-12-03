@@ -34,28 +34,6 @@ public class CatalogIMDB extends DataModel {
     }
 
     /**
-     * Metodo para analizar los datos de los ficheros. Nos interesa saber de manera previa si,
-     * en el fichero de artistas, existe algún artista que posea una película y ésta NO esté
-     * en el fichero de peliculas ya cargado.
-     *
-     * Resultado: 2 Películas que están en el fichero de artistas NO están en en el
-     * de películas:
-     * -"You Are Here"
-     * -"Palác Akropolis"
-     */
-    public void checkNonExistantFilmsFromArtists(){
-        /*for(Artist artist : casting.getList()){
-            try{
-                ArrayList<Film> filmList = artist.getDataList();
-                for(Film film : filmList)
-                    films.binarySearch(film.getIdentifier());
-            } catch(EmptyDataException | EntityNotFoundException e){
-                System.out.println(e.getMessage());
-            }
-        }*/
-    }
-
-    /**
      * Método para agregar un voto a una película
      * @param filmName Nombre de la pelicula.
      * @param score Puntuación del voto.
