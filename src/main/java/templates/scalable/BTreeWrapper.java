@@ -30,7 +30,7 @@ import exceptions.EntityNotFoundException;
  * @param <T> El tipo T debe de heredar de Comparable e implementar la interfaz Entity.
  *
  */
-public class BTreeWrapper<T> implements DataCollection<T> {
+public class BTreeWrapper<T extends Comparable<T>> implements DataCollection<T> {
 
     private Node<T> root;
     private int numNodes;
@@ -48,6 +48,10 @@ public class BTreeWrapper<T> implements DataCollection<T> {
     @Override
     public void add(T node){
         numNodes++;
+        if(!isEmpty())
+            root.add(node);
+        else
+            root = new Node<>(node);
     }
 
     @Override

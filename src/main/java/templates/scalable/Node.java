@@ -23,14 +23,33 @@ package templates.scalable;
 
 import exceptions.EntityNotFoundException;
 
-public class Node<T> {
+public class Node<T extends Comparable<T>> {
     private Node<T> left;
     private Node<T> right;
-    private T info;
+    private final T info;
 
-    public Node(){}
+    public Node(T data){ info = data; }
 
-    public void add(T node){
+    /**
+     * Basic Node methods.
+     */
+    private boolean isLeaf(){ return left == null && right == null;}
+    private boolean hasRight(){ return right != null; }
+    private boolean hasLeft(){ return left != null; }
+
+    public void add(T data){
+        if(info.compareTo(data) < 0){
+            if(hasRight())
+                right.add(data);
+            else
+                right = new Node<>(data);
+        }
+        else{
+            if(hasLeft())
+                left.add(data);
+            else
+                left = new Node<>(data);
+        }
     }
 
     public T search(String str) throws EntityNotFoundException {

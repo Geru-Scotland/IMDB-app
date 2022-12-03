@@ -10,7 +10,7 @@ import entities.Film;
 public abstract class DataModel {
 
     protected static DataCollection<Film<Artist<?>>> films;
-    protected static DataCollection<Artist<Film<?>>> casting;
+    protected static DataCollection<Artist<?>> casting;
 
     public DataModel(){}
 }
