@@ -7,7 +7,7 @@ import exceptions.EmptyDataException;
 import exceptions.EntityNotFoundException;
 import exceptions.NonValidInputValue;
 import libs.Stopwatch;
-import templates.DataWrapper;
+import templates.FilmWrapper;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -21,8 +21,8 @@ public class CatalogIMDB extends DataModel {
     private static CatalogIMDB instance;
 
     protected CatalogIMDB(){
-        films = new DataWrapper<>();
-        casting = new DataWrapper<>();
+        films = new FilmWrapper<>();
+        casting = new FilmWrapper<>();
     }
 
     public static CatalogIMDB getInstance() {
@@ -101,7 +101,7 @@ public class CatalogIMDB extends DataModel {
      * @param identifier Identificador de la entidad.
      * @throws EntityNotFoundException Excepción que será lanzada en caso de no encontrar la entidad en cuestión.
      */
-    public void displayData(DataWrapper<?> collection, String identifier) throws EntityNotFoundException {
+    public void displayData(FilmWrapper<?> collection, String identifier) throws EntityNotFoundException {
 
         try{
             Stopwatch sw = new Stopwatch();
