@@ -19,8 +19,8 @@ public class LoadMgr extends DataModel {
     /**
      * TODO: Path/File selector.
      */
-    final String filmFile = "files/films";
-    final String castFile = "files/cast";
+    final String filmFile = "smallerfiles/films_tiny";
+    final String castFile = "smallerfiles/cast_tiny";
 
     public LoadMgr(){ }
 
