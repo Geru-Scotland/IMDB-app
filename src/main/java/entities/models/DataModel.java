@@ -2,7 +2,8 @@ package entities.models;
 
 import entities.Artist;
 import entities.Film;
-import templates.DataWrapper;
+import templates.*;
+import templates.scalable.BTreeWrapper;
 
 /**
  * Junto con Entity, esta clase conformara el modelo de datos
@@ -11,7 +12,7 @@ import templates.DataWrapper;
 public abstract class DataModel {
 
     protected static DataWrapper<Film<Artist<?>>> films;
-    protected static DataWrapper<Artist<Film<?>>> casting;
+    protected static BTreeWrapper<Artist<?>> casting;
 
     public DataModel(){}
 }

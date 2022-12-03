@@ -2,12 +2,14 @@ package managers;
 
 import entities.Artist;
 import entities.Film;
+import entities.models.DataCollection;
 import entities.models.DataModel;
 import exceptions.EmptyDataException;
 import exceptions.EntityNotFoundException;
 import exceptions.NonValidInputValue;
 import libs.Stopwatch;
 import templates.DataWrapper;
+import templates.scalable.BTreeWrapper;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -22,7 +24,7 @@ public class CatalogIMDB extends DataModel {
 
     protected CatalogIMDB(){
         films = new DataWrapper<>();
-        casting = new DataWrapper<>();
+        casting = new BTreeWrapper<>();
     }
 
     public static CatalogIMDB getInstance() {
@@ -42,7 +44,7 @@ public class CatalogIMDB extends DataModel {
      * -"Palác Akropolis"
      */
     public void checkNonExistantFilmsFromArtists(){
-        for(Artist artist : casting.getList()){
+        /*for(Artist artist : casting.getList()){
             try{
                 ArrayList<Film> filmList = artist.getDataList();
                 for(Film film : filmList)
@@ -50,7 +52,7 @@ public class CatalogIMDB extends DataModel {
             } catch(EmptyDataException | EntityNotFoundException e){
                 System.out.println(e.getMessage());
             }
-        }
+        }*/
     }
 
     /**
@@ -65,7 +67,7 @@ public class CatalogIMDB extends DataModel {
         if(score < 0 || score > 10)
             throw new NonValidInputValue();
 
-        Film<?> film = films.binarySearch(filmName);
+        Film<?> film = films.search(filmName);
         film.addVote(score);
     }
 
@@ -101,11 +103,11 @@ public class CatalogIMDB extends DataModel {
      * @param identifier Identificador de la entidad.
      * @throws EntityNotFoundException Excepción que será lanzada en caso de no encontrar la entidad en cuestión.
      */
-    public void displayData(DataWrapper<?> collection, String identifier) throws EntityNotFoundException {
+    public void displayData(DataCollection<?> collection, String identifier) throws EntityNotFoundException {
 
         try{
             Stopwatch sw = new Stopwatch();
-            Object entity = collection.binarySearch(identifier);
+            Object entity = collection.search(identifier);
             System.out.println("Busqueda finalizada en " + sw.elapsedTime() + " segundos.");
             System.out.println("Nombre: "+ identifier);
 

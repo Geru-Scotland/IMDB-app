@@ -21,9 +21,16 @@
 
 package templates.scalable;
 
-import templates.scalable.BTreeEngine;
+import entities.models.DataCollection;
+import exceptions.EntityNotFoundException;
 
-public class BTreeWrapper<T> implements BTreeEngine<T> {
+/**
+ * Clase genérica encargada de gestionar colecciones de datos NO LINEALES. Hereda de
+ * ciertas funcionalidades arraigadas a su estructura de la interfaz BTreeEngine.
+ * @param <T> El tipo T debe de heredar de Comparable e implementar la interfaz Entity.
+ *
+ */
+public class BTreeWrapper<T> implements BTreeEngine<T>, DataCollection<T> {
 
     private Node<T> root;
     private int numNodes;
@@ -44,7 +51,7 @@ public class BTreeWrapper<T> implements BTreeEngine<T> {
     }
 
     @Override
-    public T search(String str){
+    public T search(String str) throws EntityNotFoundException {
         if(!isEmpty())
             return root.search(str);
         return null;

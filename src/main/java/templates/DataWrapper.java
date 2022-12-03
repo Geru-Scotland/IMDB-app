@@ -1,17 +1,18 @@
 package templates;
 
+import entities.models.DataCollection;
 import entities.models.Entity;
 import exceptions.EntityNotFoundException;
 
 import java.util.ArrayList;
 
 /**
- * Clase genérica encargada de gestionar colecciones de datos. Hereda métodos de búsqueda
- * de la clase abstracta Search Engine.
+ * Clase genérica encargada de gestionar colecciones de datos LINEALES. Hereda métodos de
+ * búsqueda de la clase abstracta Search Engine.
  * @param <T> El tipo T debe de heredar de Comparable e implementar la interfaz Entity.
  *
  */
-public class DataWrapper<T extends Entity<?>> extends SearchEngine<T> {
+public class DataWrapper<T extends Entity<?>> extends SearchEngine<T> implements DataCollection<T> {
     private final ArrayList<T> genericList;
 
     public DataWrapper(){
@@ -32,7 +33,7 @@ public class DataWrapper<T extends Entity<?>> extends SearchEngine<T> {
      * @return el elemento encontrado.
      * @throws EntityNotFoundException lanzamos excepción en caso de no haber encontrado el elemento.
      */
-    public T search(String key) throws EntityNotFoundException {
+    public T linealSearch(String key) throws EntityNotFoundException {
         for(T item : genericList)
             if(item.getIdentifier().equalsIgnoreCase(key))
                 return item;
@@ -45,7 +46,7 @@ public class DataWrapper<T extends Entity<?>> extends SearchEngine<T> {
      * @return Elemento encontrado.
      * @throws EntityNotFoundException lanzamos excepción en caso de no haber encontrado el elemento.
      */
-    public T binarySearch(String key) throws EntityNotFoundException {
+    public T search(String key) throws EntityNotFoundException {
 
         int first = 0;
         int last = genericList.size() - 1;

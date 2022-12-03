@@ -53,11 +53,11 @@ public class LoadMgr extends DataModel {
             System.out.println("Loading Casting database and linking data...[Algorithm: Binary Search | O(n(mlogp))]");
             sw.reset();
             loadCast();
-            System.out.println("Successfully loaded " + casting.getSize() + " artists in " + sw.elapsedTime() + " seconds.");
+            System.out.println("Successfully loaded " + casting.size() + " artists in " + sw.elapsedTime() + " seconds.");
             System.out.println("Sorting casting list...");
             sw.reset();
-            Collections.sort(casting.getList());
-            System.out.println("Casting list sorted in " + sw.elapsedTime() + " seconds [Algorithm: It. Mergesort (Collections.sort) | O(nlogn)]");;
+            /*Collections.sort(casting.getList());
+            System.out.println("Casting list sorted in " + sw.elapsedTime() + " seconds [Algorithm: It. Mergesort (Collections.sort) | O(nlogn)]");;*/
             System.out.println(" ");
             System.out.println("");
         } catch(IOException e){
@@ -159,7 +159,7 @@ public class LoadMgr extends DataModel {
      */
     private void linkData(String filmName, Artist<Film<?>> artist){
         try{
-            Film<Artist<?>> currFilm = films.binarySearch(filmName);
+            Film<Artist<?>> currFilm = films.search(filmName);
             artist.addData(currFilm);
             currFilm.addData(artist);
         } catch (EntityNotFoundException ignore){}

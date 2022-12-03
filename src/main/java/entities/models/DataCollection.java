@@ -19,26 +19,10 @@
  * Github: https://github.com/geru-scotland
  */
 
-package templates.scalable;
+package entities.models;
 
 import exceptions.EntityNotFoundException;
 
-public class Node<T> {
-    private Node<T> left;
-    private Node<T> right;
-    private T info;
-
-    public Node(){}
-
-    public void add(T node){
-    }
-
-    public T search(String str) throws EntityNotFoundException {
-        return info;
-    }
-
-    public T remove(String str){
-        return null;
-    }
-
+public interface DataCollection<T> {
+    public T search(String str) throws EntityNotFoundException;
 }

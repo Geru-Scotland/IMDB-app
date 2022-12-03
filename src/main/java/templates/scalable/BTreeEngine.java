@@ -21,9 +21,10 @@
 
 package templates.scalable;
 
+import exceptions.EntityNotFoundException;
+
 public interface  BTreeEngine<T> {
     public void add(T node);
-    public T search(String str);
     public T remove(String str);
     public int size();
 }
