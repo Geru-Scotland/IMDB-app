@@ -71,6 +71,8 @@ public class CatalogIMDB extends DataModel {
             displayData(casting, name);
         } catch(EntityNotFoundException e){
             System.out.println(e.getMessage());
+        } catch(NullPointerException e){
+            System.out.println("Arbol de artistas vacío.");
         }
     }
 
@@ -81,7 +83,7 @@ public class CatalogIMDB extends DataModel {
      * @param identifier Identificador de la entidad.
      * @throws EntityNotFoundException Excepción que será lanzada en caso de no encontrar la entidad en cuestión.
      */
-    public void displayData(DataCollection<?> collection, String identifier) throws EntityNotFoundException {
+    public void displayData(DataCollection<?> collection, String identifier) throws EntityNotFoundException, NullPointerException {
 
         try{
             Stopwatch sw = new Stopwatch();
@@ -119,7 +121,9 @@ public class CatalogIMDB extends DataModel {
                 System.out.println("_____________");
                 System.out.println("_____________");
 
-                assert entityList != null;
+                if(entityList == null)
+                    throw new NullPointerException();
+
                 for(Object subEntity : entityList){
                     try{
                         if(subEntity instanceof Artist)

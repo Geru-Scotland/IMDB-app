@@ -24,7 +24,7 @@ public class LinealWrapper<T extends Entity<?>> extends SearchEngine<T> implemen
 
     /**
      * Búsqueda lineal a través de la lista genérica.
-     * @param key Elemento a buscar.
+     * @param key Elemento a2 buscar.
      * @return el elemento encontrado.
      * @throws EntityNotFoundException lanzamos excepción en caso de no haber encontrado el elemento.
      */
