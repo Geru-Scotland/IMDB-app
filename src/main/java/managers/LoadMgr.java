@@ -19,8 +19,8 @@ public class LoadMgr extends DataModel {
     /**
      * TODO: Path/File selector.
      */
-    final String filmFile = "smallerfiles/films_tiny";
-    final String castFile = "smallerfiles/cast_tiny";
+    final String filmFile = "files/films";
+    final String castFile = "files/cast";
 
     public LoadMgr(){ }
 
@@ -155,7 +155,7 @@ public class LoadMgr extends DataModel {
      * @param filmName Nombre de la película a buscar.
      * @param artist Nombre del artista.
      *
-     * TODO: Trasladar esto a FilmWrapper.
+     * TODO: Trasladar esto a DataWrapper.
      */
     private void linkData(String filmName, Artist<Film<?>> artist){
         try{

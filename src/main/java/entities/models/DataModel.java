@@ -2,7 +2,7 @@ package entities.models;
 
 import entities.Artist;
 import entities.Film;
-import templates.FilmWrapper;
+import templates.DataWrapper;
 
 /**
  * Junto con Entity, esta clase conformara el modelo de datos
@@ -10,8 +10,8 @@ import templates.FilmWrapper;
  */
 public abstract class DataModel {
 
-    protected static FilmWrapper<Film<Artist<?>>> films;
-    protected static FilmWrapper<Artist<Film<?>>> casting;
+    protected static DataWrapper<Film<Artist<?>>> films;
+    protected static DataWrapper<Artist<Film<?>>> casting;
 
     public DataModel(){}
 }

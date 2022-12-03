@@ -1,7 +1,7 @@
 package entities;
 import entities.models.Entity;
 import exceptions.EmptyDataException;
-import templates.FilmWrapper;
+import templates.DataWrapper;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ public class Artist<T extends Comparable<T>> extends Entity<T> implements Compar
         double filmsRating = 0.0;
         int votes = 0;
 
-        for(Object film : filmWrapper.getList()){
+        for(Object film : dataWrapper.getList()){
             if(((Film<?>)film).getRating(false) != -1){
                 filmsRating += ((Film<?>)film).getRating(true);
                 votes += ((Film<?>)film).getVotes();
@@ -31,8 +31,8 @@ public class Artist<T extends Comparable<T>> extends Entity<T> implements Compar
         rating = filmsRating / votes;
     }
 
-    public FilmWrapper<?> getWrapper(){
-        return filmWrapper;
+    public DataWrapper<?> getWrapper(){
+        return dataWrapper;
     }
 
     /**
@@ -46,14 +46,14 @@ public class Artist<T extends Comparable<T>> extends Entity<T> implements Compar
     public void addData(T obj){
         if(!(obj instanceof Film))
             return;
-        filmWrapper.add((Film)obj);
+        dataWrapper.add((Film)obj);
     }
 
     @Override
     public String getIdentifier() { return identifier; }
 
     @Override
-    public int getDataNum(){ return filmWrapper.getList().size(); }
+    public int getDataNum(){ return dataWrapper.getList().size(); }
 
     @Override
     public double getRating(boolean opt) {
@@ -64,9 +64,9 @@ public class Artist<T extends Comparable<T>> extends Entity<T> implements Compar
 
     @Override
     public ArrayList<Entity<T>> getDataList() throws EmptyDataException {
-        if(filmWrapper.getSize() == 0)
+        if(dataWrapper.getSize() == 0)
             throw new EmptyDataException("Este artista no pertenece a ninguna pelicula.");
-        return filmWrapper.getList();
+        return dataWrapper.getList();
     }
 
     @Override

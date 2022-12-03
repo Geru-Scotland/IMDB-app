@@ -37,7 +37,7 @@ public class Film<T extends Comparable<T>> extends Entity<T> implements Comparab
         }else
             rating = (rating*(votes-1) + score)/votes;
 
-        ArrayList<Entity<T>> dataList = filmWrapper.getList();
+        ArrayList<Entity<T>> dataList = dataWrapper.getList();
         for(Entity<T> item: dataList)
             ((Artist<?>)item).computeRating();
     }
@@ -59,23 +59,23 @@ public class Film<T extends Comparable<T>> extends Entity<T> implements Comparab
     public void addData(T obj){
         if(!(obj instanceof Artist))
             return;
-        filmWrapper.add((Artist)obj);
+        dataWrapper.add((Artist)obj);
     }
 
     @Override
     public String getIdentifier() { return identifier; }
 
     @Override
-    public int getDataNum() { return filmWrapper.getSize(); }
+    public int getDataNum() { return dataWrapper.getSize(); }
 
     @Override
     public double getRating(boolean weighted) { return weighted ? rating * votes : rating; }
 
     @Override
     public ArrayList<Entity<T>> getDataList() throws EmptyDataException{
-        if(filmWrapper.getSize() == 0)
+        if(dataWrapper.getSize() == 0)
             throw new EmptyDataException("Esta pelicula no contiene ningún artista.");
-        return filmWrapper.getList();
+        return dataWrapper.getList();
     }
 
     @Override
