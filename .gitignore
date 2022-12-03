@@ -76,5 +76,5 @@ out/
 *.gradle*
 *gradle/*
 
-#DataWrapper
+#LinealWrapper
 data/

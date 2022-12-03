@@ -12,10 +12,10 @@ import java.util.ArrayList;
  * @param <T> El tipo T debe de heredar de Comparable e implementar la interfaz Entity.
  *
  */
-public class DataWrapper<T extends Entity<?>> extends SearchEngine<T> implements DataCollection<T> {
+public class LinealWrapper<T extends Entity<?>> extends SearchEngine<T> implements DataCollection<T> {
     private final ArrayList<T> genericList;
 
-    public DataWrapper(){
+    public LinealWrapper(){
         genericList = new ArrayList<>();
     }
 

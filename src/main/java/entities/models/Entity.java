@@ -1,24 +1,24 @@
 package entities.models;
 
 import exceptions.EmptyDataException;
-import templates.DataWrapper;
+import templates.LinealWrapper;
 
 import java.util.ArrayList;
 
 /**
  * Características conceptuales y métodos que toda entidad que vaya a ser wrapeada con la clase
- * DataWrapper debe de tener.
+ * LinealWrapper debe de tener.
  * @param <T> Objeto de tipo T, que pertenecerá a una colección de la entidad en cuestión.
  */
 public abstract class Entity<T extends Comparable<T>> {
     /**
      * Variables miembros
      */
-    protected DataWrapper<Entity<T>> dataWrapper;
+    protected LinealWrapper<Entity<T>> linealWrapper;
     protected String identifier;
     protected double rating;
 
-    protected  Entity() { dataWrapper = new DataWrapper<>(); }
+    protected  Entity() { linealWrapper = new LinealWrapper<>(); }
 
     /**
      * Método encargado de poblar la información relevante a la entidad.

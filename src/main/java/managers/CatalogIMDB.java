@@ -8,7 +8,7 @@ import exceptions.EmptyDataException;
 import exceptions.EntityNotFoundException;
 import exceptions.NonValidInputValue;
 import libs.Stopwatch;
-import templates.DataWrapper;
+import templates.LinealWrapper;
 import templates.scalable.BTreeWrapper;
 
 import java.math.BigDecimal;
@@ -23,7 +23,7 @@ public class CatalogIMDB extends DataModel {
     private static CatalogIMDB instance;
 
     protected CatalogIMDB(){
-        films = new DataWrapper<>();
+        films = new LinealWrapper<>();
         casting = new BTreeWrapper<>();
     }
 
