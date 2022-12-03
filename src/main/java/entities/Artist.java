@@ -76,4 +76,9 @@ public class Artist<T extends Comparable<T>> extends Entity<T> implements Compar
     public boolean equals(Object o) {
         return o instanceof Artist && ((Artist<?>)o).getIdentifier().equals(getIdentifier());
     }
+
+    @Override
+    public String toString() {
+        return getIdentifier();
+    }
 }

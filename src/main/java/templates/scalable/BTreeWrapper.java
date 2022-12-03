@@ -41,10 +41,10 @@ public class BTreeWrapper<T extends Comparable<T>> implements DataCollection<T> 
     }
 
     public boolean isEmpty() { return root == null; }
-    /**
-     * BTreeEngine overrides.
-     */
 
+    /**
+     * DataCollection overrides.
+     */
     @Override
     public void add(T node){
         numNodes++;

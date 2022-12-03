@@ -38,21 +38,21 @@ public class Node<T extends Comparable<T>> {
     private boolean hasLeft(){ return left != null; }
 
     public void add(T data){
-        if(info.compareTo(data) < 0){
+        if(info.compareTo(data) < 0)
             if(hasRight())
                 right.add(data);
             else
                 right = new Node<>(data);
-        }
-        else{
+        else
             if(hasLeft())
                 left.add(data);
             else
                 left = new Node<>(data);
-        }
     }
 
     public T search(String str) throws EntityNotFoundException {
+        if(isLeaf() && !info.toString().equals(str))
+            throw new EntityNotFoundException("Entidad no encontrada");
         return info;
     }
 
