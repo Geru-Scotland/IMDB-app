@@ -30,7 +30,7 @@ import exceptions.EntityNotFoundException;
  * @param <T> El tipo T debe de heredar de Comparable e implementar la interfaz Entity.
  *
  */
-public class BTreeWrapper<T> implements BTreeEngine<T>, DataCollection<T> {
+public class BTreeWrapper<T> implements DataCollection<T> {
 
     private Node<T> root;
     private int numNodes;

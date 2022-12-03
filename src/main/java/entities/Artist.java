@@ -64,7 +64,7 @@ public class Artist<T extends Comparable<T>> extends Entity<T> implements Compar
 
     @Override
     public ArrayList<Entity<T>> getDataList() throws EmptyDataException {
-        if(dataWrapper.getSize() == 0)
+        if(dataWrapper.size() == 0)
             throw new EmptyDataException("Este artista no pertenece a ninguna pelicula.");
         return dataWrapper.getList();
     }

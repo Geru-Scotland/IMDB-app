@@ -19,11 +19,6 @@ public class DataWrapper<T extends Entity<?>> extends SearchEngine<T> implements
         genericList = new ArrayList<>();
     }
 
-    public void add(T elemento){
-        genericList.add(elemento);
-    }
-
-    public int getSize(){ return genericList.size(); }
     public T get(int pos) { return genericList.get(pos); }
     public ArrayList<T> getList() { return genericList; }
 
@@ -39,6 +34,21 @@ public class DataWrapper<T extends Entity<?>> extends SearchEngine<T> implements
                 return item;
         throw new EntityNotFoundException("[EXCEPTION] [SEARCH ENGINE] Entity not found: " + key);
     }
+
+    /**
+     * DataCollection overrides
+     */
+
+    @Override
+    public void add(T elemento){
+        genericList.add(elemento);
+    }
+
+    @Override
+    public int size(){ return genericList.size(); }
+
+    @Override
+    public T remove(String str){ return null; }
 
     /**
      * Búsqueda binaria o dicotómica sobre la lista genérica.

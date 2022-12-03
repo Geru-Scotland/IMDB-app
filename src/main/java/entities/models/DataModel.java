@@ -11,8 +11,8 @@ import templates.scalable.BTreeWrapper;
  */
 public abstract class DataModel {
 
-    protected static DataWrapper<Film<Artist<?>>> films;
-    protected static BTreeWrapper<Artist<?>> casting;
+    protected static DataCollection<Film<Artist<?>>> films;
+    protected static DataCollection<Artist<Film<?>>> casting;
 
     public DataModel(){}
 }

@@ -66,14 +66,14 @@ public class Film<T extends Comparable<T>> extends Entity<T> implements Comparab
     public String getIdentifier() { return identifier; }
 
     @Override
-    public int getDataNum() { return dataWrapper.getSize(); }
+    public int getDataNum() { return dataWrapper.size(); }
 
     @Override
     public double getRating(boolean weighted) { return weighted ? rating * votes : rating; }
 
     @Override
     public ArrayList<Entity<T>> getDataList() throws EmptyDataException{
-        if(dataWrapper.getSize() == 0)
+        if(dataWrapper.size() == 0)
             throw new EmptyDataException("Esta pelicula no contiene ningún artista.");
         return dataWrapper.getList();
     }

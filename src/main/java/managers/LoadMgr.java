@@ -10,7 +10,6 @@ import libs.Stopwatch;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Scanner;
 
 
@@ -49,7 +48,7 @@ public class LoadMgr extends DataModel {
             System.out.println(" ");
             System.out.println("Loading Films database...[O(n)]");
             loadFilms();
-            System.out.println("Successfully loaded " + films.getSize() + " films in " + sw.elapsedTime() + " seconds.");
+            System.out.println("Successfully loaded " + films.size() + " films in " + sw.elapsedTime() + " seconds.");
             System.out.println("Loading Casting database and linking data...[Algorithm: Binary Search | O(n(mlogp))]");
             sw.reset();
             loadCast();
