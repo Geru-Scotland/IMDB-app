@@ -47,11 +47,12 @@ public class BTreeWrapper<T extends Comparable<T>> implements DataCollection<T> 
      */
     @Override
     public void add(T node){
-        numNodes++;
         if(!isEmpty())
             root.add(node);
         else
             root = new Node<>(node);
+
+        numNodes++;
     }
 
     @Override
@@ -69,7 +70,5 @@ public class BTreeWrapper<T extends Comparable<T>> implements DataCollection<T> 
     }
 
     @Override
-    public int size(){
-        return numNodes;
-    }
+    public int size(){ return numNodes; }
 }

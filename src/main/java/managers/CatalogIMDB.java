@@ -33,6 +33,10 @@ public class CatalogIMDB extends DataModel {
         return instance;
     }
 
+    public static void setCasting(DataCollection<Artist<?>> newCast){
+        casting = newCast;
+    }
+
     /**
      * Método para agregar un voto a una película
      * @param filmName Nombre de la pelicula.

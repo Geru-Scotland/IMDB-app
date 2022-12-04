@@ -6,6 +6,7 @@ import entities.models.DataModel;
 import exceptions.EntityNotFoundException;
 import exceptions.LoadMgrException;
 import libs.Stopwatch;
+import templates.scalable.BTreeWrapper;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -53,12 +54,11 @@ public class LoadMgr extends DataModel {
             sw.reset();
             loadCast();
             System.out.println("Successfully loaded " + casting.size() + " artists in " + sw.elapsedTime() + " seconds.");
-            System.out.println("Sorting casting list...");
+            System.out.println("Structure used: " + casting.getClass().getSimpleName());
             sw.reset();
-            /*Collections.sort(casting.getList());
-            System.out.println("Casting list sorted in " + sw.elapsedTime() + " seconds [Algorithm: It. Mergesort (Collections.sort) | O(nlogn)]");;*/
             System.out.println(" ");
             System.out.println("");
+
         } catch(IOException e){
             System.out.println(e.getMessage());
         } catch(LoadMgrException e){

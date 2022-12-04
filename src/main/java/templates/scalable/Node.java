@@ -51,13 +51,24 @@ public class Node<T extends Comparable<T>> {
     }
 
     public T search(String str) throws EntityNotFoundException {
-        if(isLeaf() && !info.toString().equals(str))
+        if(info.toString().equals(str))
+            return info;
+        if(isLeaf())
             throw new EntityNotFoundException("Entidad no encontrada");
-        return info;
+
+        if(info.toString().compareTo(str) < 0)
+            if(hasRight())
+                return right.search(str);
+            else
+                throw new EntityNotFoundException("Entidad no encontrada");
+
+        if(hasLeft())
+            return left.search(str);
+
+        throw new EntityNotFoundException("Entidad no encontrada");
     }
 
     public T remove(String str){
         return null;
     }
-
 }
