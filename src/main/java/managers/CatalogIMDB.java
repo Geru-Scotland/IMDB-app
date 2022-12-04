@@ -4,6 +4,7 @@ import entities.Artist;
 import entities.Film;
 import entities.models.DataCollection;
 import entities.models.DataModel;
+import entities.models.Entity;
 import exceptions.EmptyDataException;
 import exceptions.EntityNotFoundException;
 import exceptions.NonValidInputValue;
@@ -149,5 +150,26 @@ public class CatalogIMDB extends DataModel {
         } catch(EntityNotFoundException e){
             System.out.println(e.getMessage());
         }
+    }
+
+    /**
+     * Remove film
+     */
+    public Film<?> removeFilm(String str) throws EntityNotFoundException, EmptyDataException {
+        Film<?> deletedFilm = films.remove(str);
+        try{
+            for(Entity<?> artist : deletedFilm.getDataList()){
+                LinealWrapper<?> wrapper = artist.getWrapper();
+                wrapper.remove(str);
+                if(wrapper.isEmpty())
+                    casting.remove(artist.getIdentifier());
+                else
+                    ((Artist<?>)artist).computeRating();
+            }
+        } catch(EmptyDataException e){
+            System.out.println("No tiene artistas");
+        }
+        System.out.println("Se ha borrado la pelicula: " + deletedFilm.getIdentifier());
+        return deletedFilm;
     }
 }

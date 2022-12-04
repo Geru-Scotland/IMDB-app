@@ -71,13 +71,18 @@ public class BTreeWrapper<T extends Comparable<T>> implements DataCollection<T> 
     public T remove(String str) throws EntityNotFoundException {
         if(!isEmpty()){
             T entity = root.remove(str).getInfo();
-            if(entity != null)
+            if(entity != null){
+                numNodes--;
                 return entity;
+            }
             else
                 throw new EntityNotFoundException("Entidad no encontrada");
         }
         throw new EntityNotFoundException("Arbol vacio.");
     }
+
+    @Override
+    public boolean remove(T data){ return false; }
 
     @Override
     public int size(){ return numNodes; }

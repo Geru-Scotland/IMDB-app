@@ -2,6 +2,7 @@ package templates;
 
 import entities.models.DataCollection;
 import entities.models.Entity;
+import exceptions.EmptyDataException;
 import exceptions.EntityNotFoundException;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class LinealWrapper<T extends Entity<?>> extends SearchEngine<T> implemen
 
     public T get(int pos) { return genericList.get(pos); }
     public ArrayList<T> getList() { return genericList; }
+    public boolean isEmpty() { return genericList.isEmpty(); }
 
     /**
      * Búsqueda lineal a través de la lista genérica.
@@ -48,7 +50,15 @@ public class LinealWrapper<T extends Entity<?>> extends SearchEngine<T> implemen
     public int size(){ return genericList.size(); }
 
     @Override
-    public T remove(String str){ return null; }
+    public T remove(String str) throws EntityNotFoundException {
+        T data = search(str);
+        if(remove(data))
+            return data;
+        throw new EntityNotFoundException("Ha ocurrido un error, no se ha podido borrar.");
+    }
+
+    @Override
+    public boolean remove(T data){ return genericList.remove(data); }
 
     /**
      * Búsqueda binaria o dicotómica sobre la lista genérica.

@@ -27,5 +27,6 @@ public interface DataCollection<T> {
     public void add(T node);
     public T search(String str) throws EntityNotFoundException;
     public T remove(String str) throws EntityNotFoundException;
+    public boolean remove(T data) throws EntityNotFoundException;
     public int size();
 }
