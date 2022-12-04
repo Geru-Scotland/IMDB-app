@@ -31,13 +31,12 @@ public class Artist<T extends Comparable<T>> extends Entity<T> implements Compar
         rating = filmsRating / votes;
     }
 
-    public LinealWrapper<?> getWrapper(){
-        return linealWrapper;
-    }
-
     /**
      * Overrides
      */
+
+    @Override
+    public LinealWrapper<Entity<T>> getWrapper(){ return linealWrapper; }
 
     @Override
     public void populateInfo(String info){ identifier = info; }

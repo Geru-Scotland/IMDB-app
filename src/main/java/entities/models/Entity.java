@@ -61,4 +61,6 @@ public abstract class Entity<T extends Comparable<T>> {
      * @throws EmptyDataException Excepción que será lanzada en caso de no existir ningún dato.
      */
     public abstract ArrayList<Entity<T>> getDataList() throws EmptyDataException;
+
+    public abstract LinealWrapper<Entity<T>> getWrapper();
 }

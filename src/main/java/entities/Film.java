@@ -1,6 +1,7 @@
 package entities;
 import entities.models.Entity;
 import exceptions.EmptyDataException;
+import templates.LinealWrapper;
 
 import java.util.ArrayList;
 
@@ -45,6 +46,9 @@ public class Film<T extends Comparable<T>> extends Entity<T> implements Comparab
     /**
      * Overrides
      */
+
+    @Override
+    public LinealWrapper<Entity<T>> getWrapper(){ return linealWrapper; }
 
     @Override
     public void populateInfo(String info){
