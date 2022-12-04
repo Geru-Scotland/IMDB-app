@@ -26,7 +26,7 @@ import exceptions.EntityNotFoundException;
 public class Node<T extends Comparable<T>> {
     private Node<T> left;
     private Node<T> right;
-    private final T info;
+    private T info;
 
     public Node(T data){ info = data; }
 
@@ -36,6 +36,7 @@ public class Node<T extends Comparable<T>> {
     private boolean isLeaf(){ return left == null && right == null;}
     private boolean hasRight(){ return right != null; }
     private boolean hasLeft(){ return left != null; }
+    public T getInfo(){ return info; }
 
     public void add(T data){
         if(info.compareTo(data) < 0)
@@ -68,7 +69,76 @@ public class Node<T extends Comparable<T>> {
         throw new EntityNotFoundException("Entidad no encontrada");
     }
 
-    public T remove(String str){
-        return null;
+    public void display(){
+        System.out.println(info.toString());
+        if(hasRight())
+            right.display();
+        if(hasLeft())
+            left.display();
+    }
+
+    /**
+     * Elimina un intérprete del árbol (puede seguir estando en las listas de * intérpretes de las películas)
+     * @param str Nombre del intérprete a eliminar
+     * @return el Interprete (si se ha eliminado), null en caso contrario
+     */
+    public Aux<T> remove(String str){
+        int comp = str.compareTo(info.toString());
+        Aux<T> res = new Aux<>();
+
+        if(comp == 0){
+            res.info = info;
+            if(!hasLeft()){
+                res.node = right;
+                return res;
+            }
+            else if(!hasRight()){
+                res.node = left;
+                return res;
+            }
+            else{
+                Aux<T> min = right.removeMin();
+                right = min.node;
+                info = min.info;
+                res.node = this;
+                return res;
+            }
+        } else if(comp < 0){
+            if(hasLeft()){
+                res = left.remove(str);
+                left = res.node;
+            }
+            res.node = this;
+            return res;
+        } else{
+            if(hasRight()){
+                 res = right.remove(str);
+                 right = res.node;
+            }
+            res.node = this;
+            return res;
+        }
+    }
+
+    public Aux<T> removeMin(){
+        Aux<T> res = new Aux<>();
+        if(!this.hasLeft()) {
+            res.info = this.info;
+            res.node = this.right;
+        }else {
+            Aux<T> resulLeft = this.left.removeMin();
+            this.left = resulLeft.node;
+            res.info = resulLeft.info;
+            res.node = this;
+        }
+        return res;
+    }
+
+    class Aux<T extends Comparable<T>> {
+        private T info;
+        private Node<T> node;
+        public Aux(){}
+
+        public T getInfo(){ return info; }
     }
 }

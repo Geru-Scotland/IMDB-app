@@ -84,5 +84,10 @@ public class Film<T extends Comparable<T>> extends Entity<T> implements Comparab
             return 1;
         return 0;
     }
+
+    @Override
+    public boolean equals(Object o){
+        return o instanceof Film && getIdentifier().equals(((Film) o).getIdentifier());
+    }
 }
 

@@ -26,6 +26,6 @@ import exceptions.EntityNotFoundException;
 public interface DataCollection<T> {
     public void add(T node);
     public T search(String str) throws EntityNotFoundException;
-    public T remove(String str);
+    public T remove(String str) throws EntityNotFoundException;
     public int size();
 }

@@ -62,11 +62,21 @@ public class BTreeWrapper<T extends Comparable<T>> implements DataCollection<T> 
         return null;
     }
 
+    /**
+     * Elimina un intérprete del árbol (puede seguir estando en las listas de intérpretes de las películas)
+     * @param str Nombre del intérprete a eliminar
+     * @return el Interprete (si se ha eliminado), null en caso contrario
+     */
     @Override
-    public T remove(String str){
-        if(!isEmpty())
-            return root.remove(str);
-        return null;
+    public T remove(String str) throws EntityNotFoundException {
+        if(!isEmpty()){
+            T entity = root.remove(str).getInfo();
+            if(entity != null)
+                return entity;
+            else
+                throw new EntityNotFoundException("Entidad no encontrada");
+        }
+        throw new EntityNotFoundException("Arbol vacio.");
     }
 
     @Override
