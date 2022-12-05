@@ -44,7 +44,7 @@ class CatalogIMDBTest {
     void removeFilmTest() throws EmptyDataException, EntityNotFoundException {
 
         /**
-         * Intento de eliminación de peliculas no existentes, deben lanzar excepción.
+         * Intento de eliminaciï¿½n de peliculas no existentes, deben lanzar excepciï¿½n.
          */
         Assertions.assertThrows(EntityNotFoundException.class, () -> cat.removeFilm("Wrong film"));
         Assertions.assertThrows(EntityNotFoundException.class, () -> cat.removeFilm("Filmatronss"));
@@ -57,12 +57,12 @@ class CatalogIMDBTest {
         Assertions.assertDoesNotThrow(() -> cat.getCasting().search("Chiesa, Ricardo"));
 
         /**
-         * Eliminación de película existente, no debe de lanzar exepción.
+         * Eliminaciï¿½n de pelï¿½cula existente, no debe de lanzar exepciï¿½n.
          */
         Assertions.assertDoesNotThrow(() -> cat.removeFilm("Fights"));
 
         /**
-         * Borramos una película más.
+         * Borramos una pelï¿½cula mï¿½s.
          */
         Film<?> film = cat.removeFilm("Filmatron");
 
@@ -72,9 +72,9 @@ class CatalogIMDBTest {
         Assertions.assertEquals(998, cat.getFilms().size());
 
         /**
-         * El artista Chiesa, Rocardo - al únicamente haber participado en la pelicula anterior
+         * El artista Chiesa, Rocardo - al ï¿½nicamente haber participado en la pelicula anterior
          */
-        Assertions.assertThrows(EntityNotFoundException.class, () -> cat.getCasting().search("Setton, Carolina"));
+        Assertions.assertThrows(EntityNotFoundException.class, () -> cat.getCasting().search("Chiesa, Ricardo"));
 
     }
 
