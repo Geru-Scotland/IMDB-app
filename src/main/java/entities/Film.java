@@ -56,7 +56,9 @@ public class Film<T extends Comparable<T>> extends Entity<T> implements Comparab
         identifier = elem[0];
         year = Integer.parseInt(elem[1]);
         rating = Double.parseDouble(elem[2]);
+        rating = rating == -1 ? 0 : rating;
         votes = Integer.parseInt(elem[3]);
+        votes = votes == -1 ? 0 : votes;
     }
 
     @Override

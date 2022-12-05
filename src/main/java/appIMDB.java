@@ -1,3 +1,5 @@
+import entities.Film;
+import exceptions.EmptyDataException;
 import exceptions.EntityNotFoundException;
 import exceptions.LoadMgrException;
 import exceptions.NonValidInputValue;
@@ -49,7 +51,8 @@ public class appIMDB {
                             clearConsole();
                             try{
                                 cat.displayFilmInfo(film);
-                            } catch(EntityNotFoundException e){
+                                Film<?> f = cat.removeFilm(film);
+                            } catch(EntityNotFoundException | EmptyDataException e){
                                 System.out.println(e.getMessage());
                             }
                         } catch(NoSuchElementException | IllegalStateException ignore){}
@@ -71,7 +74,7 @@ public class appIMDB {
                             System.out.println("[3] Introduce tu voto: ");
                             System.out.print(">> ");
                             try{
-                                cat.addFilmVote(film, Integer.parseInt(sc.nextLine()));
+                                cat.addFilmVote(film, Float.parseFloat(sc.nextLine()));
                             } catch(EntityNotFoundException e) {
                                 System.out.println(e.getMessage());
                             }

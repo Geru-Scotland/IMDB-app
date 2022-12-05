@@ -28,7 +28,7 @@ public class Artist<T extends Comparable<T>> extends Entity<T> implements Compar
             }
         }
 
-        rating = filmsRating / votes;
+        rating = votes > 0 ? filmsRating / votes : 0;
     }
 
     /**
