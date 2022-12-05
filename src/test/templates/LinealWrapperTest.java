@@ -16,7 +16,7 @@ class LinealWrapperTest {
     static void setUp() {
         cat = CatalogIMDB.getInstance();
         try{
-            LoadMgr loadMgr = new LoadMgr();
+            LoadMgr loadMgr = new LoadMgr("smallerfiles/films_tiny", "smallerfiles/cast_tiny");
             loadMgr.loadData();
         } catch(LoadMgrException e){
             System.out.println(e.getMessage());

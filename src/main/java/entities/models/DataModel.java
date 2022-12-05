@@ -13,4 +13,5 @@ public abstract class DataModel {
     protected static DataCollection<Artist<?>> casting;
 
     public DataModel(){}
+
 }

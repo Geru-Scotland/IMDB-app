@@ -34,6 +34,9 @@ public class CatalogIMDB extends DataModel {
         return instance;
     }
 
+    public DataCollection<Film<Artist<?>>> getFilms() { return films; }
+    public DataCollection<Artist<?>> getCasting() { return casting; }
+
     public static void setCasting(DataCollection<Artist<?>> newCast){
         casting = newCast;
     }
