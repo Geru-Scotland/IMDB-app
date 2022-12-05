@@ -18,7 +18,7 @@ class CatalogIMDBTest {
     static void setUp() {
         cat = CatalogIMDB.getInstance();
         try{
-            LoadMgr loadMgr = new LoadMgr("smallerfiles/films_tiny", "smallerfiles/cast_tiny");
+            LoadMgr loadMgr = new LoadMgr("files/films", "files/cast");
             loadMgr.loadData();
         } catch(LoadMgrException e){
             System.out.println(e.getMessage());
@@ -30,9 +30,8 @@ class CatalogIMDBTest {
         Assertions.assertThrows(EntityNotFoundException.class, () -> cat.addFilmVote("Non existent film", 8));
         Assertions.assertThrows(NonValidInputValue.class, () -> cat.addFilmVote("Fight Club", 12));
 
-        Assertions.assertDoesNotThrow(()-> cat.addFilmVote("Fight Club", 9));
-
         // Se necesitan los ficheros grandes:
+        Assertions.assertDoesNotThrow(()-> cat.addFilmVote("Fight Club", 9));
         Assertions.assertDoesNotThrow(()-> cat.addFilmVote("I Love Sydney", 4));
     }
 
@@ -41,10 +40,10 @@ class CatalogIMDBTest {
     }
 
     @Test
-    void removeFilmTest() throws EmptyDataException, EntityNotFoundException {
+    void removeFilmTestS() throws EmptyDataException, EntityNotFoundException {
 
         /**
-         * Intento de eliminaciï¿½n de peliculas no existentes, deben lanzar excepciï¿½n.
+         * Intento de eliminación de peliculas no existentes, deben lanzar excepción.
          */
         Assertions.assertThrows(EntityNotFoundException.class, () -> cat.removeFilm("Wrong film"));
         Assertions.assertThrows(EntityNotFoundException.class, () -> cat.removeFilm("Filmatronss"));
@@ -57,25 +56,47 @@ class CatalogIMDBTest {
         Assertions.assertDoesNotThrow(() -> cat.getCasting().search("Chiesa, Ricardo"));
 
         /**
-         * Eliminaciï¿½n de pelï¿½cula existente, no debe de lanzar exepciï¿½n.
+         * Eliminación de película existente, no debe de lanzar exepción.
          */
         Assertions.assertDoesNotThrow(() -> cat.removeFilm("Fights"));
 
         /**
-         * Borramos una pelï¿½cula mï¿½s.
+         * NOTA: Necesita los ficheros grandes.
+         * El artista Rotstein, Sebastian ha participado en 2 peliculas.
+         */
+        Assertions.assertEquals(3, cat.getCasting().search("Rotstein, Sebastian").getDataList().size());
+
+        /**
+         * Nos aseguramos da la existencia de una pelicula.
+         */
+        Assertions.assertDoesNotThrow(() -> cat.getFilms().search("Filmatron"));
+
+        /**
+         * La borramos
          */
         Film<?> film = cat.removeFilm("Filmatron");
 
         /**
-         * Despues de las 2 eliminaciones, debemos tener 998 peliculas (films_tiny.txt)
+         * Buscamos la pelicula de manera explicita, se ha de lanzar una excepción
          */
-        Assertions.assertEquals(998, cat.getFilms().size());
+        Assertions.assertThrows(EntityNotFoundException.class, () -> cat.getFilms().search(film.getIdentifier()));
 
         /**
-         * El artista Chiesa, Rocardo - al ï¿½nicamente haber participado en la pelicula anterior
+         * Despues de las 2 eliminaciones, debemos tener 998 peliculas (films_tiny.txt)
+         * Si se utilizan los ficheros grandes: 692084 peliculas
+         */
+        Assertions.assertEquals(692084, cat.getFilms().size());
+
+        /**
+         * El artista Chiesa, Rocardo - al únicamente haber participado en la pelicula anterior
          */
         Assertions.assertThrows(EntityNotFoundException.class, () -> cat.getCasting().search("Chiesa, Ricardo"));
 
+        /**
+         * Después del borrado de Filmatron, en nuestro sistema ha de constar que Rotstein, Sebastian
+         * ha participado en 2 peliculas.
+         */
+        Assertions.assertEquals(2, cat.getCasting().search("Rotstein, Sebastian").getDataList().size());
     }
 
     @Test
