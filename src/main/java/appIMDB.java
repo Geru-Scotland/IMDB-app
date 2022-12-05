@@ -16,7 +16,10 @@ public class appIMDB {
         try{
             CatalogIMDB cat = CatalogIMDB.getInstance();
 
-            LoadMgr loadMgr = new LoadMgr();
+            final String filmFile = "files/films";
+            final String castFile = "files/cast";
+
+            LoadMgr loadMgr = new LoadMgr(filmFile, castFile);
             loadMgr.loadData();
 
             Scanner sc = new Scanner(System.in);
