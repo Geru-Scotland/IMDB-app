@@ -5,6 +5,7 @@ import exceptions.EmptyDataException;
 import exceptions.EntityNotFoundException;
 import exceptions.LoadMgrException;
 import exceptions.NonValidInputValue;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -36,11 +37,7 @@ class CatalogIMDBTest {
     }
 
     @Test
-    void setCastingTest() {
-    }
-
-    @Test
-    void removeFilmTestS() throws EmptyDataException, EntityNotFoundException {
+    void removeFilmTest() throws EmptyDataException, EntityNotFoundException {
 
         /**
          * Intento de eliminación de peliculas no existentes, deben lanzar excepción.
@@ -72,23 +69,24 @@ class CatalogIMDBTest {
         Assertions.assertDoesNotThrow(() -> cat.getFilms().search("Filmatron"));
 
         /**
-         * La borramos
+         * La borramos.
          */
         Film<?> film = cat.removeFilm("Filmatron");
 
         /**
-         * Buscamos la pelicula de manera explicita, se ha de lanzar una excepción
+         * Buscamos la pelicula de manera explicita, se ha de lanzar una excepción.
          */
         Assertions.assertThrows(EntityNotFoundException.class, () -> cat.getFilms().search(film.getIdentifier()));
 
         /**
-         * Despues de las 2 eliminaciones, debemos tener 998 peliculas (films_tiny.txt)
-         * Si se utilizan los ficheros grandes: 692084 peliculas
+         * Despues de las 2 eliminaciones, debemos tener 998 peliculas (films_tiny.txt).
+         * Si se utilizan los ficheros grandes: 692084 peliculas y 2792967 artistas.
          */
         Assertions.assertEquals(692084, cat.getFilms().size());
+        Assertions.assertEquals(2792967, cat.getCasting().size());
 
         /**
-         * El artista Chiesa, Rocardo - al únicamente haber participado en la pelicula anterior
+         * El artista Chiesa, Rocardo - al únicamente haber participado en la pelicula anterior.
          */
         Assertions.assertThrows(EntityNotFoundException.class, () -> cat.getCasting().search("Chiesa, Ricardo"));
 
@@ -99,7 +97,10 @@ class CatalogIMDBTest {
         Assertions.assertEquals(2, cat.getCasting().search("Rotstein, Sebastian").getDataList().size());
     }
 
-    @Test
-    void showStatusAfterDeletionTest() {
+    @AfterAll
+    static void showInfo(){
+        System.out.println(" ");
+        System.out.println("[POST-TESTS]");
+        System.out.println("Peliculas: " + cat.getFilms().size() + " | Artistas: " + cat.getCasting().size());
     }
 }
