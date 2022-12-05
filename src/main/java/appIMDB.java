@@ -94,6 +94,7 @@ public class appIMDB {
                             String film = sc.nextLine();
                             clearConsole();
                             Film<?> f = cat.removeFilm(film);
+                            System.out.println(cat.showStatusAfterDeletion(f));
                         } catch(EntityNotFoundException | EmptyDataException e){
                             System.out.println(e.getMessage());
                         }

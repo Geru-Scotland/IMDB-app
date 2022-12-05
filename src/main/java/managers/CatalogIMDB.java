@@ -45,7 +45,6 @@ public class CatalogIMDB extends DataModel {
      * @throws IllegalArgumentException
      * @throws NonValidInputValue Excepción que será lanzada en caso de introducir un valor válido como voto.
      */
-    
     public void addFilmVote(String filmName, float score) throws NonValidInputValue, EntityNotFoundException {
         if(score < 0 || score > 10)
             throw new NonValidInputValue();
@@ -166,10 +165,22 @@ public class CatalogIMDB extends DataModel {
                 else
                     ((Artist<?>)artist).computeRating();
             }
+            System.out.println("Se ha borrado la pelicula: " + deletedFilm.getIdentifier());
         } catch(EmptyDataException e){
             System.out.println("No tiene artistas");
         }
-        System.out.println("Se ha borrado la pelicula: " + deletedFilm.getIdentifier());
         return deletedFilm;
+    }
+
+    public StringBuffer showStatusAfterDeletion(Film<?> film){
+        StringBuffer buff = new StringBuffer();
+        buff.append("Se ha borrado la pelicula");
+        buff.append(film.getIdentifier());
+        buff.append(". En el catálogo quedan ");
+        buff.append(films.size());
+        buff.append(" peliculas y ");
+        buff.append(casting.size());
+        buff.append(" actores");
+        return buff;
     }
 }
