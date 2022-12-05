@@ -28,13 +28,14 @@ public class appIMDB {
                 System.out.println("[1] Mostrar informacion de pelicula.");
                 System.out.println("[2] Mostrar informacion de interprete.");
                 System.out.println("[3] Anadir voto a pelicula [0-10].");
+                System.out.println("[4] Eliminar pelicula.");
 
                 System.out.println("[0] Salir.");
                 System.out.print(">> ");
                 try{
                     option = Integer.parseInt(sc.nextLine());
                     clearConsole();
-                    if(option < 0 || option > 3)
+                    if(option < 0 || option > 4)
                         throw new NonValidInputValue();
 
                 } catch(NumberFormatException | NonValidInputValue e){
@@ -51,8 +52,7 @@ public class appIMDB {
                             clearConsole();
                             try{
                                 cat.displayFilmInfo(film);
-                                Film<?> f = cat.removeFilm(film);
-                            } catch(EntityNotFoundException | EmptyDataException e){
+                            } catch(EntityNotFoundException e){
                                 System.out.println(e.getMessage());
                             }
                         } catch(NoSuchElementException | IllegalStateException ignore){}
@@ -82,6 +82,17 @@ public class appIMDB {
                         } catch (NonValidInputValue | IllegalArgumentException | NoSuchElementException e){
                             clearConsole();
                             System.out.println("[EXCEPTION] Introduce un numero entre 0-10, por favor");
+                        }
+                        break;
+                    case 4:
+                        try{
+                            System.out.println("[4] Introduce el nombre de la pelicula a borrar: ");
+                            System.out.print(">> ");
+                            String film = sc.nextLine();
+                            clearConsole();
+                            Film<?> f = cat.removeFilm(film);
+                        } catch(EntityNotFoundException | EmptyDataException e){
+                            System.out.println(e.getMessage());
                         }
                         break;
                     default:

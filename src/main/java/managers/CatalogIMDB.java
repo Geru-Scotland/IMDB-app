@@ -104,7 +104,7 @@ public class CatalogIMDB extends DataModel {
 
                 if(entity instanceof Artist){
                     rating = ((Artist<?>)entity).getRating(true);
-                    dataText = "Peliculas (" + ((Artist<?>)entity).getDataNum();
+                    dataText = "Peliculas: " + ((Artist<?>)entity).getDataNum();
                     try{
                         entityList = ((Artist<?>)entity).getDataList();
                     } catch(EmptyDataException e){
@@ -112,7 +112,7 @@ public class CatalogIMDB extends DataModel {
                     }
                 }else if(entity instanceof Film){
                     rating = ((Film<?>)entity).getRating(false);
-                    dataText = "Actores (" + ((Film<?>)entity).getDataNum();
+                    dataText = "Artistas: " + ((Film<?>)entity).getDataNum();
                     dataText2 = " | votos: " + ((Film<?>)entity).getVotes();
                     try{
                         entityList = ((Film<?>)entity).getDataList();
@@ -121,7 +121,7 @@ public class CatalogIMDB extends DataModel {
                     }
                 }
 
-                System.out.println(dataText + ") ");
+                System.out.println(dataText);
                 System.out.println("Rating: " + BigDecimal.valueOf(rating).setScale(2, RoundingMode.FLOOR) + dataText2);
                 System.out.println("_____________");
                 System.out.println("_____________");

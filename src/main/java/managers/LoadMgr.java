@@ -6,7 +6,6 @@ import entities.models.DataModel;
 import exceptions.EntityNotFoundException;
 import exceptions.LoadMgrException;
 import libs.Stopwatch;
-import templates.scalable.BTreeWrapper;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -50,7 +49,7 @@ public class LoadMgr extends DataModel {
             System.out.println("Loading Films database...[O(n)]");
             loadFilms();
             System.out.println("Successfully loaded " + films.size() + " films in " + sw.elapsedTime() + " seconds.");
-            System.out.println("Loading Casting database and linking data...[Algorithm: Binary Search | O(n(mlogp))]");
+            System.out.println("Loading Casting database and linking data...");
             sw.reset();
             loadCast();
             System.out.println("Successfully loaded " + casting.size() + " artists in " + sw.elapsedTime() + " seconds.");
