@@ -79,7 +79,7 @@ public class CatalogIMDB extends DataModel {
         } catch(EntityNotFoundException e){
             System.out.println(e.getMessage());
         } catch(NullPointerException e){
-            System.out.println("Arbol de artistas vacío.");
+            System.out.println("[EXCEPTION] Arbol de artistas vacío.");
         }
     }
 
@@ -168,9 +168,9 @@ public class CatalogIMDB extends DataModel {
                 else
                     ((Artist<?>)artist).computeRating();
             }
-            System.out.println("Se ha borrado la pelicula: " + deletedFilm.getIdentifier());
+            System.out.println("[EXCEPTION] Se ha borrado la pelicula: " + deletedFilm.getIdentifier());
         } catch(EmptyDataException e){
-            System.out.println("No tiene artistas");
+            System.out.println("[EXCEPTION] No tiene artistas");
         }
         return deletedFilm;
     }

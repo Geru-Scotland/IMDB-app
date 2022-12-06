@@ -54,19 +54,20 @@ public class Node<T extends Comparable<T>> {
     public T search(String str) throws EntityNotFoundException {
         if(info.toString().equals(str))
             return info;
+        
         if(isLeaf())
-            throw new EntityNotFoundException("Entidad no encontrada");
+            throw new EntityNotFoundException("[EXCEPTION] Entidad no encontrada");
 
         if(info.toString().compareTo(str) < 0)
             if(hasRight())
                 return right.search(str);
             else
-                throw new EntityNotFoundException("Entidad no encontrada");
+                throw new EntityNotFoundException("[EXCEPTION] Entidad no encontrada");
 
         if(hasLeft())
             return left.search(str);
 
-        throw new EntityNotFoundException("Entidad no encontrada");
+        throw new EntityNotFoundException("[EXCEPTION] Entidad no encontrada");
     }
 
     public void display(){
@@ -78,7 +79,8 @@ public class Node<T extends Comparable<T>> {
     }
 
     /**
-     * Elimina un intérprete del árbol (puede seguir estando en las listas de * intérpretes de las películas)
+     * Elimina un intérprete del árbol (puede seguir estando en las listas de intérpretes de las películas)
+     * Implementación de transparencias.
      * @param str Nombre del intérprete a eliminar
      * @return el Interprete (si se ha eliminado), null en caso contrario
      */

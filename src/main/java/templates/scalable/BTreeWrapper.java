@@ -38,6 +38,7 @@ public class BTreeWrapper<T extends Comparable<T>> implements DataCollection<T> 
     public BTreeWrapper(){
         root = null;
         numNodes = 0;
+
     }
 
     public boolean isEmpty() { return root == null; }
@@ -76,9 +77,9 @@ public class BTreeWrapper<T extends Comparable<T>> implements DataCollection<T> 
                 return entity;
             }
             else
-                throw new EntityNotFoundException("Entidad no encontrada");
+                throw new EntityNotFoundException("[EXCEPTION] Entidad no encontrada");
         }
-        throw new EntityNotFoundException("Arbol vacio.");
+        throw new EntityNotFoundException("[EXCEPTION] Arbol vacio.");
     }
 
     @Override
