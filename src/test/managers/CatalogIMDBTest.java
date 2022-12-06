@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 class CatalogIMDBTest {
 
     static CatalogIMDB cat;
+
+    // Para mantener congruencia entre los tests.
     static int initFilmSize = 0;
     static int initCastSize = 0;
     static int modFilmSize = 0;
@@ -76,6 +78,11 @@ class CatalogIMDBTest {
         Assertions.assertDoesNotThrow(() -> cat.getFilms().search("Filmatron"));
 
         /**
+         * Obtenemos el número de peliculas de una actriz que ha participado en
+         * Filmatron y que sabemos en una pelicula más (ergo, 2).
+         */
+        int artistNumFilms = cat.getCasting().search("Setton, Carolina").getWrapper().size();
+        /**
          * La borramos.
          */
         Film<?> film = cat.removeFilm("Filmatron");
@@ -95,9 +102,23 @@ class CatalogIMDBTest {
         Assertions.assertEquals(initCastSize - modCastSize, cat.getCasting().size());
 
         /**
-         * El artista Chiesa, Rocardo - al únicamente haber participado en la pelicula anterior.
+         * Los artistas Chiesa, Rocardo y Goncalves, Luciano - al únicamente haber participado en la pelicula anterior
+         * son eliminados.
          */
         Assertions.assertThrows(EntityNotFoundException.class, () -> cat.getCasting().search("Chiesa, Ricardo"));
+        Assertions.assertThrows(EntityNotFoundException.class, () -> cat.getCasting().search("Goncalves, Luciano-"));
+
+        /**
+         * Comprobamos que la actriz cuyo numero de peliculas hemos almacenado antes y eran 2,
+         * Sigue existiendo:
+         */
+        Assertions.assertDoesNotThrow(() -> cat.getCasting().search("Setton, Carolina"));
+
+        /**
+         * Y ahora, que efectivamente, consta que únicamente ha participado en 1 pelicula tras el
+         * borrado de Filmatron.
+         */
+        Assertions.assertEquals(artistNumFilms - 1, cat.getCasting().search("Setton, Carolina").getWrapper().size());
 
         /**
          * Después del borrado de Filmatron, en nuestro sistema ha de constar que Rotstein, Sebastian
