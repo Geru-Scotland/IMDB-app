@@ -52,7 +52,6 @@ public class BTreeWrapper<T extends Comparable<T>> implements DataCollection<T> 
             root.add(node);
         else
             root = new Node<>(node);
-
         numNodes++;
     }
 
@@ -79,7 +78,7 @@ public class BTreeWrapper<T extends Comparable<T>> implements DataCollection<T> 
             else
                 throw new EntityNotFoundException("[EXCEPTION] Entidad no encontrada");
         }
-        throw new EntityNotFoundException("[EXCEPTION] Arbol vacio.");
+        throw new EntityNotFoundException("[EXCEPTION] Árbol vacío.");
     }
 
     @Override

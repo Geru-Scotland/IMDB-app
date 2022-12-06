@@ -155,7 +155,14 @@ public class CatalogIMDB extends DataModel {
     }
 
     /**
-     * Remove film
+     * Método encargado de borrar una película tanto de la lista/wrapper de películas
+     * como de las listas/wrappers propios de cada uno de los artistas que han participado
+     * en la misma. Se fuerza una actualización del rating en dichos artistas si aún existen
+     * películas que hayan participado. Se eliminan los artistas en caso contrario.
+     * @param str Nombre de la película a eliminar.
+     * @return devuelve referencia a objeto con la película eliminada.
+     * @throws EntityNotFoundException en caso de que no exista la película/artista buscado.
+     * @throws EmptyDataException Si se intenta realizar la operación sobre una estructura de artistas vacía.
      */
     public Film<?> removeFilm(String str) throws EntityNotFoundException, EmptyDataException {
         Film<?> deletedFilm = films.remove(str);

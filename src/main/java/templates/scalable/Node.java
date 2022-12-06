@@ -122,6 +122,10 @@ public class Node<T extends Comparable<T>> {
         }
     }
 
+    /**
+     * Función auxiliar que elimina y devuelve el mínimo de del subárbol derecho.
+     * @return Objeto de la clase auxiliar Aux.
+     */
     public Aux<T> removeMin(){
         Aux<T> res = new Aux<>();
         if(!this.hasLeft()) {

@@ -5,7 +5,7 @@ import entities.Film;
 
 /**
  * Junto con Entity, esta clase conformara el modelo de datos
- * que gestionara el Catalogo.
+ * que gestionara el Catálogo.
  */
 public abstract class DataModel {
 
@@ -13,5 +13,4 @@ public abstract class DataModel {
     protected static DataCollection<Artist<?>> casting;
 
     public DataModel(){}
-
 }
