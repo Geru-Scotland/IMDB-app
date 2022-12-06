@@ -14,9 +14,14 @@ import org.junit.jupiter.api.Test;
 class CatalogIMDBTest {
 
     static CatalogIMDB cat;
+    static int initFilmSize = 0;
+    static int initCastSize = 0;
+    static int modFilmSize = 0;
+    static int modCastSize = 0;
 
     @BeforeAll
     static void setUp() {
+
         cat = CatalogIMDB.getInstance();
         try{
             LoadMgr loadMgr = new LoadMgr("files/films", "files/cast");
@@ -24,6 +29,8 @@ class CatalogIMDBTest {
         } catch(LoadMgrException e){
             System.out.println(e.getMessage());
         }
+        initFilmSize = cat.getFilms().size();
+        initCastSize = cat.getCasting().size();
     }
 
     @Test
@@ -56,7 +63,7 @@ class CatalogIMDBTest {
          * Eliminación de película existente, no debe de lanzar exepción.
          */
         Assertions.assertDoesNotThrow(() -> cat.removeFilm("Fights"));
-
+        modFilmSize++;
         /**
          * NOTA: Necesita los ficheros grandes.
          * El artista Rotstein, Sebastian ha participado en 2 peliculas.
@@ -72,6 +79,8 @@ class CatalogIMDBTest {
          * La borramos.
          */
         Film<?> film = cat.removeFilm("Filmatron");
+        modFilmSize++;
+        modCastSize += 2; //2 artistas van a ser eliminados al ser Filmatron su única pelicula
 
         /**
          * Buscamos la pelicula de manera explicita, se ha de lanzar una excepción.
@@ -82,8 +91,8 @@ class CatalogIMDBTest {
          * Despues de las 2 eliminaciones, debemos tener 998 peliculas (films_tiny.txt).
          * Si se utilizan los ficheros grandes: 692084 peliculas y 2792967 artistas.
          */
-        Assertions.assertEquals(692084, cat.getFilms().size());
-        Assertions.assertEquals(2792967, cat.getCasting().size());
+        Assertions.assertEquals(initFilmSize - modFilmSize, cat.getFilms().size());
+        Assertions.assertEquals(initCastSize - modCastSize, cat.getCasting().size());
 
         /**
          * El artista Chiesa, Rocardo - al únicamente haber participado en la pelicula anterior.
@@ -95,6 +104,21 @@ class CatalogIMDBTest {
          * ha participado en 2 peliculas.
          */
         Assertions.assertEquals(2, cat.getCasting().search("Rotstein, Sebastian").getDataList().size());
+    }
+
+    @Test
+    void addTest(){
+        Film film = new Film();
+        film.populateInfo("Random new Film\t2022\t-1\t-1");
+        cat.getFilms().add(film);
+        modFilmSize--;
+        Assertions.assertEquals(initFilmSize - modFilmSize, cat.getFilms().size());
+    }
+
+    @Test
+    void artistSearch(){
+        Assertions.assertThrows(EntityNotFoundException.class, () -> cat.getCasting().search("Non existant artist"));
+        Assertions.assertDoesNotThrow(() -> cat.getCasting().search("Morris, Nato"));
     }
 
     @AfterAll
