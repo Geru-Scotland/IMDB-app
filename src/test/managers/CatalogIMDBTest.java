@@ -153,12 +153,13 @@ class CatalogIMDBTest {
 
     /**
      * Comprueba que el artista es insertado satisfactoriamente en el wrapper del árbol
-     * y se le asigna una película.
+     * y se vincula a una pelicula (y la pelicula al artista). Se comprueba que ésta
+     * vinculación se ha realizado correctamente.
      *
      * Adicionalmente verifica la congruencia del tamaño de la colección de datos.
      */
     @Test
-    void addArtistTest() {
+    void addAndLinkArtistTest() {
 
         Assertions.assertDoesNotThrow(() -> {
             Artist artist = new Artist();
@@ -172,7 +173,11 @@ class CatalogIMDBTest {
 
         Assertions.assertDoesNotThrow(() -> {
             Artist aQuery = cat.getCasting().search("Artist, New");
-            Assertions.assertTrue(aQuery.getWrapper().search("Fight Science").getIdentifier().contains("Science"));
+            Film film = (Film)aQuery.getWrapper().get(0);
+            film.addData(aQuery);
+
+            Assertions.assertTrue(aQuery.getWrapper().search(film.getIdentifier()) != null
+                    && film.getDataList().contains(aQuery));
         });
     }
 
