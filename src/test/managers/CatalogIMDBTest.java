@@ -6,14 +6,10 @@ import exceptions.EmptyDataException;
 import exceptions.EntityNotFoundException;
 import exceptions.LoadMgrException;
 import exceptions.NonValidInputValue;
-import org.junit.Assert;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.util.concurrent.atomic.AtomicReference;
-
 
 class CatalogIMDBTest {
 
@@ -27,7 +23,6 @@ class CatalogIMDBTest {
 
     @BeforeAll
     static void setUp() {
-
         cat = CatalogIMDB.getInstance();
         try{
             LoadMgr loadMgr = new LoadMgr("files/films", "files/cast");
@@ -160,7 +155,6 @@ class CatalogIMDBTest {
      */
     @Test
     void addAndLinkArtistTest() {
-
         Assertions.assertDoesNotThrow(() -> {
             Artist artist = new Artist();
             artist.populateInfo("Artist, New");
