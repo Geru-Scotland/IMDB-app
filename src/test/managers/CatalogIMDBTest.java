@@ -1,14 +1,18 @@
 package managers;
 
+import entities.Artist;
 import entities.Film;
 import exceptions.EmptyDataException;
 import exceptions.EntityNotFoundException;
 import exceptions.LoadMgrException;
 import exceptions.NonValidInputValue;
+import org.junit.Assert;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 
 class CatalogIMDBTest {
@@ -129,8 +133,11 @@ class CatalogIMDBTest {
         Assertions.assertEquals(2, cat.getCasting().search("Rotstein, Sebastian").getDataList().size());
     }
 
+    /**
+     * Add a film and check that is indeed in the collection.
+     */
     @Test
-    void addTest(){
+    void addFilmTest(){
         Film film = new Film();
         film.populateInfo("Random new Film\t2022\t-1\t-1");
         cat.getFilms().add(film);
@@ -139,9 +146,34 @@ class CatalogIMDBTest {
     }
 
     @Test
-    void artistSearch(){
+    void artistSearchTest(){
         Assertions.assertThrows(EntityNotFoundException.class, () -> cat.getCasting().search("Non existant artist"));
         Assertions.assertDoesNotThrow(() -> cat.getCasting().search("Morris, Nato"));
+    }
+
+    /**
+     * Comprueba que el artista es insertado satisfactoriamente en el wrapper del árbol
+     * y se le asigna una película.
+     *
+     * Adicionalmente verifica la congruencia del tamaño de la colección de datos.
+     */
+    @Test
+    void addArtistTest() {
+
+        Assertions.assertDoesNotThrow(() -> {
+            Artist artist = new Artist();
+            artist.populateInfo("Artist, New");
+
+            artist.addData(cat.getFilms().search("Fight Science"));
+            cat.getCasting().add(artist);
+            modCastSize--;
+            Assertions.assertEquals(initCastSize - modCastSize, cat.getCasting().size());
+        });
+
+        Assertions.assertDoesNotThrow(() -> {
+            Artist aQuery = cat.getCasting().search("Artist, New");
+            Assertions.assertTrue(aQuery.getWrapper().search("Fight Science").getIdentifier().contains("Science"));
+        });
     }
 
     @AfterAll
