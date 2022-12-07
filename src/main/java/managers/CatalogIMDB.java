@@ -124,7 +124,7 @@ public class CatalogIMDB extends DataModel {
                 }
 
                 System.out.println(dataText);
-                System.out.println("Rating: " + BigDecimal.valueOf(rating).setScale(2, RoundingMode.FLOOR) + dataText2);
+                System.out.println("Rating: " + BigDecimal.valueOf(rating).setScale(4, RoundingMode.FLOOR) + dataText2);
                 System.out.println("_____________");
                 System.out.println("_____________");
 
@@ -134,9 +134,9 @@ public class CatalogIMDB extends DataModel {
                 for(Object subEntity : entityList){
                     try{
                         if(subEntity instanceof Artist)
-                            System.out.println(((Artist<?>)subEntity).getIdentifier() + " [r=" + BigDecimal.valueOf(((Artist<?>)subEntity).getRating(true)).setScale(2, RoundingMode.FLOOR)+ "]");
+                            System.out.println(((Artist<?>)subEntity).getIdentifier() + " [r=" + BigDecimal.valueOf(((Artist<?>)subEntity).getRating(true)).setScale(4, RoundingMode.FLOOR)+ "]");
                         else if(subEntity instanceof Film)
-                            System.out.println(((Film<?>)subEntity).getIdentifier() + " [r=" + BigDecimal.valueOf(((Film<?>)subEntity).getRating(false)).setScale(2, RoundingMode.FLOOR)+ ", v="+ ((Film<?>)subEntity).getVotes()+"]");
+                            System.out.println(((Film<?>)subEntity).getIdentifier() + " [r=" + BigDecimal.valueOf(((Film<?>)subEntity).getRating(false)).setScale(4, RoundingMode.FLOOR)+ ", v="+ ((Film<?>)subEntity).getVotes()+"]");
                     } catch(NumberFormatException e){
                         System.out.println("Rating: -");
                     }
