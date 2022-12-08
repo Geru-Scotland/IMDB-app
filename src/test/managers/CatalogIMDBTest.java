@@ -39,7 +39,6 @@ class CatalogIMDBTest {
         Assertions.assertThrows(EntityNotFoundException.class, () -> cat.addFilmVote("Non existent film", 8));
         Assertions.assertThrows(NonValidInputValue.class, () -> cat.addFilmVote("Fight Club", 12));
 
-        // Se necesitan los ficheros grandes:
         Assertions.assertDoesNotThrow(()-> cat.addFilmVote("Fight Club", 9));
         Assertions.assertDoesNotThrow(()-> cat.addFilmVote("I Love Sydney", 4));
     }
@@ -68,7 +67,7 @@ class CatalogIMDBTest {
 
         /*
          * NOTA: Necesita los ficheros grandes.
-         * El artista Rotstein, Sebastian ha participado en 2 peliculas.
+         * El artista Rotstein, Sebastian ha participado en 3 peliculas.
          */
         Assertions.assertEquals(3, cat.getCasting().search("Rotstein, Sebastian").getDataList().size());
 
@@ -151,7 +150,7 @@ class CatalogIMDBTest {
      * y se vincula a una pelicula (y la pelicula al artista). Se comprueba que ésta
      * vinculación se ha realizado correctamente.
      *
-     * Adicionalmente verifica la congruencia del tamaño de la colección de datos.
+     * Adicionalmente, verifica la congruencia del tamaño de la colección de datos.
      */
     @Test
     void addAndLinkArtistTest() {
@@ -163,9 +162,7 @@ class CatalogIMDBTest {
             cat.getCasting().add(artist);
             modCastSize--;
             Assertions.assertEquals(initCastSize - modCastSize, cat.getCasting().size());
-        });
 
-        Assertions.assertDoesNotThrow(() -> {
             Artist aQuery = cat.getCasting().search("Artist, New");
             Film film = (Film)aQuery.getWrapper().get(0);
             film.addData(aQuery);

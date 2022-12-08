@@ -26,7 +26,7 @@ import exceptions.EntityNotFoundException;
 
 /**
  * Clase genérica encargada de gestionar colecciones de datos NO LINEALES. Hereda de
- * ciertas funcionalidades arraigadas a su estructura de la interfaz BTreeEngine.
+ * ciertas funcionalidades arraigadas a su estructura de la interfaz DataCollection.
  * @param <T> El tipo T debe de heredar de Comparable e implementar la interfaz Entity.
  *
  */
