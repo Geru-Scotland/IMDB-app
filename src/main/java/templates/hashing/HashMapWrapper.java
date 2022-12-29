@@ -21,32 +21,9 @@
 
 package templates.hashing;
 
-import entities.models.DataCollection;
-import exceptions.EntityNotFoundException;
+public class HashMapWrapper<K, V> {
 
-public class HashWrapper <T extends Comparable<T>> implements DataCollection<T> {
-    @Override
-    public void add(T node) {
+    public HashMapWrapper(){
 
-    }
-
-    @Override
-    public T search(String str) throws EntityNotFoundException {
-        return null;
-    }
-
-    @Override
-    public T remove(String str) throws EntityNotFoundException {
-        return null;
-    }
-
-    @Override
-    public boolean remove(T data) throws EntityNotFoundException {
-        return false;
-    }
-
-    @Override
-    public int size() {
-        return 0;
     }
 }
