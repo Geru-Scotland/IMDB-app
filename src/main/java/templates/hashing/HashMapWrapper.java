@@ -41,17 +41,23 @@ public class HashMapWrapper<T> implements DataCollection<T> {
 
     @Override
     public T search(String str) throws EntityNotFoundException {
+        if(hashMap.isEmpty())
+            throw new EntityNotFoundException("[EXCEPTION] Emtpy HashMap");
         return hashMap.get(str);
     }
 
     @Override
     public T remove(String str) throws EntityNotFoundException {
-        return null;
+        if(hashMap.isEmpty())
+            throw new EntityNotFoundException("[EXCEPTION] Emtpy HashMap");
+        return hashMap.remove(str);
     }
 
     @Override
     public boolean remove(T data) throws EntityNotFoundException {
-        return false;
+        if(hashMap.isEmpty())
+            throw new EntityNotFoundException("[EXCEPTION] Emtpy HashMap");
+        return hashMap.remove(data.toString(), data);
     }
 
     @Override
