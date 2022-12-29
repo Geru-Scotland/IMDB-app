@@ -63,4 +63,9 @@ public abstract class Entity<T extends Comparable<T>> {
     public abstract ArrayList<Entity<T>> getDataList() throws EmptyDataException;
 
     public abstract LinealWrapper<Entity<T>> getWrapper();
+
+    /**
+     * Hashing
+     */
+    public abstract int getHash();
 }

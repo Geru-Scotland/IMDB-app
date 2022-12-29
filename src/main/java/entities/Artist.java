@@ -4,6 +4,7 @@ import exceptions.EmptyDataException;
 import templates.LinealWrapper;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Clase que gestiona lo relacionado a los artistas. Implementa Comparable para
@@ -29,6 +30,16 @@ public class Artist<T extends Comparable<T>> extends Entity<T> implements Compar
         }
 
         rating = votes > 0 ? filmsRating / votes : 0;
+    }
+
+    public HashSet<Artist> getAdjacents(){
+        HashSet<Artist> hashSet = new HashSet<>();
+
+        for(Object film: linealWrapper.getList())
+            for(Object artist : ((Film<?>)film).getWrapper().getList())
+                hashSet.add((Artist)artist);
+
+        return hashSet;
     }
 
     /**
@@ -79,5 +90,10 @@ public class Artist<T extends Comparable<T>> extends Entity<T> implements Compar
     @Override
     public String toString() {
         return getIdentifier();
+    }
+
+    @Override
+    public int getHash(){
+        return 0;
     }
 }
