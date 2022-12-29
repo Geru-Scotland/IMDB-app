@@ -16,8 +16,8 @@ public class appIMDB {
         try{
             CatalogIMDB cat = CatalogIMDB.getInstance();
 
-            final String filmFile = "files/films";
-            final String castFile = "files/cast";
+            final String filmFile = "smallerfiles/films_tiny";
+            final String castFile = "smallerfiles/cast_tiny";
 
             LoadMgr loadMgr = new LoadMgr(filmFile, castFile);
             loadMgr.loadData();

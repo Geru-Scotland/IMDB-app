@@ -78,3 +78,9 @@ out/
 
 #LinealWrapper
 data/
+
+#LaTeX
+LaTeX/
+
+#R
+.rHistory
