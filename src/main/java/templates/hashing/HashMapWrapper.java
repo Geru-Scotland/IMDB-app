@@ -21,9 +21,40 @@
 
 package templates.hashing;
 
-public class HashMapWrapper<K, V> {
+import entities.models.DataCollection;
+import exceptions.EntityNotFoundException;
+
+import java.util.HashMap;
+
+public class HashMapWrapper<T> implements DataCollection<T> {
+
+    HashMap<Integer, T> hashMap;
 
     public HashMapWrapper(){
-
+        hashMap = new HashMap<>();
     }
+
+    @Override
+    public void add(T data) {
+        hashMap.put(data.hashCode(), data);
+    }
+
+    @Override
+    public T search(String str) throws EntityNotFoundException {
+        // Bread-First search
+        return null;
+    }
+
+    @Override
+    public T remove(String str) throws EntityNotFoundException {
+        return null;
+    }
+
+    @Override
+    public boolean remove(T data) throws EntityNotFoundException {
+        return false;
+    }
+
+    @Override
+    public int size() { return hashMap.size(); }
 }

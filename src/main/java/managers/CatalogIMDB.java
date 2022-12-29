@@ -10,6 +10,7 @@ import exceptions.EntityNotFoundException;
 import exceptions.NonValidInputValue;
 import libs.Stopwatch;
 import templates.LinealWrapper;
+import templates.hashing.HashMapWrapper;
 import templates.scalable.BTreeWrapper;
 
 import java.math.BigDecimal;
@@ -25,7 +26,7 @@ public class CatalogIMDB extends DataModel {
 
     protected CatalogIMDB(){
         films = new LinealWrapper<>();
-        casting = new BTreeWrapper<>();
+        casting = new HashMapWrapper<>();
     }
 
     public static CatalogIMDB getInstance() {

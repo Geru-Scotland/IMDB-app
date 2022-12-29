@@ -42,8 +42,8 @@ public class LinealWrapper<T extends Entity<?>> extends SearchEngine<T> implemen
      */
 
     @Override
-    public void add(T elemento){
-        genericList.add(elemento);
+    public void add(T data){
+        genericList.add(data);
     }
 
     @Override

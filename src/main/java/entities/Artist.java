@@ -93,7 +93,5 @@ public class Artist<T extends Comparable<T>> extends Entity<T> implements Compar
     }
 
     @Override
-    public int getHash(){
-        return 0;
-    }
+    public int getHash(){ return identifier.hashCode(); }
 }

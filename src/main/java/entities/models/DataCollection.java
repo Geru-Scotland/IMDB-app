@@ -24,7 +24,7 @@ package entities.models;
 import exceptions.EntityNotFoundException;
 
 public interface DataCollection<T> {
-    void add(T node);
+    void add(T data);
     T search(String str) throws EntityNotFoundException;
     T remove(String str) throws EntityNotFoundException;
     boolean remove(T data) throws EntityNotFoundException;
