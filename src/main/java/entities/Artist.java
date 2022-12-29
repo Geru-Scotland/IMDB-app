@@ -35,9 +35,15 @@ public class Artist<T extends Comparable<T>> extends Entity<T> implements Compar
     public HashSet<Artist> getAdjacents(){
         HashSet<Artist> hashSet = new HashSet<>();
 
+        /*
+         * No es necesario comprobar si existe o no cada actor que se quiera agregar.
+         * HashSet utiliza una función hash para comprobar que no esté duplicado, en
+         * el momento de agregar un nuevo elemento al conjunto.
+         */
         for(Object film: linealWrapper.getList())
             for(Object artist : ((Film<?>)film).getWrapper().getList())
-                hashSet.add((Artist)artist);
+                if(!((Artist)artist).getIdentifier().equals(identifier))
+                    hashSet.add((Artist)artist);
 
         return hashSet;
     }
