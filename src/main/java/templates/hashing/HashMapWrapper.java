@@ -28,7 +28,7 @@ import java.util.HashMap;
 
 public class HashMapWrapper<T> implements DataCollection<T> {
 
-    HashMap<Integer, T> hashMap;
+    HashMap<String, T> hashMap;
 
     public HashMapWrapper(){
         hashMap = new HashMap<>();
@@ -36,13 +36,12 @@ public class HashMapWrapper<T> implements DataCollection<T> {
 
     @Override
     public void add(T data) {
-        hashMap.put(data.hashCode(), data);
+        hashMap.put(data.toString(), data);
     }
 
     @Override
     public T search(String str) throws EntityNotFoundException {
-        // Bread-First search
-        return null;
+        return hashMap.get(str);
     }
 
     @Override
