@@ -34,6 +34,11 @@ public class HashMapWrapper<T> implements DataCollection<T> {
         hashMap = new HashMap<>();
     }
 
+    /**
+     * TODO: Me parece un poco redundante tener como clave el hash
+     * del nombre del artista y como valor la referencia al
+     * objeto en sí. Mejorar ésto.
+     */
     @Override
     public void add(T data) {
         hashMap.put(data.toString(), data);
@@ -43,7 +48,11 @@ public class HashMapWrapper<T> implements DataCollection<T> {
     public T search(String str) throws EntityNotFoundException {
         if(hashMap.isEmpty())
             throw new EntityNotFoundException("[EXCEPTION] Emtpy HashMap");
-        return hashMap.get(str);
+
+        T obj = hashMap.get(str);
+        if(obj == null)
+            throw new EntityNotFoundException("[EXCEPTION] Entit not found.");
+        return obj;
     }
 
     @Override
