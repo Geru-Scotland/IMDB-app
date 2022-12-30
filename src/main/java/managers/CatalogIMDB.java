@@ -15,7 +15,7 @@ import templates.scalable.BTreeWrapper;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Clase catálogo, cuyo objetivo es el de hacer de interfaz para el usuario, entre
@@ -181,6 +181,64 @@ public class CatalogIMDB extends DataModel {
             System.out.println("[EXCEPTION] No tiene artistas");
         }
         return deletedFilm;
+    }
+
+    public void printAdjacents(String name) {
+        try{
+            HashSet<Artist> adjList = casting.search(name).getAdjacents();
+            System.out.println("Adjacency list size: " + adjList.size());
+            for(Artist artist : adjList){
+                System.out.println(" | " + artist.getIdentifier());
+            }
+        } catch(EntityNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Distancia entre 2 artistas.
+     * No estamos trabajando con un grafo en sí, pero vamos
+     * a simular su funcionamiento.
+     *
+     * Algoritmo: Bread-first search.
+     */
+    public int distance(String str1, String str2) throws EntityNotFoundException {
+        Set<Artist> visited = new HashSet<>();
+        Queue<Artist> artistQueue = new LinkedList<>();
+        HashMap<Artist, Integer> distances = new HashMap<>();
+        LinkedList<Artist> t = new LinkedList<>();
+        t.addFirst(new Artist());
+
+        Artist baseArtist = casting.search(str1);
+        artistQueue.add(baseArtist);
+        distances.put(baseArtist, 0);
+
+        while(!artistQueue.isEmpty()){
+            Artist currentArtist = artistQueue.poll();
+
+            if(currentArtist.getIdentifier().equals(str2))
+                return distances.get(currentArtist);
+
+            visited.add(currentArtist);
+            HashSet<Artist> adjacents = currentArtist.getAdjacents();
+            for(Object adjArtist : adjacents){
+                if(!artistQueue.contains((Artist)adjArtist) && !visited.contains((Artist)adjArtist)){
+                    artistQueue.add((Artist)adjArtist);
+                    distances.put((Artist)adjArtist, distances.get(currentArtist) + 1);
+                }
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Igual que en el método anterior, trabajamos simulando
+     * un grafo. Imprimimos por pantalla cada uno de los intérpretes
+     * que existan en el camino más corto de entre los dos intérpretes
+     * pasados como parámetro.
+     */
+    public void printShortestPath(String str1, String str2){
+
     }
 
     public StringBuffer showStatusAfterDeletion(Film<?> film){
