@@ -29,7 +29,7 @@ class CatalogIMDBTest {
     static void setUp() {
         cat = CatalogIMDB.getInstance();
         try{
-            LoadMgr loadMgr = new LoadMgr("files/films", "files/cast");
+            LoadMgr loadMgr = new LoadMgr("smallerfiles/films_small", "smallerfiles/cast_small");
             loadMgr.loadData();
         } catch(LoadMgrException e){
             System.out.println(e.getMessage());
@@ -177,13 +177,27 @@ class CatalogIMDBTest {
     }
 
     @Test
-    void getGraphDistanceTest(String str1, String str2){
-        
+    void getGraphDistanceTest() throws EntityNotFoundException {
+
+        /**
+         * Tienen distancia 1.
+         */
+        Assertions.assertEquals(1, cat.getGraphDistance("Turman, Jeremy","Foran, Marcus"));
+
+        /**
+         * Tienen distancia 2.
+         */
+        Assertions.assertEquals(2, cat.getGraphDistance("Turman, Jeremy","Eduardo, Johnny"));
+
+        /**
+         * Artista inexistente.
+         */
+        Assertions.assertThrows(EntityNotFoundException.class, () -> cat.getGraphDistance("Non existant", "Foran, Marcus"));
     }
 
     @Test
     void displayShortestDistanceTest(){
-
+        // equals
     }
 
     /**
