@@ -203,7 +203,7 @@ public class CatalogIMDB extends DataModel {
      * Algoritmo: Bread-first search.
      */
     public int distance(String str1, String str2) throws EntityNotFoundException {
-        HashMap<Artist, Boolean> visited = new HashMap<>();
+        HashSet<Artist> visited = new HashSet<>();
         Queue<Artist> queue = new LinkedList<>();
         HashMap<Artist, Integer> distancesMap = new HashMap<>();
 
@@ -220,9 +220,9 @@ public class CatalogIMDB extends DataModel {
 
             HashSet<Artist> adjacents = currentArtist.getAdjacents();
             for(Object adjArtist : adjacents){
-                if(!visited.containsKey((Artist)adjArtist)){
+                if(!visited.contains((Artist)adjArtist)){
                     queue.add((Artist)adjArtist);
-                    visited.put((Artist)adjArtist, true);
+                    visited.add((Artist)adjArtist);
                     distancesMap.put((Artist)adjArtist, distancesMap.get(currentArtist) + 1);
                 }
             }
