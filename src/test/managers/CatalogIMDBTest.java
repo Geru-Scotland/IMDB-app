@@ -11,9 +11,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
+
 
 class CatalogIMDBTest {
 
@@ -29,7 +28,7 @@ class CatalogIMDBTest {
     static void setUp() {
         cat = CatalogIMDB.getInstance();
         try{
-            LoadMgr loadMgr = new LoadMgr("smallerfiles/films_small", "smallerfiles/cast_small");
+            LoadMgr loadMgr = new LoadMgr("files/films", "files/cast");
             loadMgr.loadData();
         } catch(LoadMgrException e){
             System.out.println(e.getMessage());
@@ -196,24 +195,18 @@ class CatalogIMDBTest {
     }
 
     @Test
-    void displayShortestDistanceTest(){
-        // equals
+    void displayShortestDistanceTest() throws EntityNotFoundException {
+
+        /**
+         * Shortest path:
+         * Demar, Diana - Porter, Christopher S. - Silvia, Carissa
+         */
+        StringBuilder path = new StringBuilder();
+        for(Artist a : cat.computeShortestPath("Demar, Diana", "Silvia, Carissa"))
+            path.append(a.getIdentifier());
+        Assertions.assertTrue(path.toString().contains("Porter, Christopher S."));
     }
 
-    /**
-     *
-     */
-    public LinkedList<Artist> backTraceShortestPath(HashMap<Artist, Artist> backTraceMap, Artist init){
-        LinkedList<Artist> shortestPath = new LinkedList<>();
-
-        while(init != null){
-            shortestPath.add(init);
-            init = backTraceMap.get(init);
-        }
-        Collections.reverse(shortestPath);
-
-        return shortestPath;
-    }
 
     @AfterAll
     static void showInfo(){
