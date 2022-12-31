@@ -195,7 +195,7 @@ class CatalogIMDBTest {
     }
 
     @Test
-    void displayShortestDistanceTest() throws EntityNotFoundException {
+    void displayShortestPathTest() throws EntityNotFoundException {
 
         /**
          * Shortest path:
