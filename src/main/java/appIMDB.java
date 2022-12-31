@@ -111,7 +111,7 @@ public class appIMDB {
                             System.out.print(">> ");
                             String dest = sc.nextLine();
                             clearConsole();
-                            System.out.println("Distancia entre " + init + " y " + dest + ": " + cat.distance(init, dest));
+                            System.out.println("Distancia entre " + init + " y " + dest + ": " + cat.getGraphDistance(init, dest));
                         } catch(NoSuchElementException | IllegalStateException ignore){} catch (
                                 EntityNotFoundException e) {
                             System.out.println(e.getMessage());

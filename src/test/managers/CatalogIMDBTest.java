@@ -11,6 +11,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+
 class CatalogIMDBTest {
 
     static CatalogIMDB cat;
@@ -170,6 +174,31 @@ class CatalogIMDBTest {
             Assertions.assertTrue(aQuery.getWrapper().search(film.getIdentifier()) != null
                     && film.getDataList().contains(aQuery));
         });
+    }
+
+    @Test
+    void getGraphDistanceTest(String str1, String str2){
+        
+    }
+
+    @Test
+    void displayShortestDistanceTest(){
+
+    }
+
+    /**
+     *
+     */
+    public LinkedList<Artist> backTraceShortestPath(HashMap<Artist, Artist> backTraceMap, Artist init){
+        LinkedList<Artist> shortestPath = new LinkedList<>();
+
+        while(init != null){
+            shortestPath.add(init);
+            init = backTraceMap.get(init);
+        }
+        Collections.reverse(shortestPath);
+
+        return shortestPath;
     }
 
     @AfterAll

@@ -202,7 +202,7 @@ public class CatalogIMDB extends DataModel {
      *
      * Algoritmo: Bread-first search.
      */
-    public int distance(String str1, String str2) throws EntityNotFoundException {
+    public int getGraphDistance(String str1, String str2) throws EntityNotFoundException {
         HashSet<Artist> visited = new HashSet<>();
         Queue<Artist> queue = new LinkedList<>();
         HashMap<Artist, Integer> distancesMap = new HashMap<>();
