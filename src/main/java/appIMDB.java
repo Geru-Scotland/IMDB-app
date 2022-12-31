@@ -127,11 +127,8 @@ public class appIMDB {
                             String dest = sc.nextLine();
                             clearConsole();
                             System.out.println("Camino más corto entre " + init + " y " + dest + ": ");
-                            cat.displayShortestPaths(init, dest);
-                        } catch(NoSuchElementException | IllegalStateException ignore){} catch (
-                                EntityNotFoundException e) {
-                            System.out.println(e.getMessage());
-                        }
+                            cat.displayShortestPath(init, dest);
+                        } catch(NoSuchElementException | IllegalStateException ignore){}
                         break;
                     default:
                         break;

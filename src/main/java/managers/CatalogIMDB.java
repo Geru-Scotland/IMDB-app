@@ -230,7 +230,19 @@ public class CatalogIMDB extends DataModel {
         throw new EntityNotFoundException("Something went wrong.");
     }
 
-    public void displayShortestPaths(String str1, String str2) throws EntityNotFoundException {
+    public void displayShortestPath(String init, String dest){
+        try{
+            System.out.println("[BSF] Shortest path: ");
+            for(Artist v : computeShortestPath(init, dest)){
+                System.out.print( v.getIdentifier() +" - ");
+            }
+            System.out.println();
+        } catch(EntityNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public LinkedList<Artist> computeShortestPath(String str1, String str2) throws EntityNotFoundException {
         Queue<Artist> queue = new LinkedList<>();
         HashMap<Artist, Artist> backTraceMap = new HashMap<>();
 
@@ -243,14 +255,7 @@ public class CatalogIMDB extends DataModel {
         while(!queue.isEmpty()){
             Artist current = queue.poll();
             if(current.equals(dest))
-            {
-                System.out.println("[BSF] Shortest path: ");
-                for(Artist v : backTraceShortestPath(backTraceMap, current)){
-                    System.out.print( v.getIdentifier() +" - ");
-                }
-                System.out.println();
-                return;
-            }
+                return backTraceShortestPath(backTraceMap, current);
 
             for(Object adj : current.getAdjacents()){
                 if(!backTraceMap.containsKey((Artist)adj)){
@@ -259,6 +264,7 @@ public class CatalogIMDB extends DataModel {
                 }
             }
         }
+        throw new EntityNotFoundException("[EXCEPTION] Entity not found");
     }
 
     public LinkedList<Artist> backTraceShortestPath(HashMap<Artist, Artist> backTraceMap, Artist init){
@@ -269,7 +275,6 @@ public class CatalogIMDB extends DataModel {
             init = backTraceMap.get(init);
         }
         Collections.reverse(shortestPath);
-
         return shortestPath;
     }
 
