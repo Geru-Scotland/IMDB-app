@@ -203,32 +203,74 @@ public class CatalogIMDB extends DataModel {
      * Algoritmo: Bread-first search.
      */
     public int distance(String str1, String str2) throws EntityNotFoundException {
-        Set<Artist> visited = new HashSet<>();
-        Queue<Artist> artistQueue = new LinkedList<>();
-        HashMap<Artist, Integer> distances = new HashMap<>();
-        LinkedList<Artist> t = new LinkedList<>();
-        t.addFirst(new Artist());
+        Queue<Artist> visited = new LinkedList<>();
+        Queue<Artist> queue = new LinkedList<>();
+        HashMap<Artist, Integer> distancesMap = new HashMap<>();
 
-        Artist baseArtist = casting.search(str1);
-        artistQueue.add(baseArtist);
-        distances.put(baseArtist, 0);
+        Artist init = casting.search(str1);
+        Artist dest = casting.search(str2);
+        queue.add(init);
+        distancesMap.put(init, 0);
 
-        while(!artistQueue.isEmpty()){
-            Artist currentArtist = artistQueue.poll();
+        while(!queue.isEmpty()){
+            Artist currentArtist = queue.poll();
 
-            if(currentArtist.getIdentifier().equals(str2))
-                return distances.get(currentArtist);
+            if(currentArtist.getIdentifier().equals(dest.getIdentifier()))
+                return distancesMap.get(currentArtist);
 
-            visited.add(currentArtist);
             HashSet<Artist> adjacents = currentArtist.getAdjacents();
             for(Object adjArtist : adjacents){
-                if(!artistQueue.contains((Artist)adjArtist) && !visited.contains((Artist)adjArtist)){
-                    artistQueue.add((Artist)adjArtist);
-                    distances.put((Artist)adjArtist, distances.get(currentArtist) + 1);
+                if(!visited.contains((Artist)adjArtist)){
+                    queue.add((Artist)adjArtist);
+                    visited.add((Artist)adjArtist);
+                    distancesMap.put((Artist)adjArtist, distancesMap.get(currentArtist) + 1);
                 }
             }
         }
-        return 0;
+        throw new EntityNotFoundException("Something went wrong.");
+    }
+
+    public void displayShortestPaths(String str1, String str2) throws EntityNotFoundException {
+        Queue<Artist> queue = new LinkedList<>();
+        HashMap<Artist, Artist> backTraceMap = new HashMap<>();
+
+        Artist init = casting.search(str1);
+        Artist dest = casting.search(str2);
+
+        queue.add(init);
+        backTraceMap.put(init, null);
+
+        while(!queue.isEmpty()){
+            Artist current = queue.poll();
+            if(current.equals(dest))
+            {
+                System.out.println("[BSF] Shortest path: ");
+                for(Artist v : backTraceShortestPath(backTraceMap, current)){
+                    System.out.print( v.getIdentifier() +" - ");
+                }
+                System.out.println();
+                return;
+            }
+
+            for(Object adj : current.getAdjacents()){
+                if(!backTraceMap.containsKey((Artist)adj)){
+                    queue.add((Artist)adj);
+                    backTraceMap.put((Artist)adj, current);
+                }
+            }
+        }
+    }
+
+    public LinkedList<Artist> backTraceShortestPath(HashMap<Artist, Artist> backTraceMap, Artist init){
+        LinkedList<Artist> shortestPath = new LinkedList<>();
+
+        while(init != null){
+            shortestPath.add(init);
+            init = backTraceMap.get(init);
+        }
+        Collections.reverse(shortestPath);
+
+        return shortestPath;
     }
 
     /**
