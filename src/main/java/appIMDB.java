@@ -16,8 +16,8 @@ public class appIMDB {
         try{
             CatalogIMDB cat = CatalogIMDB.getInstance();
 
-            final String filmFile = "smallerfiles/films_tiny";
-            final String castFile = "smallerfiles/cast_tiny";
+            final String filmFile = "smallerfiles/films_small";
+            final String castFile = "smallerfiles/cast_small";
 
             LoadMgr loadMgr = new LoadMgr(filmFile, castFile);
             loadMgr.loadData();
@@ -32,18 +32,20 @@ public class appIMDB {
                 System.out.println("[2] Mostrar informacion de interprete.");
                 System.out.println("[3] Anadir voto a pelicula [0-10].");
                 System.out.println("[4] Eliminar pelicula.");
+                System.out.println("[5] Calcular distancia entre dos artistas.");
+                System.out.println("[6] Mostrar camino más corto entre dos artistas.");
 
                 System.out.println("[0] Salir.");
                 System.out.print(">> ");
                 try{
                     option = Integer.parseInt(sc.nextLine());
                     clearConsole();
-                    if(option < 0 || option > 4)
+                    if(option < 0 || option > 6)
                         throw new NonValidInputValue();
 
                 } catch(NumberFormatException | NonValidInputValue e){
                     clearConsole();
-                    System.out.println("[EXCEPTION] Input incorrecto. Introduce un numero entre el 0-3.");
+                    System.out.println("[EXCEPTION] Input incorrecto. Introduce un numero entre el 0-6.");
                     continue;
                 }
                 switch(option) {
@@ -64,10 +66,11 @@ public class appIMDB {
                         try{
                             System.out.println("[2] Introduce el nombre del artista: ");
                             System.out.print(">> ");
-                            String artist = sc.nextLine();
+                            String init = sc.nextLine();
                             clearConsole();
-                            cat.displayArtistInfo(artist);
-                        } catch(NoSuchElementException | IllegalStateException ignore){}
+                            cat.displayArtistInfo(init);
+                        } catch(NoSuchElementException | IllegalStateException ignore){}{
+                        }
                         break;
                     case 3:
                         try{
@@ -96,6 +99,37 @@ public class appIMDB {
                             Film<?> f = cat.removeFilm(film);
                             System.out.println(cat.showStatusAfterDeletion(f));
                         } catch(EntityNotFoundException | EmptyDataException e){
+                            System.out.println(e.getMessage());
+                        }
+                        break;
+                    case 5:
+                        try{
+                            System.out.println("[5] Introduce el nombre del primer artista: ");
+                            System.out.print(">> ");
+                            String init = sc.nextLine();
+                            System.out.println("[5] Introduce el nombre del segundo artista: ");
+                            System.out.print(">> ");
+                            String dest = sc.nextLine();
+                            clearConsole();
+                            System.out.println("Distancia entre " + init + " y " + dest + ": " + cat.distance(init, dest));
+                        } catch(NoSuchElementException | IllegalStateException ignore){} catch (
+                                EntityNotFoundException e) {
+                            System.out.println(e.getMessage());
+                        }
+                    break;
+                    case 6:
+                        try{
+                            System.out.println("[6] Introduce el nombre del primer artista: ");
+                            System.out.print(">> ");
+                            String init = sc.nextLine();
+                            System.out.println("[6] Introduce el nombre del segundo artista: ");
+                            System.out.print(">> ");
+                            String dest = sc.nextLine();
+                            clearConsole();
+                            System.out.println("Camino más corto entre " + init + " y " + dest + ": ");
+                            cat.displayShortestPaths(init, dest);
+                        } catch(NoSuchElementException | IllegalStateException ignore){} catch (
+                                EntityNotFoundException e) {
                             System.out.println(e.getMessage());
                         }
                         break;

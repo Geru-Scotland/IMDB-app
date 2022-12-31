@@ -80,7 +80,7 @@ public class CatalogIMDB extends DataModel {
         } catch(EntityNotFoundException e){
             System.out.println(e.getMessage());
         } catch(NullPointerException e){
-            System.out.println("[EXCEPTION] Arbol de artistas vacío.");
+            System.out.println("[EXCEPTION] Colleción de artistas vacío.");
         }
     }
 
