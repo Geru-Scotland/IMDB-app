@@ -278,16 +278,6 @@ public class CatalogIMDB extends DataModel {
         return shortestPath;
     }
 
-    /**
-     * Igual que en el método anterior, trabajamos simulando
-     * un grafo. Imprimimos por pantalla cada uno de los intérpretes
-     * que existan en el camino más corto de entre los dos intérpretes
-     * pasados como parámetro.
-     */
-    public void printShortestPath(String str1, String str2){
-
-    }
-
     public StringBuffer showStatusAfterDeletion(Film<?> film){
         StringBuffer buff = new StringBuffer();
         buff.append("Se ha borrado la pelicula");
