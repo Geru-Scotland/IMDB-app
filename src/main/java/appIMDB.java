@@ -1,10 +1,15 @@
+import entities.Artist;
 import entities.Film;
+import entities.models.DataCollection;
 import exceptions.EmptyDataException;
 import exceptions.EntityNotFoundException;
 import exceptions.LoadMgrException;
 import exceptions.NonValidInputValue;
 import managers.CatalogIMDB;
 import managers.LoadMgr;
+import templates.LinealWrapper;
+import templates.hashing.HashMapWrapper;
+import templates.scalable.BTreeWrapper;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -21,6 +26,19 @@ public class appIMDB {
 
             LoadMgr loadMgr = new LoadMgr(filmFile, castFile);
             loadMgr.loadData();
+
+            /*
+             * Casos de uso como ejemplo para documentación:
+             *
+             * DataCollection<Artist<?>> casting = new LinealWrapper<>();
+             * CatalogIMDB.setCasting(casting);
+
+             * casting = new BTreeWrapper<>();
+             * CatalogIMDB.setCasting(casting);
+
+             * casting = new HashMapWrapper<>();
+             * CatalogIMDB.setCasting(casting);
+            */
 
             Scanner sc = new Scanner(System.in);
             int option =- 1;

@@ -34,11 +34,6 @@ public class HashMapWrapper<T> implements DataCollection<T> {
         hashMap = new HashMap<>();
     }
 
-    /**
-     * TODO: Me parece un poco redundante tener como clave el hash
-     * del nombre del artista y como valor la referencia al
-     * objeto en sí. Mejorar ésto.
-     */
     @Override
     public void add(T data) {
         hashMap.put(data.toString(), data);
