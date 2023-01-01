@@ -11,9 +11,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.LinkedList;
-
-
 class CatalogIMDBTest {
 
     static CatalogIMDB cat;
@@ -28,7 +25,7 @@ class CatalogIMDBTest {
     static void setUp() {
         cat = CatalogIMDB.getInstance();
         try{
-            LoadMgr loadMgr = new LoadMgr("files/films", "files/cast");
+            LoadMgr loadMgr = new LoadMgr("smallerfiles/films_small", "smallerfiles/cast_small");
             loadMgr.loadData();
         } catch(LoadMgrException e){
             System.out.println(e.getMessage());
@@ -148,7 +145,7 @@ class CatalogIMDBTest {
         Assertions.assertDoesNotThrow(() -> cat.getCasting().search("Morris, Nato"));
     }
 
-    /**
+    /*
      * Comprueba que el artista es insertado satisfactoriamente en el wrapper del árbol
      * y se vincula a una pelicula (y la pelicula al artista). Se comprueba que ésta
      * vinculación se ha realizado correctamente.
@@ -178,26 +175,40 @@ class CatalogIMDBTest {
     @Test
     void getGraphDistanceTest() throws EntityNotFoundException {
 
-        /**
+        /*
          * Tienen distancia 1.
          */
-        Assertions.assertEquals(1, cat.getGraphDistance("Turman, Jeremy","Foran, Marcus"));
+        Assertions.assertEquals(1, cat.getGraphDistance("Turman, Jeremy", "Foran, Marcus"));
+        Assertions.assertEquals(1, cat.getGraphDistance("Eilert, Amy", "Daniels, Anthony (I)"));
 
-        /**
+        /*
          * Tienen distancia 2.
          */
-        Assertions.assertEquals(2, cat.getGraphDistance("Turman, Jeremy","Eduardo, Johnny"));
+        Assertions.assertEquals(2, cat.getGraphDistance("Turman, Jeremy", "Eduardo, Johnny"));
+        Assertions.assertEquals(2, cat.getGraphDistance("Eilert, Amy", "Rydstrom, Gary"));
+        Assertions.assertEquals(2, cat.getGraphDistance("Eilert, Amy", "Hanks, Tom"));
 
-        /**
+        /*
+         * Tienen distancia 3
+         */
+        Assertions.assertEquals(3, cat.getGraphDistance("Eilert, Amy", "Oz, Frank"));
+        Assertions.assertEquals(3, cat.getGraphDistance("Eilert, Amy", "Wallace, George (IV)"));
+
+        /*
+         * Tienen distancia 4
+         */
+        Assertions.assertEquals(4, cat.getGraphDistance("Eilert, Amy", "Sills, Beverly"));
+
+        /*
          * Artista inexistente.
          */
         Assertions.assertThrows(EntityNotFoundException.class, () -> cat.getGraphDistance("Non existant", "Foran, Marcus"));
     }
 
     @Test
-    void displayShortestPathTest() throws EntityNotFoundException {
+    void computeShortestPathTest() throws EntityNotFoundException {
 
-        /**
+        /*
          * Shortest path:
          * Demar, Diana - Porter, Christopher S. - Silvia, Carissa
          */
@@ -205,6 +216,27 @@ class CatalogIMDBTest {
         for(Artist a : cat.computeShortestPath("Demar, Diana", "Silvia, Carissa"))
             path.append(a.getIdentifier());
         Assertions.assertTrue(path.toString().contains("Porter, Christopher S."));
+
+        /*
+         * Shortest path:
+         * Eilert, Amy - Allers, Roger - Burtt, Ben - Oz, Frank
+         */
+        path = new StringBuilder();
+        for(Artist a : cat.computeShortestPath("Eilert, Amy", "Oz, Frank"))
+            path.append(a.getIdentifier());
+        Assertions.assertTrue(path.toString().contains("Allers, Roger"));
+        Assertions.assertTrue(path.toString().contains("Burtt, Ben"));
+
+        /*
+         * Shortest path:
+         * Eilert, Amy - Tiffany (I) - Minnelli, Liza - Welch, Raquel - Sills, Beverly
+         */
+        path = new StringBuilder();
+        for(Artist a : cat.computeShortestPath("Eilert, Amy", "Sills, Beverly"))
+            path.append(a.getIdentifier());
+        Assertions.assertTrue(path.toString().contains("Tiffany (I)"));
+        Assertions.assertTrue(path.toString().contains("Minnelli, Liza"));
+        Assertions.assertTrue(path.toString().contains("Welch, Raquel"));
     }
 
 

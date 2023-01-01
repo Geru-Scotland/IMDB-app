@@ -33,7 +33,7 @@ public class appIMDB {
                 System.out.println("[3] Anadir voto a pelicula [0-10].");
                 System.out.println("[4] Eliminar pelicula.");
                 System.out.println("[5] Calcular distancia entre dos artistas.");
-                System.out.println("[6] Mostrar camino más corto entre dos artistas.");
+                System.out.println("[6] Mostrar camino mas corto entre dos artistas.");
 
                 System.out.println("[0] Salir.");
                 System.out.print(">> ");
