@@ -2,7 +2,6 @@ package templates;
 
 import entities.models.DataCollection;
 import entities.models.Entity;
-import exceptions.EmptyDataException;
 import exceptions.EntityNotFoundException;
 
 import java.util.ArrayList;

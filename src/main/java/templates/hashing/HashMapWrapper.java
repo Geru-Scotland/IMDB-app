@@ -34,6 +34,10 @@ public class HashMapWrapper<T> implements DataCollection<T> {
         hashMap = new HashMap<>();
     }
 
+    /**
+     * DataCollection overrides
+     */
+
     @Override
     public void add(T data) {
         hashMap.put(data.toString(), data);

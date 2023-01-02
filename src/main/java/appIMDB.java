@@ -1,15 +1,10 @@
-import entities.Artist;
 import entities.Film;
-import entities.models.DataCollection;
 import exceptions.EmptyDataException;
 import exceptions.EntityNotFoundException;
 import exceptions.LoadMgrException;
 import exceptions.NonValidInputValue;
 import managers.CatalogIMDB;
 import managers.LoadMgr;
-import templates.LinealWrapper;
-import templates.hashing.HashMapWrapper;
-import templates.scalable.BTreeWrapper;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -28,7 +23,9 @@ public class appIMDB {
             loadMgr.loadData();
 
             /*
-             * Casos de uso como ejemplo para documentación:
+             * Casos de uso como ejemplo para documentación.
+             * La instanciación, nosotros lo hacemos en el
+             * constructor de CatalogIMDB.java
              *
              * DataCollection<Artist<?>> casting = new LinealWrapper<>();
              * CatalogIMDB.setCasting(casting);
