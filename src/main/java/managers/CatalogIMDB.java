@@ -215,12 +215,11 @@ public class CatalogIMDB extends DataModel {
         while(!queue.isEmpty()){
             Artist currentArtist = queue.poll();
 
-            if(currentArtist.getIdentifier().equals(dest.getIdentifier()))
-                return distancesMap.get(currentArtist);
-
             HashSet<Artist> adjacents = currentArtist.getAdjacents();
             for(Object adjArtist : adjacents){
                 if(!visited.contains((Artist)adjArtist)){
+                    if(((Artist)adjArtist).getIdentifier().equals(dest.getIdentifier()))
+                        return distancesMap.get(currentArtist) + 1;
                     queue.add((Artist)adjArtist);
                     visited.add((Artist)adjArtist);
                     distancesMap.put((Artist)adjArtist, distancesMap.get(currentArtist) + 1);
@@ -254,11 +253,13 @@ public class CatalogIMDB extends DataModel {
 
         while(!queue.isEmpty()){
             Artist current = queue.poll();
-            if(current.equals(dest))
-                return backTraceShortestPath(backTraceMap, current);
 
             for(Object adj : current.getAdjacents()){
                 if(!backTraceMap.containsKey((Artist)adj)){
+                    if(((Artist)adj).equals(dest)){
+                        backTraceMap.put((Artist)adj, current);
+                        return backTraceShortestPath(backTraceMap, (Artist)adj);
+                    }
                     queue.add((Artist)adj);
                     backTraceMap.put((Artist)adj, current);
                 }
